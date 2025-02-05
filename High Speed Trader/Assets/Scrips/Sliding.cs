@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-
 public class Sliding : MonoBehaviour
 {
     [Header("References")]
@@ -14,6 +13,7 @@ public class Sliding : MonoBehaviour
     public float slideForce;
     public float maxSlideTimer;
     private float slideTimer;
+    private float initialSlideSpeed;
 
     public float slideYScale;
     private float startYScale;
@@ -24,6 +24,7 @@ public class Sliding : MonoBehaviour
     private float verticalInput;
 
     private bool sliding;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,21 +37,20 @@ public class Sliding : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         
-        if(Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
         {
             startSlide();
         }
         
-        if(Input.GetKeyUp(slideKey) && sliding)
+        if (Input.GetKeyUp(slideKey) && sliding)
         {
             stopSlide();
         }
-        SlidingMovement();
     }
 
     private void FixedUpdate()
     {
-        if(sliding)
+        if (sliding)
             SlidingMovement();
     }
 
@@ -60,6 +60,7 @@ public class Sliding : MonoBehaviour
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         slideTimer = maxSlideTimer;
+        initialSlideSpeed = rb.velocity.magnitude; // Record the initial slide speed
     }
     
     private void stopSlide()
@@ -70,17 +71,18 @@ public class Sliding : MonoBehaviour
     
     private void SlidingMovement()
     {
-       Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Impulse);
+
+        // Gradually reduce the speed over time
+        float slideSpeed = Mathf.Lerp(initialSlideSpeed, 0, 1 - (slideTimer / maxSlideTimer));
+        rb.velocity = rb.velocity.normalized * slideSpeed;
+
+        slideTimer -= Time.deltaTime;
        
-       rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Impulse);
-       rb.velocity = new Vector3(rb.velocity.x * 0.98f, rb.velocity.y, rb.velocity.z * 0.98f);
-       slideTimer -= Time.deltaTime;
-       
-       if (slideTimer <= 0)
-       {
-           stopSlide();
-       
-       }
-       
+        if (slideTimer <= 0)
+        {
+            stopSlide();
+        }
     }
 }
