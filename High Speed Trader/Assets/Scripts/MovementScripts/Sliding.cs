@@ -45,6 +45,11 @@ public class Sliding : MonoBehaviour
         if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && !pm.crouching)
             StartSlide();
 
+        // if has no vertical/horizontal motion, start crouch instead
+
+        else if (Input.GetKeyDown(slideKey) && !pm.crouching)
+            pm.StartCrouching();
+
         if (Input.GetKeyUp(slideKey) && (sliding || pm.crouching))
         {
             StopSlideAndCrouch();
