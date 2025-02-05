@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
 
     public float groundDrag;
+    private Coroutine speedCoroutine;
     
     [Header("Jumping")] 
 
@@ -71,18 +72,26 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = crouchSpeed;
         }
         // Sprinting
-        else if(grounded && Input.GetKey(sprintKey) && movementState != MovementState.crouching)
+        else if (grounded && Input.GetKey(sprintKey) && movementState != MovementState.crouching)
         {
             movementState = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            if (speedCoroutine != null)
+            {
+                StopCoroutine(speedCoroutine);
+            }
+            speedCoroutine = StartCoroutine(GraduallyIncreaseSpeed(sprintSpeed));
         }
-        //Walking
-        else if(grounded)
+        // Walking
+        else if (grounded)
         {
             movementState = MovementState.walking;
+            if (speedCoroutine != null)
+            {
+                StopCoroutine(speedCoroutine);
+            }
             moveSpeed = walkSpeed;
         }
-        //Air
+        // Air
         else
         {
             movementState = MovementState.air;
@@ -141,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if (OnSlope() && !exitingSlope)
+        if (OnSlope())
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
             if(rb.velocity.y > 0)
@@ -159,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
     private void SpeedController()
     {
 
-        if (OnSlope())
+        if (OnSlope() && !exitingSlope)
         {
             if (rb.velocity.magnitude > moveSpeed)
             {
@@ -207,5 +216,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
+    
+    private IEnumerator GraduallyIncreaseSpeed(float targetSpeed)
+    {
+        while (moveSpeed < targetSpeed)
+        {
+            moveSpeed += Time.deltaTime * 7f; // Adjust the increment value as needed
+            yield return null;
+        }
+        moveSpeed = targetSpeed;
     }
 }
