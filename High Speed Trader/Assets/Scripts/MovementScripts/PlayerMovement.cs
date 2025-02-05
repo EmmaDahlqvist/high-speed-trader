@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     bool grounded;
 
     public Transform orientation;
+    public Transform playerObj;
 
     float horizontalInput;
     float verticalInput;
@@ -64,14 +65,14 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
 
-        startYScale = transform.localScale.y;
+        startYScale = playerObj.localScale.y;
     }
 
     // Update is called once per frame
     void Update()
     {
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        grounded = Physics.Raycast(playerObj.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
         MyInput();
         SpeedControl();
@@ -107,15 +108,38 @@ public class PlayerMovement : MonoBehaviour
         // start crouch
         if(Input.GetKey(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Force);
+            StartCrouching();
         }
 
         // stop crouching
         if(Input.GetKeyUp(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            StopCrouching();
         }
+    }
+
+    public bool crouching;
+
+    // initiate crouch
+    public void StartCrouching()
+    {
+        crouching = true;
+        playerObj.localScale = new Vector3(playerObj.localScale.x, crouchYScale, playerObj.localScale.z);
+        rb.AddForce(Vector3.down * 5f, ForceMode.Force);
+    }
+
+    // crouch movement
+    private void Crouch()
+    {
+        state = MovementState.crouching;
+        moveSpeed = crouchSpeed;
+    }
+
+    // stop the crouch
+    public void StopCrouching()
+    {
+        crouching = false;
+        playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
 
     private void StateHandler()
@@ -128,10 +152,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Mode - Crouching
-        if(Input.GetKey(crouchKey))
+        if(crouching)
         {
-            state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
+            Crouch();
         }
  
         // Mode - Sprinting
@@ -191,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(playerObj.up * jumpForce, ForceMode.Impulse);
     }
 
     private void ResetJump()
