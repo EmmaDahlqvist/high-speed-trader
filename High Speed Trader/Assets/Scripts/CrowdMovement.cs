@@ -32,24 +32,27 @@ public class CrowdMovement : MonoBehaviour
         
         Transform targetWaypoint = waypoints[currentWaypointIndex];
         transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, crowdSpeed * Time.deltaTime);
+        
 
         if (checkReachedWaypoint(targetWaypoint))
         {
             currentWaypointIndex++;
 
-            faceNewWaypoint();
+            HandleLastWayPoint(); // do this before indexing the array again
 
-            handleLastWayPoint();
+            FaceNewWaypoint();
+
+            
         }
 
     }
 
-    private void faceNewWaypoint()
+    private void FaceNewWaypoint()
     {
-        // TODO: implementera detta
+        transform.LookAt(waypoints[currentWaypointIndex]);
     }
 
-    private void handleLastWayPoint()
+    private void HandleLastWayPoint()
     {
         if (currentWaypointIndex >= waypoints.Length)
         {
