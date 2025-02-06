@@ -930,8 +930,9 @@ GameObject:
   - component: {fileID: 1953337171}
   - component: {fileID: 1953337170}
   - component: {fileID: 1953337174}
+  - component: {fileID: 1953337175}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: Taxi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,7 +1018,7 @@ Transform:
   m_GameObject: {fileID: 1953337169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.93, y: 1.9, z: 112.47}
+  m_LocalPosition: {x: 53.09, y: 1.9, z: 112.85}
   m_LocalScale: {x: 5, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1031,7 +1032,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953337169}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1050,6 +1051,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1953337175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953337169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94548704389cdbc45839101d7eb8e57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 60
+  distance: 40
 --- !u!1 &2079619598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1076,7 @@ GameObject:
   - component: {fileID: 2079619600}
   - component: {fileID: 2079619599}
   - component: {fileID: 2079619601}
+  - component: {fileID: 2079619602}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1104,7 +1120,7 @@ Transform:
   m_GameObject: {fileID: 2079619598}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.87613, y: 1.3, z: 23.096272}
+  m_LocalPosition: {x: 49.248, y: 4.19, z: 104.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1142,6 +1158,27 @@ MonoBehaviour:
     m_Bits: 1024
   orientation: {fileID: 1486995087}
   state: 0
+--- !u!65 &2079619602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079619598}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
