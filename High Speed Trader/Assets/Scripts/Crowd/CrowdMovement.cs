@@ -65,13 +65,4 @@ public class CrowdMovement : MonoBehaviour
         return Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-    }
-
 }

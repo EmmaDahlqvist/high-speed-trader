@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class KillCollider : MonoBehaviour
+public class CrowdCollision : MonoBehaviour
 {
+    public float destroyDelay = 0.5f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class KillCollider : MonoBehaviour
     {
         
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,5 +26,9 @@ public class KillCollider : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
+        if (other.CompareTag("Obstacle"))
+        {
+            Destroy(other.transform.root.gameObject, destroyDelay);
+        }
     }
 }
