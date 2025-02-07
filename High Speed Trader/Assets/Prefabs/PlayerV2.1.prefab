@@ -912,7 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 512
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
@@ -966,5 +966,5 @@ MonoBehaviour:
   _interactableMask:
     serializedVersion: 2
     m_Bits: 128
-  _interactionPromptUI: {fileID: 5968263369244634350}
+  _goalCanvas: {fileID: 0}
   _numFound: 0
