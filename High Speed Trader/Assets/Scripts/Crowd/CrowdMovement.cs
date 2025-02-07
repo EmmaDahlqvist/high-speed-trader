@@ -33,7 +33,6 @@ public class CrowdMovement : MonoBehaviour
         Transform targetWaypoint = waypoints[currentWaypointIndex];
         transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, crowdSpeed * Time.deltaTime);
         
-
         if (checkReachedWaypoint(targetWaypoint))
         {
             currentWaypointIndex++;
