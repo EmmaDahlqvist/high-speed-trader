@@ -12,12 +12,12 @@ TagManager:
   - 
   - Water
   - UI
+  - Camera
   - 
   - 
-  - 
-  - Obstacle
+  - whatIsWall
   - whatIsGround
-  - 
+  - PostProcessing
   - 
   - 
   - 
