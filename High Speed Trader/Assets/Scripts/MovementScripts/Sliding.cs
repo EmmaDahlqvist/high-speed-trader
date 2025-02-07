@@ -15,6 +15,7 @@ public class Sliding : MonoBehaviour
     public float maxSlideTime;
     public float slideForce;
     private float slideTimer;
+    private float initialSlideSpeed;
 
     public float slideYScale;
     private float startYScale;
@@ -67,6 +68,7 @@ public class Sliding : MonoBehaviour
     private void StartSlide()
     {
         sliding = true;
+        initialSlideSpeed = rb.velocity.magnitude; // Record the initial slide speed
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -81,6 +83,9 @@ public class Sliding : MonoBehaviour
         rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
         slideTimer -= Time.deltaTime;
+
+        float slideSpeed = Mathf.Lerp(initialSlideSpeed, 0, 1 - (slideTimer / maxSlideTime));
+        rb.velocity = rb.velocity.normalized * slideSpeed;
 
         if (slideTimer <= 0)
             StopSlide();
