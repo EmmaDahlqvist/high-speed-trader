@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerMovement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float wallRunSpeed;
 
     public float groundDrag;
+
+    private Coroutine speedCoroutine;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -156,18 +159,25 @@ public class PlayerMovement : MonoBehaviour
         {
             Crouch();
         }
- 
-        // Mode - Sprinting
-        if(grounded && Input.GetKey(sprintKey))
+
+        // Sprinting
+        else if (grounded && Input.GetKey(sprintKey) && state != MovementState.crouching)
         {
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            if (speedCoroutine != null)
+            {
+                StopCoroutine(speedCoroutine);
+            }
+            speedCoroutine = StartCoroutine(GraduallyIncreaseSpeed(sprintSpeed));
         }
-
-        // Mode - Walking
-        else if(grounded)
+        // Walking
+        else if (grounded)
         {
             state = MovementState.walking;
+            if (speedCoroutine != null)
+            {
+                StopCoroutine(speedCoroutine);
+            }
             moveSpeed = walkSpeed;
         }
 
@@ -220,6 +230,16 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private IEnumerator GraduallyIncreaseSpeed(float targetSpeed)
+    {
+        while (moveSpeed < targetSpeed)
+        {
+            moveSpeed += Time.deltaTime * 7f; // Adjust the increment value as needed
+            yield return null;
+        }
+        moveSpeed = targetSpeed;
     }
 
 }
