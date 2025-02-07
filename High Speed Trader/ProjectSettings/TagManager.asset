@@ -12,13 +12,13 @@ TagManager:
   - Water
   - UI
   - Camera
-  - 
+  - Interactable
   - 
   - whatIsWall
   - whatIsGround
   - PostProcessing
   - 
-  - 
+  - Prompt
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 4229044101
     locked: 0
