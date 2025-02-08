@@ -1683,6 +1683,7 @@ GameObject:
   - component: {fileID: 1596954143}
   - component: {fileID: 1596954145}
   - component: {fileID: 1596954144}
+  - component: {fileID: 1596954146}
   m_Layer: 5
   m_Name: CurrentBalanceValue
   m_TagString: Untagged
@@ -1808,6 +1809,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596954142}
   m_CullTransparentMesh: 1
+--- !u!114 &1596954146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596954142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a076ac58bbea8914fbc2d53ebb23224b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725954429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,6 +1996,7 @@ GameObject:
   - component: {fileID: 1998499724}
   - component: {fileID: 1998499723}
   - component: {fileID: 1998499727}
+  - component: {fileID: 1998499728}
   m_Layer: 5
   m_Name: LevelSelectorCanvas
   m_TagString: Untagged
@@ -2088,6 +2102,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df666e885dd468f42baaa281782f090c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1998499728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998499722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241ba8e1365c4754a97bec6a23bce86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2000713496
