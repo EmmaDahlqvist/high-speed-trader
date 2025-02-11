@@ -8,7 +8,7 @@ public class NPCWander : NPCComponent
 
     private void Start()
     {
-        npc.Agent.SetDestination(new Vector3(20.6900005f, 1.71000004f, 20.8199997f));
+        npc.Agent.SetDestination(new Vector3(100, 1.71000004f, 30.8199997f));
     }
     
 }
