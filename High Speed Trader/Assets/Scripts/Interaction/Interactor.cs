@@ -25,6 +25,12 @@ public class Interactor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if no goal canvas is set up yet
+        if(_goalCanvas == null)
+        {
+            return;
+        }
+
         _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _colliders, _interactableMask);
         
         if(_numFound > 0)

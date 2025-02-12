@@ -14,6 +14,9 @@ public class Sliding : MonoBehaviour
     [Header("Sliding")]
     public float maxSlideTime;
     public float slideForce;
+    public float maxAirSlideBoost;
+    public float minAirSlideBoost;
+    public float airSlideBoostHeight;
     private float slideTimer;
     private float initialSlideSpeed;
 
@@ -55,6 +58,35 @@ public class Sliding : MonoBehaviour
         {
             StopSlideAndCrouch();
         }
+
+        AirSliding();
+    }
+
+    private bool wasGrounded; // track if player was grounded
+    private float fallStartHeight;
+    private void AirSliding()
+    {
+        bool currentlyGrounded = pm.IsGrounded();
+
+        // when player leaves ground, track height
+        if (wasGrounded && !currentlyGrounded)
+        {
+            fallStartHeight = transform.position.y;
+        }
+
+        if (!wasGrounded && currentlyGrounded && airSliding)
+        {
+            float fallDistance = fallStartHeight - transform.position.y;
+
+            if (fallDistance > airSlideBoostHeight)
+            {
+                PerformLandingBoost();
+            }
+
+            airSliding = false;
+        }
+
+        wasGrounded = currentlyGrounded;
     }
 
     private void FixedUpdate()
@@ -74,21 +106,40 @@ public class Sliding : MonoBehaviour
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
+
+        if(!pm.IsGrounded())
+        {
+            airSliding = true;
+        }
     }
+
+    private bool airSliding = false;
 
     private void SlidingMovement()
     {
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
         rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
         slideTimer -= Time.deltaTime;
 
         float slideSpeed = Mathf.Lerp(initialSlideSpeed, 0, 1 - (slideTimer / maxSlideTime));
-        rb.velocity = rb.velocity.normalized * slideSpeed;
+
+        // only modify speed when player is on ground
+        if (pm.IsGrounded())
+        {
+            rb.velocity = new Vector3(rb.velocity.normalized.x * slideSpeed, rb.velocity.y, rb.velocity.normalized.z * slideSpeed);
+        }
 
         if (slideTimer <= 0)
             StopSlide();
+    }
+
+    private void PerformLandingBoost()
+    {
+        Vector3 boostDirection = rb.velocity.normalized; // current direction
+        float boostStrength = Mathf.Clamp(fallStartHeight - transform.position.y, minAirSlideBoost, maxAirSlideBoost); // count how much boost slide should get
+
+        rb.AddForce(boostDirection * boostStrength, ForceMode.Impulse); // add boost on landing
     }
 
     private void StopSlide()

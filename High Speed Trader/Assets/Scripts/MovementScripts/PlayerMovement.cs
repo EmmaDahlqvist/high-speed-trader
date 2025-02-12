@@ -49,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
     public MovementState state;
 
 
+    public bool IsGrounded()
+    {
+        return grounded;
+    }
+
     public enum MovementState
     {
         walking,
