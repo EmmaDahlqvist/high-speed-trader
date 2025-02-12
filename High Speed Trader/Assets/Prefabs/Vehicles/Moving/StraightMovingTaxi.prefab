@@ -221,9 +221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f137841c623b0a84cbcca8a81d54c0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motorTorque: 2000
+  motorTorque: 3000
   brakeTorque: 2000
-  maxSpeed: 30
+  maxSpeed: 50
   centreOfGravityOffset: -1
 --- !u!114 &896147312837372001
 MonoBehaviour:
