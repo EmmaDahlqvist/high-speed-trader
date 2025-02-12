@@ -31,7 +31,14 @@ public class CashManager : MonoBehaviour
 
     public int GetCash()
     {
+        LoadCash();
         return cash;
+    }
+    
+    public void SetCash(int amount)
+    {
+        cash = amount;
+        SaveCash();
     }
 
     private void SaveCash()
@@ -42,7 +49,7 @@ public class CashManager : MonoBehaviour
 
     private void LoadCash()
     {
-        cash = PlayerPrefs.GetInt("PlayerCash", 100);
+        cash = PlayerPrefs.GetInt("PlayerCash", 150);
     }
 
     // Update is called once per frame

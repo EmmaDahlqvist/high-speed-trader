@@ -11,7 +11,6 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
-
     }
     
     public void OnQuitButton()
