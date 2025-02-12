@@ -247,4 +247,11 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = targetSpeed;
     }
 
+    private bool IsTouchingWall()
+    {
+        RaycastHit hit;
+        float checkDistance = 1f; // justera detta värde beroende på hur nära väggen spelaren ska vara för att fastna
+        return Physics.Raycast(playerObj.position, transform.forward, out hit, checkDistance, whatIsGround);
+    }
+
 }
