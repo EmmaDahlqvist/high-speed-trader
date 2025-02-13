@@ -125,6 +125,7 @@ public class Sliding : MonoBehaviour
 
     private void SlidingMovement()
     {
+        pm.sliding = true;
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
@@ -145,6 +146,7 @@ public class Sliding : MonoBehaviour
     private void StopSlide()
     {
         sliding = false;
+        pm.sliding = false;
         pm.StartCrouching();
         extraSlideSpeed = 0;
     }
@@ -152,6 +154,7 @@ public class Sliding : MonoBehaviour
     private void StopSlideAndCrouch()
     {
         sliding = false;
+        pm.sliding = false;
         
         // start crouch instead
         pm.StopCrouching();
