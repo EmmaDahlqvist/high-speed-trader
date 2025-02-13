@@ -10,6 +10,7 @@ public class MovementSound : MonoBehaviour
     public GameObject sprinting;
     public GameObject sliding;
     public GameObject landing;
+    public GameObject crouching;
 
     private Dictionary<PlayerMovement.MovementState, GameObject> soundMap;
     private PlayerMovement.MovementState lastState; // remember last state
@@ -23,7 +24,7 @@ public class MovementSound : MonoBehaviour
         {
             { PlayerMovement.MovementState.walking, walking },
             { PlayerMovement.MovementState.sprinting, sprinting },
-            { PlayerMovement.MovementState.crouching, walking }, // Samma som walking sålänge
+            { PlayerMovement.MovementState.crouching, crouching },
             { PlayerMovement.MovementState.sliding, sliding },
             { PlayerMovement.MovementState.landed, landing }
         };
