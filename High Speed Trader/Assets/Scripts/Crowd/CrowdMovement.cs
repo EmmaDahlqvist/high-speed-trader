@@ -41,7 +41,6 @@ public class CrowdMovement : MonoBehaviour
 
             FaceNewWaypoint();
 
-            
         }
 
     }
