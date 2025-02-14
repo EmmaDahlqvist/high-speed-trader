@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         sprinting,
         wallRunning,
         sliding,
+        vaulting,
         crouching,
         air
     }
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     public bool sliding;
     private bool wasInAir = false;
     private bool landed;
+    public bool vaulting;
 
     // Start is called before the first frame update
     void Start()
@@ -167,6 +169,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
+        // Mode - vaulting
+        if(vaulting )
+        {
+            state = MovementState.vaulting;
+            return;
+        }
+
         if (landed) return; // dont change state if just landed
         
         // player was in air
