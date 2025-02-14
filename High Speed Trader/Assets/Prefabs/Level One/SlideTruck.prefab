@@ -546,7 +546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7740812722906704485}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SlideTruck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9088192272341550522}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3067758861599283151}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 4231427940559863027}
   - component: {fileID: 8204192178127126757}
   - component: {fileID: 896147312837372001}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Taxi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 4744684023518030310}
   - component: {fileID: 3973221485956475848}
   - component: {fileID: 8194355493134563695}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6919144688987403703}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: StraightMovingTaxi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,8 +359,8 @@ Transform:
   m_GameObject: {fileID: 1423798594413160114}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.03, y: 2.01, z: 117.81}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 17.03, y: 2.0069, z: 117.81}
+  m_LocalScale: {x: 1.3564993, y: 1.3269539, z: 1.1149}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3512934177157559684}
@@ -375,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4894978334111227707}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelFrontLeftCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 802959270741448431}
   - component: {fileID: 6783108762686452606}
   - component: {fileID: 2175413865418879909}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5486378532539082100}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelBackLeftCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 5610251798602408413}
   - component: {fileID: 1441346663069696053}
   - component: {fileID: 6579256460741348313}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 2250853255398219739}
   - component: {fileID: 8021849748675728490}
   - component: {fileID: 4432100442743938994}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -702,7 +702,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3330577672200387525}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelFrontRightCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 7097557608402369884}
   - component: {fileID: 5644976924089256900}
   - component: {fileID: 4307446456140439235}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 3524921373920271521}
   - component: {fileID: 5522748194071852942}
   - component: {fileID: 3160408897798488299}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 541108092585337087}
   - component: {fileID: 7670381135857740137}
   - component: {fileID: 8793612127140908165}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: EventCollision
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -977,7 +977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4700575188375682173}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelBackRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,7 +1009,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3493312986079555526}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelBackLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 4418041805289589790}
   - component: {fileID: 22938887887497004}
   - component: {fileID: 3833226644460232086}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1127,7 @@ GameObject:
   - component: {fileID: 844831632354404729}
   - component: {fileID: 5308667101185800835}
   - component: {fileID: 6669020334856831200}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1221,7 +1221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6899836042266584017}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WheelBackRightCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

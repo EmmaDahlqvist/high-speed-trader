@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 512
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionPoint: {fileID: 8454019870351723886}
-  _interactionPointRadius: 2
+  _interactionPointRadius: 6
   _interactableMask:
     serializedVersion: 2
     m_Bits: 128
