@@ -14,9 +14,9 @@ public class Sliding : MonoBehaviour
     [Header("Sliding")]
     public float maxSlideTime;
     public float slideForce;
-    public float maxAirSlideBoost;
-    public float minAirSlideBoost;
-    public float airSlideBoostHeight;
+    public float maxAirSlideBoost = 20;
+    public float minAirSlideBoost = 5;
+    public float airSlideBoostHeight = 2;
     private float slideTimer;
     private float initialSlideSpeed;
 
@@ -64,9 +64,12 @@ public class Sliding : MonoBehaviour
 
     private bool wasGrounded; // track if player was grounded
     private float fallStartHeight;
+    private float extraSlideSpeed = 0;
+
+    // make player get more slide speed if they jump from higher distance
     private void AirSliding()
     {
-        bool currentlyGrounded = pm.IsGrounded();
+        bool currentlyGrounded = pm.IsGrounded(); // ground status
 
         // when player leaves ground, track height
         if (wasGrounded && !currentlyGrounded)
@@ -74,13 +77,17 @@ public class Sliding : MonoBehaviour
             fallStartHeight = transform.position.y;
         }
 
+        //when player lands
         if (!wasGrounded && currentlyGrounded && airSliding)
         {
             float fallDistance = fallStartHeight - transform.position.y;
 
             if (fallDistance > airSlideBoostHeight)
             {
-                PerformLandingBoost();
+                extraSlideSpeed = Mathf.Clamp(fallDistance, minAirSlideBoost, maxAirSlideBoost);
+            } else
+            {
+                extraSlideSpeed = 0; // no extra speed if not high enough fall
             }
 
             airSliding = false;
@@ -114,15 +121,17 @@ public class Sliding : MonoBehaviour
     }
 
     private bool airSliding = false;
+    private float slideSpeed;
 
     private void SlidingMovement()
     {
+        pm.sliding = true;
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
         slideTimer -= Time.deltaTime;
 
-        float slideSpeed = Mathf.Lerp(initialSlideSpeed, 0, 1 - (slideTimer / maxSlideTime));
+        slideSpeed = Mathf.Lerp(initialSlideSpeed + extraSlideSpeed, 0, 1 - (slideTimer / maxSlideTime));
 
         // only modify speed when player is on ground
         if (pm.IsGrounded())
@@ -134,25 +143,21 @@ public class Sliding : MonoBehaviour
             StopSlide();
     }
 
-    private void PerformLandingBoost()
-    {
-        Vector3 boostDirection = rb.velocity.normalized; // current direction
-        float boostStrength = Mathf.Clamp(fallStartHeight - transform.position.y, minAirSlideBoost, maxAirSlideBoost); // count how much boost slide should get
-
-        rb.AddForce(boostDirection * boostStrength, ForceMode.Impulse); // add boost on landing
-    }
-
     private void StopSlide()
     {
         sliding = false;
+        pm.sliding = false;
         pm.StartCrouching();
+        extraSlideSpeed = 0;
     }
 
     private void StopSlideAndCrouch()
     {
         sliding = false;
+        pm.sliding = false;
         
         // start crouch instead
         pm.StopCrouching();
+        extraSlideSpeed = 0;
     }
 }
