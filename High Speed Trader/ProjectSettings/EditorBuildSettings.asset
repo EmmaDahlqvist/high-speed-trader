@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScenes/WinScreen.unity
     guid: 760ba411830336f4d9cfb23ebca335d2
   - enabled: 1
-    path: Assets/Scenes/ShifaaCity.unity
-    guid: 8f9c650af568eb847a6085547c949326
+    path: Assets/Scenes/Levels/LevelOne.unity
+    guid: 3ec7c0ff3a8c15449aed3e06c9eea112
   m_configObjects: {}

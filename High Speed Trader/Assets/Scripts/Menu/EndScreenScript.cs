@@ -18,6 +18,8 @@ public class EndScreenScript : MonoBehaviour
         deathText = GameObject.Find("BetMoneyLost").GetComponent<TextMeshProUGUI>();
         deathText.text = "You died! You lost: " + cashManager.getLastRemovedCash() + "$";
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
