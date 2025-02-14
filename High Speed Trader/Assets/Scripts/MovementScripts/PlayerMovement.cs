@@ -49,16 +49,27 @@ public class PlayerMovement : MonoBehaviour
     public MovementState state;
 
 
+    public bool IsGrounded()
+    {
+        return grounded;
+    }
+
     public enum MovementState
     {
+        standingStill,
+        landed,
         walking,
         sprinting,
         wallRunning,
+        sliding,
         crouching,
         air
     }
 
     public bool wallRunning;
+    public bool sliding;
+    private bool wasInAir = false;
+    private bool landed;
 
     // Start is called before the first frame update
     void Start()
@@ -145,17 +156,52 @@ public class PlayerMovement : MonoBehaviour
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
 
+    private IEnumerator SetLandedState()
+    {
+        landed = true;
+        state = MovementState.landed;
+        yield return new WaitForSeconds(0.1f); // wait 100 ms (to make sure sound is played)
+        landed = false;
+        StateHandler(); // call state handler right after landing
+    }
+
     private void StateHandler()
     {
+        if (landed) return; // dont change state if just landed
+        
+        // player was in air
+        if (!wasInAir && !grounded)
+        {
+            wasInAir = true; // player is in the air
+        }
+        else if (wasInAir && grounded) // was in air but just landed
+        {
+            wasInAir = false;
+            StartCoroutine(SetLandedState());
+            return; // dont change state right after
+        }
+
         // Mode - WallRunning
-        if(wallRunning)
+        if (wallRunning)
         {
             state = MovementState.wallRunning;
             moveSpeed = wallRunSpeed; // if adding sliding, use desiredMoveSpeed here instead
         }
 
+        // Mode - standing still
+        if(grounded && horizontalInput == 0 && verticalInput == 0)
+        {
+            state = MovementState.standingStill;
+        }
+
+        // Mode - sliding
+        else if (sliding && grounded)
+        {
+            state = MovementState.sliding;
+        }
+
         // Mode - Crouching
-        if(crouching)
+        else if(crouching)
         {
             Crouch();
         }
@@ -240,6 +286,13 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
         moveSpeed = targetSpeed;
+    }
+
+    private bool IsTouchingWall()
+    {
+        RaycastHit hit;
+        float checkDistance = 1f; // justera detta värde beroende på hur nära väggen spelaren ska vara för att fastna
+        return Physics.Raycast(playerObj.position, transform.forward, out hit, checkDistance, whatIsGround);
     }
 
 }

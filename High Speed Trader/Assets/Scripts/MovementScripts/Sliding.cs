@@ -14,6 +14,9 @@ public class Sliding : MonoBehaviour
     [Header("Sliding")]
     public float maxSlideTime;
     public float slideForce;
+    public float maxAirSlideBoost = 20;
+    public float minAirSlideBoost = 5;
+    public float airSlideBoostHeight = 2;
     private float slideTimer;
     private float initialSlideSpeed;
 
@@ -55,6 +58,42 @@ public class Sliding : MonoBehaviour
         {
             StopSlideAndCrouch();
         }
+
+        AirSliding();
+    }
+
+    private bool wasGrounded; // track if player was grounded
+    private float fallStartHeight;
+    private float extraSlideSpeed = 0;
+
+    // make player get more slide speed if they jump from higher distance
+    private void AirSliding()
+    {
+        bool currentlyGrounded = pm.IsGrounded(); // ground status
+
+        // when player leaves ground, track height
+        if (wasGrounded && !currentlyGrounded)
+        {
+            fallStartHeight = transform.position.y;
+        }
+
+        //when player lands
+        if (!wasGrounded && currentlyGrounded && airSliding)
+        {
+            float fallDistance = fallStartHeight - transform.position.y;
+
+            if (fallDistance > airSlideBoostHeight)
+            {
+                extraSlideSpeed = Mathf.Clamp(fallDistance, minAirSlideBoost, maxAirSlideBoost);
+            } else
+            {
+                extraSlideSpeed = 0; // no extra speed if not high enough fall
+            }
+
+            airSliding = false;
+        }
+
+        wasGrounded = currentlyGrounded;
     }
 
     private void FixedUpdate()
@@ -71,21 +110,34 @@ public class Sliding : MonoBehaviour
         initialSlideSpeed = rb.velocity.magnitude; // Record the initial slide speed
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        rb.AddForce(Vector3.down * 50f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
+
+        if(!pm.IsGrounded())
+        {
+            airSliding = true;
+        }
     }
+
+    private bool airSliding = false;
+    private float slideSpeed;
 
     private void SlidingMovement()
     {
+        pm.sliding = true;
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
         rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
         slideTimer -= Time.deltaTime;
 
-        float slideSpeed = Mathf.Lerp(initialSlideSpeed, 0, 1 - (slideTimer / maxSlideTime));
-        rb.velocity = rb.velocity.normalized * slideSpeed;
+        slideSpeed = Mathf.Lerp(initialSlideSpeed + extraSlideSpeed, 0, 1 - (slideTimer / maxSlideTime));
+
+        // only modify speed when player is on ground
+        if (pm.IsGrounded())
+        {
+            rb.velocity = new Vector3(rb.velocity.normalized.x * slideSpeed, rb.velocity.y, rb.velocity.normalized.z * slideSpeed);
+        }
 
         if (slideTimer <= 0)
             StopSlide();
@@ -94,14 +146,18 @@ public class Sliding : MonoBehaviour
     private void StopSlide()
     {
         sliding = false;
+        pm.sliding = false;
         pm.StartCrouching();
+        extraSlideSpeed = 0;
     }
 
     private void StopSlideAndCrouch()
     {
         sliding = false;
+        pm.sliding = false;
         
         // start crouch instead
         pm.StopCrouching();
+        extraSlideSpeed = 0;
     }
 }
