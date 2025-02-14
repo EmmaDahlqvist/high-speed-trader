@@ -9,23 +9,26 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     public TextMeshProUGUI scoreText;
+    private CashManager cashManager;
 
     int score;
-    int initialScore = 100;
-    int multiplier = 10;
+    public int multiplier;
     int scoreLoweringRate = 1;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
         instance = this;
-        score = initialScore * multiplier;
-        scoreText.text = score.ToString() + "$";
+        //last removed is basically just the last bet you made
+        // scoreText.text = score.ToString() + "$";
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        cashManager = FindObjectOfType<CashManager>();
+        score = cashManager.getLastRemovedCash() * multiplier;
+
         scoreText.text = score.ToString() + "$";
         StartCoroutine(LowerScoreRoutine());
     }
