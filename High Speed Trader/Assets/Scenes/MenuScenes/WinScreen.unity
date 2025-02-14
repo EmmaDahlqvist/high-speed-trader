@@ -383,7 +383,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Try Again
+  m_text: Play again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game over
+  m_text: Game won
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -526,8 +526,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281348330
-  m_fontColor: {r: 0.91764706, g: 0.1882353, b: 0.1882353, a: 1}
+    rgba: 4284153690
+  m_fontColor: {r: 0.3529412, g: 1, b: 0.3529412, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 760558551}
   - component: {fileID: 760558550}
   - component: {fileID: 760558549}
+  - component: {fileID: 760558552}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -769,8 +770,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1966209297}
-        m_TargetAssemblyTypeName: EndScreenScript, Assembly-CSharp
+      - m_Target: {fileID: 760558552}
+        m_TargetAssemblyTypeName: WinScreenScript, Assembly-CSharp
         m_MethodName: OnRestartButton
         m_Mode: 1
         m_Arguments:
@@ -794,7 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.73333335, g: 0.12941177, b: 0.12941177, a: 1}
+  m_Color: {r: 0.2509804, g: 0.7607843, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -819,6 +820,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760558547}
   m_CullTransparentMesh: 1
+--- !u!114 &760558552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760558547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41090861048c0474b85faaa3efa067fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &774662945
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +844,7 @@ GameObject:
   - component: {fileID: 774662949}
   - component: {fileID: 774662948}
   - component: {fileID: 774662947}
+  - component: {fileID: 774662950}
   m_Layer: 5
   m_Name: ExitToMenuButton
   m_TagString: Untagged
@@ -902,8 +916,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1966209297}
-        m_TargetAssemblyTypeName: EndScreenScript, Assembly-CSharp
+      - m_Target: {fileID: 774662950}
+        m_TargetAssemblyTypeName: WinScreenScript, Assembly-CSharp
         m_MethodName: onBackToMenuButton
         m_Mode: 1
         m_Arguments:
@@ -927,7 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.73333335, g: 0.12941177, b: 0.12941177, a: 1}
+  m_Color: {r: 0.2509804, g: 0.7607843, b: 0.2509804, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -952,6 +966,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774662945}
   m_CullTransparentMesh: 1
+--- !u!114 &774662950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774662945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41090861048c0474b85faaa3efa067fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1682094534
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,10 +989,10 @@ GameObject:
   - component: {fileID: 1682094535}
   - component: {fileID: 1682094537}
   - component: {fileID: 1682094536}
-  - component: {fileID: 1682094538}
   - component: {fileID: 1682094539}
+  - component: {fileID: 1682094540}
   m_Layer: 5
-  m_Name: BetMoneyLost
+  m_Name: BetMoneyWon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1020,8 +1046,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282072020
-  m_fontColor: {r: 0.83137256, g: 0.23137255, b: 0.23137255, a: 1}
+    rgba: 4284153690
+  m_fontColor: {r: 0.3529412, g: 1, b: 0.3529412, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1088,18 +1114,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682094534}
   m_CullTransparentMesh: 1
---- !u!114 &1682094538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682094534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2f197f32c890a44aa811ede0304c78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1682094539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,6 +1124,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 241ba8e1365c4754a97bec6a23bce86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1682094540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682094534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41090861048c0474b85faaa3efa067fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1966209292

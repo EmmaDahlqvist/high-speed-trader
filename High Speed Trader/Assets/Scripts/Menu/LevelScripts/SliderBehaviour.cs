@@ -61,6 +61,7 @@ public class SliderBehaviour : MonoBehaviour
         {
             betSlider.value = minBet;
             currentBetText.text = minBet + " $";
+            currentBet = minBet;
         }
     }
     

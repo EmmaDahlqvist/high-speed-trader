@@ -14,6 +14,7 @@ public class LevelInitalizer : MonoBehaviour
     // Start is called before the first frame update
     public void StartLevel()
     {
+        
         currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         CashManager cashManager = FindObjectOfType<CashManager>();
         sliderBehaviour = FindObjectOfType<SliderBehaviour>();
@@ -27,7 +28,7 @@ public class LevelInitalizer : MonoBehaviour
 
 
         
-        //cashManager.SetCash(1000);
+        // cashManager.SetCash(1000);
     }
     void Start()
     {

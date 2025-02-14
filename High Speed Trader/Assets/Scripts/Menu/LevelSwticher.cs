@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class LevelSwticher : MonoBehaviour
@@ -21,7 +22,7 @@ public class LevelSwticher : MonoBehaviour
         
     }
     
-    public void onLeftArrowButton()
+    public async void onLeftArrowButton()
     {
         int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
@@ -29,6 +30,7 @@ public class LevelSwticher : MonoBehaviour
         {
             LevelInitalizer.StartLevel();
             UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            await Task.Delay(1); // Delay for 1 millisecond
             UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1));
             
             
@@ -37,12 +39,13 @@ public class LevelSwticher : MonoBehaviour
         {
             LevelInitalizer.StartLevel();
             UnityEngine.SceneManagement.SceneManager.LoadScene(2, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            await Task.Delay(1); // Delay for 1 millisecond
             UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(2));
             
 
         }
     }
-    public void onRightArrowButton()
+    public async void onRightArrowButton()
     {
         int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
@@ -50,6 +53,7 @@ public class LevelSwticher : MonoBehaviour
         {
             LevelInitalizer.StartLevel();
             UnityEngine.SceneManagement.SceneManager.LoadScene(2, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            await Task.Delay(1); // Delay for 1 millisecond
             UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(2));
 
         }
@@ -58,6 +62,7 @@ public class LevelSwticher : MonoBehaviour
             LevelInitalizer.StartLevel();
 
             UnityEngine.SceneManagement.SceneManager.LoadScene(3, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            await Task.Delay(1); // Delay for 1 millisecond
             UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(3));
 
         }

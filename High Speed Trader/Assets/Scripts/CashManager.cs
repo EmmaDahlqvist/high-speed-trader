@@ -5,6 +5,8 @@ using UnityEngine;
 public class CashManager : MonoBehaviour
 {
     private int cash;
+    private int lastRemovedCash;
+    private int lastAddedCash;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,14 @@ public class CashManager : MonoBehaviour
     public void AddCash(int amount)
     {
         cash += amount;
+        lastAddedCash = amount;
         SaveCash();
+    }
+    
+    public int getLastAddedCash()
+    {
+        LoadCash();
+        return lastAddedCash;
     }
 
     public void RemoveCash(int amount)
@@ -26,7 +35,14 @@ public class CashManager : MonoBehaviour
             return;
         }
         cash -= amount;
+        lastRemovedCash = amount;
         SaveCash();
+    }
+    
+    public int getLastRemovedCash()
+    {
+        LoadCash();
+        return lastRemovedCash;
     }
 
     public int GetCash()
@@ -44,12 +60,16 @@ public class CashManager : MonoBehaviour
     private void SaveCash()
     {
         PlayerPrefs.SetInt("PlayerCash", cash);
+        PlayerPrefs.SetInt("LastRemovedCash", lastRemovedCash);
+        PlayerPrefs.SetInt("LastAddedCash", lastAddedCash);
         PlayerPrefs.Save();
     }
 
     private void LoadCash()
     {
         cash = PlayerPrefs.GetInt("PlayerCash", 150);
+        lastRemovedCash = PlayerPrefs.GetInt("LastRemovedCash", 0);
+        lastAddedCash = PlayerPrefs.GetInt("LastAddedCash", 0);
     }
 
     // Update is called once per frame

@@ -24,7 +24,7 @@ public class PlayLevel : MonoBehaviour
     public void Play()
     {
        cashManager.RemoveCash(sliderBehaviour.currentBet);
-       UnityEngine.SceneManagement.SceneManager.LoadScene(4, UnityEngine.SceneManagement.LoadSceneMode.Single);
+       UnityEngine.SceneManagement.SceneManager.LoadScene(5, UnityEngine.SceneManagement.LoadSceneMode.Single);
        //TODO load correct scene
     }
 
