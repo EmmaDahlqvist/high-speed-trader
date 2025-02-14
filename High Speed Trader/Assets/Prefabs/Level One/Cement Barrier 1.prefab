@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2675938822291247653}
   - component: {fileID: 6998828922439942056}
   - component: {fileID: 7391373008260256155}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cement Barrier 1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
