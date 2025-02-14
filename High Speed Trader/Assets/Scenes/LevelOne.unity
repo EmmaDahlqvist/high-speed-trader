@@ -4759,6 +4759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_v2
       objectReference: {fileID: 0}
+    - target: {fileID: 5702488209778206707, guid: 6b8b6c3b5379b7b49b6ce46f0c7580f5, type: 3}
+      propertyPath: far clip plane
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7702339490803064105, guid: 6b8b6c3b5379b7b49b6ce46f0c7580f5, type: 3}
       propertyPath: slideForce
       value: 400
