@@ -110,7 +110,7 @@ public class Sliding : MonoBehaviour
         initialSlideSpeed = rb.velocity.magnitude; // Record the initial slide speed
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        rb.AddForce(Vector3.down * 50f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
 
@@ -125,6 +125,7 @@ public class Sliding : MonoBehaviour
 
     private void SlidingMovement()
     {
+        pm.sliding = true;
         Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
 
@@ -145,6 +146,7 @@ public class Sliding : MonoBehaviour
     private void StopSlide()
     {
         sliding = false;
+        pm.sliding = false;
         pm.StartCrouching();
         extraSlideSpeed = 0;
     }
@@ -152,6 +154,7 @@ public class Sliding : MonoBehaviour
     private void StopSlideAndCrouch()
     {
         sliding = false;
+        pm.sliding = false;
         
         // start crouch instead
         pm.StopCrouching();

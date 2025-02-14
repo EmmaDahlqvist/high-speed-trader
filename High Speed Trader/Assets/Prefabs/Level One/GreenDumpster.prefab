@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2895038268201595824}
   - component: {fileID: 5515135581872273781}
   - component: {fileID: 2026186302415325556}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GreenDumpster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 3357705614973172281}
   - component: {fileID: 5705355383288468316}
   - component: {fileID: 4832355995044961990}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EventCollision
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
