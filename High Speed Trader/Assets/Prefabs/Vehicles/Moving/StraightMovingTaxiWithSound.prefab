@@ -271,11 +271,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineSound: {fileID: 1730369175138824673}
   player: {fileID: 0}
-  sweetSpotDistance: 15
-  fadeOutDistance: 50
+  sweetSpotDistance: 20
+  fadeDistance: 100
   maxVolume: 1
   minVolume: 0
-  smoothFactor: 5
+  smoothFactor: 6
 --- !u!1 &1080362124583542523
 GameObject:
   m_ObjectHideFlags: 0
