@@ -11,7 +11,7 @@ public class VaultOverObject : MonoBehaviour
 
     private Transform player;
     private Transform playerObj;
-    private Transform playerCam; // Länka din kamera här i Unity Inspector
+    private Transform playerCam;
     private PlayerMovement pm;
 
     private bool isVaulting = false;
@@ -48,14 +48,14 @@ public class VaultOverObject : MonoBehaviour
 
         Quaternion originalCamRot = playerCam.localRotation;
 
-        // Gör kameratilten
+        // cameratilt
         playerCam.DOLocalRotate(new Vector3(cameraTiltAngle, 0, 0), cameraTiltDuration)
             .SetEase(Ease.InOutSine)
             .OnComplete(() =>
-                playerCam.DOLocalRotate(Vector3.zero, cameraTiltDuration).SetEase(Ease.InOutSine) // Återställ kameran
+                playerCam.DOLocalRotate(Vector3.zero, cameraTiltDuration).SetEase(Ease.InOutSine) // reset camera
             );
 
-        // Flytta spelaren med DOTween
+        // move player (using DOTween)
         player.DOMove(endPos, vaultDuration)
             .SetEase(Ease.OutQuad)
             .OnComplete(() => { isVaulting = false;
