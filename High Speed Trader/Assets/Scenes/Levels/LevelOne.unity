@@ -483,6 +483,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3725775416128114872, guid: b403553d72fa9714187d5da865e765ef, type: 3}
+      propertyPath: maxTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725775416128114872, guid: b403553d72fa9714187d5da865e765ef, type: 3}
+      propertyPath: minTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725775416128114872, guid: b403553d72fa9714187d5da865e765ef, type: 3}
       propertyPath: spawnTimer
       value: 1
       objectReference: {fileID: 0}
