@@ -15,13 +15,13 @@ public class WinScreenScript : MonoBehaviour
     void Start()
     {
         cashManager = FindObjectOfType<CashManager>();
-        // TODO here I want to see what my bet was going into the level that I failed on, and change the death Text accordingly - for later
         deathText = GameObject.Find("BetMoneyWon").GetComponent<TextMeshProUGUI>();
-        cashManager.AddCash(cashManager.GetCash());
-        deathText.text = "You sold all your stocks! You earned: " + cashManager.getLastAddedCash() + "$";
+        cashManager.AddCash(PlayerPrefs.GetInt("Score"));
+        deathText.text = "You sold all your stocks! You earned: " + PlayerPrefs.GetInt("Score") + "$";
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
-    private int deathLevel; //for later TODO
     
     public async void OnRestartButton()
     {
