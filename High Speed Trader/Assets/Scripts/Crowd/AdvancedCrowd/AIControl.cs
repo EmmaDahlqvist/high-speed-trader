@@ -15,6 +15,7 @@ public class AIControl : MonoBehaviour
     {
         agent = this.GetComponent<NavMeshAgent>();
         agent.SetDestination(goal.transform.position);
+        agent.speed = Random.Range(7f, 8f);
     }
 
     // Update is called once per frame
