@@ -9,7 +9,9 @@ public class VehicleSpawner : MonoBehaviour
     public float rotationOnSpawn;
 
     [Header("Spawn Settings")]
-    public float spawnTimer;
+    private float spawnTimer;
+    public float minTime;
+    public float maxTime;
 
     private Quaternion rotationQuaternion;
 
@@ -30,6 +32,7 @@ public class VehicleSpawner : MonoBehaviour
     {
         while (true)
         {
+            spawnTimer = Random.Range(minTime, maxTime);
             yield return new WaitForSeconds(spawnTimer);
             spawnVehicle();
         }

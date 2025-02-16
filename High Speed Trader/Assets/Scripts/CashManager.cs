@@ -16,8 +16,13 @@ public class CashManager : MonoBehaviour
 
     public void AddCash(int amount)
     {
+        Debug.Log("AddCash called with amount: " + amount);
+        Debug.Log("Call Stack: " + System.Environment.StackTrace);
+
+        
         cash += amount;
         lastAddedCash = amount;
+        PlayerPrefs.SetInt("LastAddedCash", lastAddedCash);
         SaveCash();
     }
     
@@ -36,6 +41,7 @@ public class CashManager : MonoBehaviour
         }
         cash -= amount;
         lastRemovedCash = amount;
+        PlayerPrefs.SetInt("LastRemovedCash", lastRemovedCash);
         SaveCash();
     }
     
@@ -60,17 +66,21 @@ public class CashManager : MonoBehaviour
     private void SaveCash()
     {
         PlayerPrefs.SetInt("PlayerCash", cash);
-        PlayerPrefs.SetInt("LastRemovedCash", lastRemovedCash);
-        PlayerPrefs.SetInt("LastAddedCash", lastAddedCash);
         PlayerPrefs.Save();
     }
 
     private void LoadCash()
     {
         cash = PlayerPrefs.GetInt("PlayerCash", 150);
+        if(cash < 100)
+        {
+            cash = 150;
+            SaveCash();
+        }
         lastRemovedCash = PlayerPrefs.GetInt("LastRemovedCash", 0);
         lastAddedCash = PlayerPrefs.GetInt("LastAddedCash", 0);
     }
+
 
     // Update is called once per frame
     void Update()

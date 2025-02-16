@@ -1,15 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LaptopInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] private string prompt;
     public string InteractionPrompt => prompt;
-
-    public bool Interact(Interactor interactor)
+    private ScoreManager scoreManager;
+    
+    private void Start()
     {
-        print("opening laptop");
-        return true;
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
+
+    public async void Interact(Interactor interactor)
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(5, LoadSceneMode.Single);
+        await Task.Delay(1); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(5));
     }
 }
