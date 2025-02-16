@@ -56,6 +56,7 @@ public class SliderBehaviour : MonoBehaviour
             currentBetText.text = currentCash.ToString() + " $";
             betSlider.interactable = false; // Disable the slider
             active = false;
+            currentBet = minBet;
         }
         else if (currentCash >= minBet)
         {

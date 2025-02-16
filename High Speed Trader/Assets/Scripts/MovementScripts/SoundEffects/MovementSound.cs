@@ -11,6 +11,7 @@ public class MovementSound : MonoBehaviour
     public GameObject sliding;
     public GameObject landing;
     public GameObject crouching;
+    public GameObject vaulting;
 
     private Dictionary<PlayerMovement.MovementState, GameObject> soundMap;
     private PlayerMovement.MovementState lastState; // remember last state
@@ -26,7 +27,8 @@ public class MovementSound : MonoBehaviour
             { PlayerMovement.MovementState.sprinting, sprinting },
             { PlayerMovement.MovementState.crouching, crouching },
             { PlayerMovement.MovementState.sliding, sliding },
-            { PlayerMovement.MovementState.landed, landing }
+            { PlayerMovement.MovementState.landed, landing },
+            { PlayerMovement.MovementState.vaulting, vaulting}
         };
 
         // Stäng av alla ljudobjekt från start
