@@ -17,7 +17,6 @@ public class EndScreenScript : MonoBehaviour
         // TODO here I want to see what my bet was going into the level that I failed on, and change the death Text accordingly - for later
         deathText = GameObject.Find("BetMoneyLost").GetComponent<TextMeshProUGUI>();
         deathText.text = "You died! You lost: " + cashManager.getLastRemovedCash() + "$";
-        LevelInitalizer = FindObjectOfType<LevelInitalizer>();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -32,6 +31,7 @@ public class EndScreenScript : MonoBehaviour
     
     public async void OnRestartButton()
     {
+        LevelInitalizer = FindObjectOfType<LevelInitalizer>();
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
         UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1));

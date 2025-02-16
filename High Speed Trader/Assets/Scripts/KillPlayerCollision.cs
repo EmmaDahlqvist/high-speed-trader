@@ -13,9 +13,9 @@ public class KillPlayerCollision: MonoBehaviour
         {
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(4, LoadSceneMode.Single);
-            await Task.Delay(1); // Delay for 1 millisecond
+            await Task.Delay(5); // Delay for 1 millisecond
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(4));
-            SceneManager.UnloadSceneAsync(currentSceneIndex);
+            // SceneManager.UnloadSceneAsync(currentSceneIndex);
         }
 
     }

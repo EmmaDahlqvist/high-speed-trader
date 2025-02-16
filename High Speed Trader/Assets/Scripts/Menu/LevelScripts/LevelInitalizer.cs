@@ -15,24 +15,29 @@ public class LevelInitalizer : MonoBehaviour
     public void StartLevel()
     {
         
+       
         currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         CashManager cashManager = FindObjectOfType<CashManager>();
         sliderBehaviour = FindObjectOfType<SliderBehaviour>();
         currentBalance = FindObjectOfType<CurrentBalance>();
         playLevel = FindObjectOfType<PlayLevel>();
-        
+
+
+
 
         sliderBehaviour.Start();
         currentBalance.Start();
         playLevel.Start();
 
 
-        
-        // cashManager.SetCash(1000);
     }
     void Start()
     {
-        StartLevel();   
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (sceneName != "WinScreen" && sceneName != "EndScreen")
+        {
+            StartLevel();
+        }
     }
 
     // Update is called once per frame

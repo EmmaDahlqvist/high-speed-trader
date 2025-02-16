@@ -10,40 +10,42 @@ public class WinScreenScript : MonoBehaviour
     private TextMeshProUGUI deathText;
     private LevelInitalizer LevelInitalizer;
     private CashManager cashManager;
+    private int lastScore;
+
 
     // Start is called before the first frame update
     void Start()
     {
         cashManager = FindObjectOfType<CashManager>();
-        deathText = GameObject.Find("BetMoneyWon").GetComponent<TextMeshProUGUI>();
-        cashManager.AddCash(PlayerPrefs.GetInt("Score"));
-        deathText.text = "You sold all your stocks! You earned: " + PlayerPrefs.GetInt("Score") + "$";
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
+        deathText = GameObject.Find("BetMoneyWon").GetComponent<TextMeshProUGUI>();
+        lastScore = PlayerPrefs.GetInt("Score", 0);
+  
+
+        
+        deathText.text = "You sold all your stocks! You earned: " + lastScore + "$";
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        
+
+        // Reset CashManager state
     }
     
     public async void OnRestartButton()
     {
+        cashManager.AddCash(lastScore);
+        
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1));
+        LevelInitalizer.StartLevel();
 
-        UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1);
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(scene);
-
-        LevelInitalizer = FindObjectOfType<LevelInitalizer>();
-        if (LevelInitalizer != null)
-        {
-            LevelInitalizer.StartLevel();
-        }
-        else
-        {
-            Debug.LogWarning("LevelInitalizer not found in the scene.");
-        }
+      
     }
     
     public async void onBackToMenuButton()
     {
+        cashManager.AddCash(lastScore);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
         UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));

@@ -21,6 +21,5 @@ public class LaptopInteraction : MonoBehaviour, IInteractable
         SceneManager.LoadScene(5, LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(5));
-        SceneManager.UnloadSceneAsync(currentSceneIndex);
     }
 }
