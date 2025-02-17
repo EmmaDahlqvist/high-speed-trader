@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1487596456638256966}
   - component: {fileID: 700518055086490528}
   - component: {fileID: 1458315789971548186}
+  - component: {fileID: 3702321028307603144}
   m_Layer: 5
   m_Name: PromptImage
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 4645118543605486457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.327, y: 1.327, z: 1.327}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8966649621257854973}
@@ -35,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 682, y: -314.5}
+  m_AnchoredPosition: {x: 566, y: -306}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &700518055086490528
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &3702321028307603144
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4645118543605486457}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4977661337246624107
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +393,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptText: {fileID: 6836046183074555673}
   promptImage: {fileID: 4645118543605486457}
-  message: Select Text om TriggerZone
+  message: Hold [C] to slide!
+  fadeDistance: 10
+  fadeSpeed: 2
 --- !u!1 &8798860987877919577
 GameObject:
   m_ObjectHideFlags: 0

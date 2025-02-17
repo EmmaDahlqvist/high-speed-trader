@@ -51,7 +51,7 @@ public class MovementSound : MonoBehaviour, PlayerMovementListener
         if(landingSound != null)
         {
             audioSource.pitch = audioSource.pitch = Random.Range(0.8f, 0.9f);
-            audioSource.PlayOneShot(landingSound, 0.2f);
+            audioSource.PlayOneShot(landingSound, 0.3f);
         }
     }
 

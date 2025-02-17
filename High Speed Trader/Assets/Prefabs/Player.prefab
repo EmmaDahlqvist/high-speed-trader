@@ -92,7 +92,7 @@ MonoBehaviour:
   crouchYScale: 0.5
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 99
+  crouchKey: 0
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -157,7 +157,7 @@ MonoBehaviour:
   minAirSlideBoost: 5
   airSlideBoostHeight: 2
   slideYScale: 0.5
-  slideKey: 306
+  slideKey: 99
 --- !u!114 &7136074516745932115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,9 +192,9 @@ MonoBehaviour:
   walking: {fileID: 7287701747606910284}
   sprinting: {fileID: 8818991829019171479}
   sliding: {fileID: 3048004438047233945}
-  landing: {fileID: 4232530312276164574}
   crouching: {fileID: 2536998987903307426}
   vaulting: {fileID: 7301551471011031936}
+  landingSound: {fileID: 0}
 --- !u!1 &395190853317004117
 GameObject:
   m_ObjectHideFlags: 0

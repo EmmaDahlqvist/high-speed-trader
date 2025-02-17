@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3785703256644349167}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TrashBag2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 711090118441468955}
   - component: {fileID: 8382426106195325768}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EventCollision
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -149,6 +149,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 38596c652c3134a41ab7364769e641e4, type: 3}
       propertyPath: m_Name
       value: Mesh_Bag4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38596c652c3134a41ab7364769e641e4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2611314478542011707, guid: 38596c652c3134a41ab7364769e641e4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4129356788942975847, guid: 38596c652c3134a41ab7364769e641e4, type: 3}
       propertyPath: m_Materials.Array.data[0]

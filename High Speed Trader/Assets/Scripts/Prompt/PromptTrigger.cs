@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,37 +8,49 @@ public class PromptTrigger : MonoBehaviour
     public TextMeshProUGUI promptText;
     public GameObject promptImage;
     public string message;
+    public float fadeDistance = 3f; // Maxavstånd från zonens mitt där prompten fortfarande syns lite
+    public float fadeSpeed = 2f; // Hur snabbt den fadar
+    private CanvasGroup canvasGroup;
+    private Transform player;
+    private bool playerInZone = false;
+    private Vector3 zoneCenter; // Mitten av zonen
+    private float zoneRadius; // Storleken på trigger-zonen
 
-    // to make sure they dont get the prompt twice
-    private bool hasBeenPrompted = false;
-
-    // Start is called before the first frame update
     void Start()
     {
-        //dont show from start
-        promptImage.SetActive(false);
+        promptText.SetText(message);
+        canvasGroup = promptImage.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = promptImage.AddComponent<CanvasGroup>();
+        }
+
+        canvasGroup.alpha = 0f; // make invisible
+        promptImage.SetActive(true);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Beräkna zonens mittpunkt och storlek
+        Collider col = GetComponent<Collider>();
+        zoneCenter = col.bounds.center;
+        zoneRadius = col.bounds.extents.magnitude; // Använd storlek på zonen
     }
 
-    // Update is called once per frame
     void Update()
     {
-    }
+        if (player == null) return;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && !hasBeenPrompted)
+        float distance = Vector3.Distance(player.position, zoneCenter);
+
+        if (distance <= zoneRadius) // Spelaren är inne i zonen
         {
-            promptText.text = message;
-            promptImage.SetActive(true);
-            hasBeenPrompted = true;
+            playerInZone = true;
+            canvasGroup.alpha = 1f; // Full synlighet
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Player"))
+        else // Spelaren är utanför zonen
         {
-            promptImage.SetActive(false);
+            playerInZone = false;
+            float fadeFactor = Mathf.Clamp01(1 - ((distance - zoneRadius) / fadeDistance));
+            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, fadeFactor, Time.deltaTime * fadeSpeed);
         }
     }
 }

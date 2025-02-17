@@ -47,6 +47,11 @@ public class ScoreManager : MonoBehaviour
     {
         score -= scoreLoweringRate;
         scoreText.text = score.ToString() + "$";
+
+        // Calculate the color based on the score
+        float t = Mathf.InverseLerp(0, cashManager.getLastRemovedCash(), score);
+        Color color = Color.Lerp(Color.red, Color.green, t);
+        scoreText.color = color;
     }
 
     private void OnDestroy()
