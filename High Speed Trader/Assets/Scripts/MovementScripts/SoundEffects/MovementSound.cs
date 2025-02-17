@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementSound : MonoBehaviour
+public class MovementSound : MonoBehaviour, PlayerMovementListener
 {
     private PlayerMovement pm;
 
     public GameObject walking;
     public GameObject sprinting;
     public GameObject sliding;
-    public GameObject landing;
     public GameObject crouching;
     public GameObject vaulting;
+
+    public AudioClip landingSound;
+    private AudioSource audioSource;
 
     private Dictionary<PlayerMovement.MovementState, GameObject> soundMap;
     private PlayerMovement.MovementState lastState; // remember last state
@@ -20,6 +22,10 @@ public class MovementSound : MonoBehaviour
     {
         pm = GetComponent<PlayerMovement>();
 
+        pm.addLandingListener(this); // lägg till som landinglistener
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         // connect state to sound
         soundMap = new Dictionary<PlayerMovement.MovementState, GameObject>
         {
@@ -27,7 +33,6 @@ public class MovementSound : MonoBehaviour
             { PlayerMovement.MovementState.sprinting, sprinting },
             { PlayerMovement.MovementState.crouching, crouching },
             { PlayerMovement.MovementState.sliding, sliding },
-            { PlayerMovement.MovementState.landed, landing },
             { PlayerMovement.MovementState.vaulting, vaulting}
         };
 
@@ -38,6 +43,16 @@ public class MovementSound : MonoBehaviour
         }
 
         lastState = pm.state; // Spara initialt state
+    }
+
+    // Spela landing sound, lyssnar på playermovement när den landar
+    public void PlaySound()
+    {
+        if(landingSound != null)
+        {
+            audioSource.pitch = audioSource.pitch = Random.Range(0.8f, 0.9f);
+            audioSource.PlayOneShot(landingSound, 0.2f);
+        }
     }
 
     void Update()

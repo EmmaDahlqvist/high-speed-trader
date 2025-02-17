@@ -110,7 +110,7 @@ public class Sliding : MonoBehaviour
         initialSlideSpeed = rb.velocity.magnitude; // Record the initial slide speed
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        rb.AddForce(Vector3.down * 50f, ForceMode.Impulse);
+        rb.AddForce(Vector3.down * 7f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
 

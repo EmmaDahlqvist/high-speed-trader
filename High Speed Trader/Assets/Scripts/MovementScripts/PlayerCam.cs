@@ -20,7 +20,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

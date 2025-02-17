@@ -42,11 +42,18 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    private PlayerMovementListener landingListener;
+
     Vector3 moveDirection;
 
     Rigidbody rb;
 
     public MovementState state;
+
+    public void addLandingListener(PlayerMovementListener playerMovementListener)
+    {
+        landingListener = playerMovementListener;
+    }
 
 
     public bool IsGrounded()
@@ -57,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
     public enum MovementState
     {
         standingStill,
-        landed,
         walking,
         sprinting,
         wallRunning,
@@ -158,15 +164,6 @@ public class PlayerMovement : MonoBehaviour
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
 
-    private IEnumerator SetLandedState()
-    {
-        landed = true;
-        state = MovementState.landed;
-        yield return new WaitForSeconds(0.1f); // wait 100 ms (to make sure sound is played)
-        landed = false;
-        StateHandler(); // call state handler right after landing
-    }
-
     private void StateHandler()
     {
         // Mode - vaulting
@@ -175,8 +172,6 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.vaulting;
             return;
         }
-
-        if (landed) return; // dont change state if just landed
         
         // player was in air
         if (!wasInAir && !grounded)
@@ -186,8 +181,10 @@ public class PlayerMovement : MonoBehaviour
         else if (wasInAir && grounded) // was in air but just landed
         {
             wasInAir = false;
-            StartCoroutine(SetLandedState());
-            return; // dont change state right after
+            if(landingListener != null)
+            {
+                landingListener.PlaySound();
+            }
         }
 
         // Mode - WallRunning
