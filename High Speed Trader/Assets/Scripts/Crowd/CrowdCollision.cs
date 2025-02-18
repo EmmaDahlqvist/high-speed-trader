@@ -34,7 +34,8 @@ public class CrowdCollision : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            Destroy(other.transform.root.gameObject, destroyDelay);
+            // Destroy(other.transform.root.gameObject, destroyDelay);
+            Destroy(other.transform.parent.gameObject, destroyDelay);
         }
     }
 }
