@@ -21,6 +21,7 @@ public class PlayerCam : MonoBehaviour
     public float lookingBackTime = 2f;
     public float turnAroundTime = 1;
     bool lockedStart = true;
+    public bool turnAroundAtStart = true;
 
 
     private List<TurnAroundCompleteListener> turnAroundCompleteListeners = new List<TurnAroundCompleteListener>();
@@ -29,8 +30,6 @@ public class PlayerCam : MonoBehaviour
     void Start()
     {
         // set up rotation from start:
-        camHolder.rotation = Quaternion.Euler(0, 180, 0);
-        orientation.rotation = Quaternion.Euler(0, 180, 0);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -41,7 +40,18 @@ public class PlayerCam : MonoBehaviour
         {
             turnAroundCompleteListeners.Add(player.GetComponent<PlayerMovement>()); // add playermovement script as turn around listener
             turnAroundCompleteListeners.Add(player.GetComponent<StartPrompt>()); // add startprompt script as turn around listener
-        } 
+        }
+
+        if (turnAroundAtStart)
+        {
+            camHolder.rotation = Quaternion.Euler(0, 180, 0);
+            orientation.rotation = Quaternion.Euler(0, 180, 0);
+
+            lockedStart = true;
+        } else
+        {
+            TurnAroundComplete();
+        }
     }
 
     // Update is called once per frame
