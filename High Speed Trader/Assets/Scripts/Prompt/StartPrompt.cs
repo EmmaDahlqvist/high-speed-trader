@@ -44,7 +44,7 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
 
     public void ActAfterTurn()
     {
-        getReadyPromptCanvas.SetActive(false);
+        HideCanvasGroup(getReadyCanvasGroup);
         ShowPrompt(runCanvasGroup, runPromptCanvas);
         StartCoroutine(FadeOutRoutine(runCanvasGroup));
     }
@@ -56,7 +56,7 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
 
     private void ShowPrompt(CanvasGroup canvasGroup, GameObject canvas)
     {
-        canvas.SetActive(true);
+        //canvas.SetActive(true);
         canvasGroup.alpha = 1f;
     }
 

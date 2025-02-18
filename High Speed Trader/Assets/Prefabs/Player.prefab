@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1524884778490065639}
   - component: {fileID: 7136074516745932115}
   - component: {fileID: 4285552324593336672}
+  - component: {fileID: 730637939095778685}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -195,6 +196,21 @@ MonoBehaviour:
   crouching: {fileID: 2536998987903307426}
   vaulting: {fileID: 7301551471011031936}
   landingSound: {fileID: 8300000, guid: 79e6e1370ee1ca747b469e68d0dcb0fe, type: 3}
+--- !u!114 &730637939095778685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126733507240892217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea50c8bd0b951341a3efa8d74ed3e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptTimer: 3
+  getReadyPromptCanvas: {fileID: 0}
+  runPromptCanvas: {fileID: 0}
 --- !u!1 &395190853317004117
 GameObject:
   m_ObjectHideFlags: 0
