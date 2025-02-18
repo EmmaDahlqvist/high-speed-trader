@@ -28,15 +28,18 @@ public class VaultOverObject : MonoBehaviour
             return;
         }
 
-        // player was in trigger zone
-        if (other.CompareTag("Player"))
+        if (Input.GetKey(KeyCode.Space))
         {
-            isVaulting = true;
-            playerObj = other.transform;
-            player = other.transform.root;
-            pm = playerObj.parent.GetComponent<PlayerMovement>(); // get playermovement script from player
+            // player was in trigger zone
+            if (other.CompareTag("Player"))
+            {
+                isVaulting = true;
+                playerObj = other.transform;
+                player = other.transform.root;
+                pm = playerObj.parent.GetComponent<PlayerMovement>(); // get playermovement script from player
 
-            PerformVault();
+                PerformVault();
+            }
         }
     }
 

@@ -69,5 +69,5 @@ MonoBehaviour:
   vaultDuration: 0.5
   vaultHeight: 1.2
   vaultDistance: 3
-  cameraTiltAngle: 15
+  cameraTiltAngle: 10
   cameraTiltDuration: 0.3
