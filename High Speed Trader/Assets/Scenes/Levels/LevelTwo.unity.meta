@@ -1,7 +1,15 @@
 fileFormatVersion: 2
-guid: d85875c57534f8546b9e7e8c1ba48709
+guid: 72b4e2acc4eee1241bf4db5a98e5270b
+timeCreated: 1487020702
+licenseType: Store
 DefaultImporter:
-  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88919
+  packageName: Flat Style Vehicles Pack
+  packageVersion: 2.0
+  assetPath: Assets/Flat_Style_Vehicles/Demo/Demo.unity
+  uploadId: 196408
