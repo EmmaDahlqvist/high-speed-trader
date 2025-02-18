@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static PlayerMovement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     public MovementState state;
 
+    private bool lockedStart;
+
     public void addLandingListener(PlayerMovementListener playerMovementListener)
     {
         landingListener = playerMovementListener;
@@ -86,13 +88,14 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
-
         startYScale = playerObj.localScale.y;
+        lockedStart = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (lockedStart) return;
         // ground check
         grounded = Physics.Raycast(playerObj.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
@@ -109,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (lockedStart) return;
         MovePlayer();
     }
 
@@ -301,4 +305,9 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Raycast(playerObj.position, transform.forward, out hit, checkDistance, whatIsGround);
     }
 
+    public void ActAfterTurn()
+    {
+        // unlock player movement after they have turned around
+        lockedStart = false;
+    }
 }

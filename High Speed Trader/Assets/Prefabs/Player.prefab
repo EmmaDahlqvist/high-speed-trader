@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4285552324593336672}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,6 +413,8 @@ MonoBehaviour:
   sensY: 400
   orientation: {fileID: 2854748091565921993}
   camHolder: {fileID: 6162175768287036645}
+  lookingBackTime: 2
+  turnAroundTime: 1
 --- !u!114 &9176705499174664357
 MonoBehaviour:
   m_ObjectHideFlags: 0
