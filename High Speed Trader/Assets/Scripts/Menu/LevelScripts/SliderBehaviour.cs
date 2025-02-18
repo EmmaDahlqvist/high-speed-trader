@@ -25,14 +25,17 @@ public class SliderBehaviour : MonoBehaviour
     public bool active = true;
 
 
-    
+    public void SetLevel(int level)
+    {
+        currentLevel = level;
+    }
     
     public void Start()
     {
         cashManager = FindObjectOfType<CashManager>();
         currentCash = cashManager.GetCash();
         currentBetText = GameObject.Find("CurrentBet").GetComponent<TextMeshProUGUI>();
-        currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        //currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         betSlider = GetComponent<Slider>();
         minBet = (int)minBets.GetValue(currentLevel-1);
         maxBet = (int)maxBets.GetValue(currentLevel-1);
