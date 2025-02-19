@@ -25,6 +25,8 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         justStarted = true;
     }
 
+    public Rect mouseBounds = new Rect(100, 100, 800, 500); // (x, y, width, height)
+
     // Update is called once per frame
     void Update()
     {
@@ -53,8 +55,8 @@ public class CameraFollower : MonoBehaviour, UIHitListener
             Cursor.visible = true;
         } else
         {
-            Cursor.lockState = CursorLockMode.Locked; // lock
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked; // lock
+            //Cursor.visible = false;
         }
 
 
@@ -63,10 +65,10 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
         yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -80, 80); // left and right
+        yRotation = Mathf.Clamp(yRotation, -20, 20); // left and right
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -10, 10); // up and down
+        xRotation = Mathf.Clamp(xRotation, -5, 5); // up and down
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
