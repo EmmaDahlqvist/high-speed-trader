@@ -21,13 +21,14 @@ public class CameraFollower : MonoBehaviour, UIHitListener
     {
         Cursor.lockState = CursorLockMode.Locked;  // Lås musen initialt
         Cursor.visible = false;  // Dölj musen initialt
-        transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         justStarted = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if(justStarted)
         {
             if (Input.GetMouseButtonDown(0))
@@ -44,6 +45,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
                 return;
             }
         }
+        */
 
         if(lookingAtUI)
         {
@@ -61,10 +63,10 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
         yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -80, 80);
+        yRotation = Mathf.Clamp(yRotation, -80, 80); // left and right
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80, 90);
+        xRotation = Mathf.Clamp(xRotation, -10, 10); // up and down
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }

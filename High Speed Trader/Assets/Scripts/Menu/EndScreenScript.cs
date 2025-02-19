@@ -40,9 +40,9 @@ public class EndScreenScript : MonoBehaviour
     
     public async void onBackToMenuButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(7, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(7));
     }
     
     

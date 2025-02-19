@@ -32,6 +32,7 @@ public class SliderBehaviour : MonoBehaviour
     
     public void Start()
     {
+        currentLevel = 1;
         cashManager = FindObjectOfType<CashManager>();
         currentCash = cashManager.GetCash();
         currentBetText = GameObject.Find("CurrentBet").GetComponent<TextMeshProUGUI>();

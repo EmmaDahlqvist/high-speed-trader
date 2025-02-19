@@ -22,7 +22,7 @@ public class ScreenSelector : MonoBehaviour
         menuObject.SetActive(true);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
-        //levelObjects.Add(levelThreeObject);
+        levelObjects.Add(3, levelThreeObject);
 
 
         foreach(GameObject gameObject in levelObjects.Values)
@@ -47,6 +47,7 @@ public class ScreenSelector : MonoBehaviour
     public void OnPlayButton()
     {
         menuObject.SetActive(false);
+        SwitchRaycaster(menuObject);
 
 
         levelObjects[currentLvl].SetActive(true);
@@ -93,4 +94,22 @@ public class ScreenSelector : MonoBehaviour
         slider.SetLevel(currentLvl);
         slider.Start();
     }
+
+    public void OnBackToMenuButton()
+    {
+        print("back to menu");
+        currentLvl = 1;
+        foreach (GameObject gameObject in levelObjects.Values)
+        {
+            gameObject.SetActive(false);
+        }
+        menuObject.SetActive(true);
+        SwitchRaycaster(menuObject);
+    }
+
+    public GameObject GetCurrentLevelObject()
+    {
+        return levelObjects[currentLvl];
+    }
+    
 }
