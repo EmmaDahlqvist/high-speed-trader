@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class CurveVehicleMovement : MonoBehaviour
 {
-
-
-
-
     
     [SerializeField]
     private Transform[] routes;
@@ -18,6 +14,7 @@ public class CurveVehicleMovement : MonoBehaviour
 
     private Vector3 carPosition;
 
+    [SerializeField]
     private float speedModifier;
 
     private bool coroutineAllowed;
@@ -27,7 +24,6 @@ public class CurveVehicleMovement : MonoBehaviour
     {
         routeToGo = 0;
         tParam = 0f;
-        speedModifier = 0.1f;
         coroutineAllowed = true;
     }
 
@@ -59,12 +55,23 @@ public class CurveVehicleMovement : MonoBehaviour
                 Mathf.Pow(tParam, 3) * p3;
 
             transform.position = carPosition;
+
+            Vector3 tangent =
+                3 * Mathf.Pow(1 - tParam, 2) * (p1 - p0) +
+                6 * (1 - tParam) * tParam * (p2 - p1) +
+                3 * Mathf.Pow(tParam, 2) * (p3 - p2);
+
+            if (tangent != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(tangent);
+            }
+
+
             yield return new WaitForEndOfFrame();
         }
 
         tParam = 0f;
-
-        routeToGo = 0;
+        routeToGo += 1;
 
         if (routeToGo > routes.Length - 1)
             routeToGo = 0;
