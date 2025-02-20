@@ -10463,7 +10463,7 @@ MonoBehaviour:
   zoomDuration: 1.5
   zoomFactor: 3
   fadeCanvas: {fileID: 640731656}
-  fadeDuration: 1.5
+  fadeDuration: 1
   nextScene: NextScene
   moveCloserAmount: -0.55
   screenSelectorObject: {fileID: 24086356}
