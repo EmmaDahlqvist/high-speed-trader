@@ -97,7 +97,6 @@ public class ScreenSelector : MonoBehaviour
 
     public void OnBackToMenuButton()
     {
-        print("back to menu");
         currentLvl = 1;
         foreach (GameObject gameObject in levelObjects.Values)
         {

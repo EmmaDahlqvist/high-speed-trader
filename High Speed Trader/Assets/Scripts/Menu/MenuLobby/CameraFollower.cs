@@ -19,8 +19,8 @@ public class CameraFollower : MonoBehaviour, UIHitListener
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;  // Lås musen initialt
-        Cursor.visible = false;  // Dölj musen initialt
+        Cursor.lockState = CursorLockMode.Confined;  // Lås musen initialt
+        Cursor.visible = true;  // Dölj musen initialt
         transform.rotation = Quaternion.Euler(0, 0, 0);
         justStarted = true;
     }
@@ -30,33 +30,12 @@ public class CameraFollower : MonoBehaviour, UIHitListener
     // Update is called once per frame
     void Update()
     {
-        /*
-        if(justStarted)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if(!lookingAtUI)
-                {
-                    Cursor.lockState = CursorLockMode.Locked; // lock
-                    Cursor.visible = false;
-                    transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
-                }
-                justStarted = false;
-            } else
-            {
-                return;
-            }
-        }
-        */
-
         if(lookingAtUI)
         {
-            Cursor.lockState = CursorLockMode.None;  // unlock
             Cursor.visible = true;
         } else
         {
-            //Cursor.lockState = CursorLockMode.Locked; // lock
-            //Cursor.visible = false;
+            Cursor.visible = false;
         }
 
 

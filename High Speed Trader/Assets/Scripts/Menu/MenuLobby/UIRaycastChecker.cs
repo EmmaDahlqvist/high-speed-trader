@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIRaycastChecker : MonoBehaviour
 {
-    public Camera playerCamera;  // Tilldela din huvudkamera här
-    public GraphicRaycaster raycaster; // Tilldela din UI-canvas GraphicRaycaster
+    public Camera playerCamera;  
+    public GraphicRaycaster raycaster; // default raycaster (like main menu)
 
     private List<UIHitListener> uiHitListeners = new List<UIHitListener>();
 
@@ -38,8 +38,11 @@ public class UIRaycastChecker : MonoBehaviour
     bool IsLookingAtUI()
     {
         // pointer
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = new Vector2(Screen.width / 2, Screen.height / 2);
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+        //pointerData.position = new Vector2(Screen.width / 2, Screen.height / 2);
 
         // hit objects
         List<RaycastResult> results = new List<RaycastResult>();
