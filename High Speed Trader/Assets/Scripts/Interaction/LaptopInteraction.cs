@@ -17,9 +17,8 @@ public class LaptopInteraction : MonoBehaviour, IInteractable
 
     public async void Interact(Interactor interactor)
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(5, LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(5));
+        SceneManager.LoadScene("WinScreen", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("WinScreen"));
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinScreenScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WinScreenScript : MonoBehaviour
     private TextMeshProUGUI deathText;
     private LevelInitalizer LevelInitalizer;
     private CashManager cashManager;
+    private HighScore highScore;
     private int lastScore;
 
 
@@ -18,12 +20,12 @@ public class WinScreenScript : MonoBehaviour
     {
         cashManager = FindObjectOfType<CashManager>();
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
+        highScore = FindObjectOfType<HighScore>();
         deathText = GameObject.Find("BetMoneyWon").GetComponent<TextMeshProUGUI>();
         lastScore = PlayerPrefs.GetInt("Score", 0);
-  
 
         
-        deathText.text = "You sold all your stocks! You earned: " + lastScore + "$";
+        deathText.text = "Your score: " + lastScore + "$" + "\n" + "Net return: " + (lastScore - cashManager.getLastRemovedCash()) + "$";
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         
@@ -34,11 +36,14 @@ public class WinScreenScript : MonoBehaviour
     public async void OnRestartButton()
     {
         cashManager.AddCash(lastScore);
+        highScore.UpdateHighScore(lastScore);
         
-        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
-        LevelInitalizer.StartLevel();
+        cashManager.AddCash(lastScore);
+        highScore.UpdateHighScore(lastScore);
+        //TODO reset the level, popup/idk?
+        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
 
       
     }
@@ -46,9 +51,10 @@ public class WinScreenScript : MonoBehaviour
     public async void onBackToMenuButton()
     {
         cashManager.AddCash(lastScore);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
+        highScore.UpdateHighScore(lastScore);
+        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
 
 

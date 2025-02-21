@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreenScript : MonoBehaviour
 {
@@ -32,17 +33,16 @@ public class EndScreenScript : MonoBehaviour
     public async void OnRestartButton()
     {
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
-        LevelInitalizer.StartLevel();
+        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
     
     public async void onBackToMenuButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
+        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
     
     

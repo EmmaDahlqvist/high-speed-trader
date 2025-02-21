@@ -27,9 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScenes/EndScreen.unity
     guid: 59694eab011c137449362cdec97307ba
   - enabled: 1
-    path: Assets/Scenes/MenuScenes/WinScreen.unity
+    path: Assets/Scenes/MenuScenes/HighScore.unity
     guid: 760ba411830336f4d9cfb23ebca335d2
   - enabled: 1
     path: Assets/Scenes/MenuScenes/MenuLobby.unity
     guid: f2c5b05f2f17d954c8e18d5853af1523
+  - enabled: 1
+    path: Assets/Scenes/MenuScenes/WinScreen.unity
+    guid: db8f810fc3d36924fb66df7185b4af3c
   m_configObjects: {}
