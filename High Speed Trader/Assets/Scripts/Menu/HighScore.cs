@@ -9,48 +9,32 @@ public class HighScore : MonoBehaviour
     private TextMeshProUGUI HighScoreText;
 
     private int highScore;
+    private int level;
     
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.Find("HighScoreText") != null)
-        {
-            HighScoreText = GameObject.Find("HighScoreText").GetComponent<TextMeshProUGUI>();
-            UpdateHighScoreText();
-        }
     }
 
-    public int GetHighScore()
+    public int GetHighscore(int level)
     {
-        return PlayerPrefs.GetInt("HighScore");
-    }
-    
-    private void SaveHighScore()
-    {
-        PlayerPrefs.SetInt("HighScore", highScore);
-        PlayerPrefs.Save();
+        string key = $"Highscore_Level_{level}";
+        return PlayerPrefs.GetInt(key, 0);
     }
 
-    private void LoadHighScore()
-    {
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
-        SaveHighScore();
-    }
     
-    public void UpdateHighScore(int score)
+    public void SetHighScore(int score, int level)
     {
-        if (score > highScore)
+        string key = $"Highscore_Level_{level}";
+        int currentHighscore = PlayerPrefs.GetInt(key, 0);
+
+        if (score > currentHighscore)
         {
-            highScore = score;
-            SaveHighScore();
+            PlayerPrefs.SetInt(key, score);
+            PlayerPrefs.Save();
         }
     }
-    
-    public void UpdateHighScoreText()
-    {
-        LoadHighScore();
-        HighScoreText.text = "High Score: " + highScore + "$";
-    }
+   
     
 
     // Update is called once per frame

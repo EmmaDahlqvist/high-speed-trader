@@ -8,15 +8,23 @@ public class HighScoreScreen : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI text;
-    public void UpdateHighScore()
+    public HighScore highScore;
+
+
+    public void UpdateHighScore(int level)
     {
+        if(level == 0)
+        {
+            MenuText();
+            return;
+        }
         text.text = "HIGHEST TURNAROUND:";
-        scoreText.text = PlayerPrefs.GetInt("HighScore") + "$";
+        scoreText.text = highScore.GetHighscore(level).ToString() + "$";
     }
 
-    public void RemoveAllText()
+    public void MenuText()
     {
-        text.text = "";
-        scoreText.text = "";
+        text.text = "LOGIN";
+        scoreText.text = "...";
     }
 }

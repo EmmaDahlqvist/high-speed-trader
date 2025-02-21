@@ -165,6 +165,8 @@ GameObject:
   - component: {fileID: 8636937366661776902}
   - component: {fileID: 2195158372865888865}
   - component: {fileID: 8335234971146244110}
+  - component: {fileID: 768628929509078000}
+  - component: {fileID: 7377675412359437970}
   m_Layer: 7
   m_Name: LaptopWithPrompt
   m_TagString: Untagged
@@ -273,6 +275,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: Press [E] To sell your stock
+--- !u!114 &768628929509078000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201476619745540440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf1516b2940e504087832737dce6bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7377675412359437970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201476619745540440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785c51dbabfd846428bccd78d23e4036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5777065060921584895
 GameObject:
   m_ObjectHideFlags: 0

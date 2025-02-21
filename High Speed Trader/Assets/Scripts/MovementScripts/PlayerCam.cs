@@ -45,7 +45,7 @@ public class PlayerCam : MonoBehaviour
         if (turnAroundAtStart)
         {
             camHolder.rotation = Quaternion.Euler(0, 180, 0);
-            orientation.rotation = Quaternion.Euler(0, 180, 0);
+            //orientation.rotation = Quaternion.Euler(0, 180, 0);
 
             lockedStart = true;
         } else
@@ -57,10 +57,11 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(lockedStart)
+        if(lockedStart && turnAroundAtStart)
         {
             if(lookingBackTime <= 0)
             {
+
                 orientation.DORotate(Vector3.zero, turnAroundTime).OnComplete(() => TurnAroundComplete()); ; // turn the orientation back around in time
                 camHolder.DORotate(Vector3.zero, turnAroundTime); // turn the camera back around in time
             }

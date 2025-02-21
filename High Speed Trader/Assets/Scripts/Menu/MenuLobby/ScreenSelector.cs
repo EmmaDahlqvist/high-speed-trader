@@ -16,31 +16,31 @@ public class ScreenSelector : MonoBehaviour
     private UIRaycastChecker UIRaycastChecker;
     public GameObject highScoreObject;
     private HighScoreScreen highScoreScreen;
+    private LevelManager levelManager;
 
     private int currentLvl = 0;
     public Dictionary<int, GameObject> levelObjects = new Dictionary<int, GameObject>();
     private void Start()
     {
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
-        //menuObject.SetActive(true);
+        levelManager = transform.GetComponent<LevelManager>();
+
         levelObjects.Add(0, menuObject);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
         levelObjects.Add(3, levelThreeObject);
 
 
-        foreach(GameObject gameObject in levelObjects.Values)
-        {
-            gameObject.SetActive(false);
-        }
+        DeactivateAllScreens();
 
         UIRaycastChecker = screenHolderObject.GetComponent<UIRaycastChecker>();
         if (UIRaycastChecker == null)
         {
             Debug.LogError("screenholder did not have UIRaycastChecker script!");
         }
-        SetScreen(0);
 
+
+        SetScreen(levelManager.GetLastLevel());
     }
 
     public int GetCurrentLevel()
@@ -55,8 +55,7 @@ public class ScreenSelector : MonoBehaviour
         currentLvl = 1;
         menuObject.SetActive(false);
 
-        levelObjects[currentLvl].SetActive(true);
-        SwitchRaycaster(levelObjects[currentLvl]);
+        SetScreen(currentLvl);
 
         Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
         slider = sliderObj.GetComponent<SliderBehaviour>();
@@ -82,21 +81,25 @@ public class ScreenSelector : MonoBehaviour
     public void OnSwitchRightButton()
     {
         currentLvl += 1;
-        levelObjects[currentLvl-1].SetActive(false);
         SetScreen(currentLvl);
-
-        Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
-        slider = sliderObj.GetComponent<SliderBehaviour>();
-        slider.SetLevel(currentLvl);
-        slider.Start();
     }
 
     public void OnSwitchLeftButton()
     {
         currentLvl -= 1;
-        levelObjects[currentLvl+1].SetActive(false);
         SetScreen(currentLvl);
+    }
 
+    private void DeactivateAllScreens()
+    {
+        foreach (GameObject gameObject in levelObjects.Values)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void SetUpSlider()
+    {
         Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
         slider = sliderObj.GetComponent<SliderBehaviour>();
         slider.SetLevel(currentLvl);
@@ -107,8 +110,16 @@ public class ScreenSelector : MonoBehaviour
     // 0 means menu
     private void SetScreen(int level)
     {
+        currentLvl = level; // set current level index
+
+        DeactivateAllScreens();
         levelObjects[level].SetActive(true);
         SwitchRaycaster(levelObjects[level]);
+        highScoreScreen.UpdateHighScore(level);
+        if(level != 0)
+        {
+            SetUpSlider();
+        }
     }
 
     private void StartMenu()

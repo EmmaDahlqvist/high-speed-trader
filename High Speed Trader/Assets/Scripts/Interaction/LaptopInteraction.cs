@@ -8,15 +8,16 @@ public class LaptopInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] private string prompt;
     public string InteractionPrompt => prompt;
-    private ScoreManager scoreManager;
+    private LevelManager levelManager;
     
     private void Start()
     {
-        scoreManager = FindObjectOfType<ScoreManager>();
+        levelManager = transform.GetComponent<LevelManager>();
     }
 
     public async void Interact(Interactor interactor)
     {
+        levelManager.SetLastLevel(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene("WinScreen", LoadSceneMode.Single);
         await Task.Delay(5); // Delay for 1 millisecond
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("WinScreen"));

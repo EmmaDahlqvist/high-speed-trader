@@ -10,10 +10,12 @@ public class EndScreenScript : MonoBehaviour
     private TextMeshProUGUI deathText;
     private LevelInitalizer LevelInitalizer;
     private CashManager cashManager;
-    
+    private LevelManager levelManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = transform.GetComponent<LevelManager>();
         cashManager = FindObjectOfType<CashManager>();
         // TODO here I want to see what my bet was going into the level that I failed on, and change the death Text accordingly - for later
         deathText = GameObject.Find("BetMoneyLost").GetComponent<TextMeshProUGUI>();
@@ -40,6 +42,7 @@ public class EndScreenScript : MonoBehaviour
     
     public async void onBackToMenuButton()
     {
+        levelManager.SetLastLevel(0);
         SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
         await Task.Delay(5); // Delay for 1 millisecond
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
