@@ -32,17 +32,17 @@ public class EndScreenScript : MonoBehaviour
     public async void OnRestartButton()
     {
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1));
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
         LevelInitalizer.StartLevel();
     }
     
     public async void onBackToMenuButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(7, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(7));
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
     }
     
     

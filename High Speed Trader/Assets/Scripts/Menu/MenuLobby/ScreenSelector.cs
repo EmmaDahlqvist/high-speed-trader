@@ -42,6 +42,11 @@ public class ScreenSelector : MonoBehaviour
 
     }
 
+    public int GetCurrentLevel()
+    {
+        return currentLvl;
+    }
+
     private SliderBehaviour slider;
 
     public void OnPlayButton()

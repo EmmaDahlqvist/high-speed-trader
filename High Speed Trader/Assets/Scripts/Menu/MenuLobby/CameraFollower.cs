@@ -47,7 +47,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         yRotation = Mathf.Clamp(yRotation, -20, 20); // left and right
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -5, 5); // up and down
+        xRotation = Mathf.Clamp(xRotation, -15, 5); // up and down
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }

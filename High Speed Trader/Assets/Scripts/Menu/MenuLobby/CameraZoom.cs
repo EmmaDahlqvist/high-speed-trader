@@ -61,11 +61,12 @@ public class CameraZoom : MonoBehaviour
         }
 
         // Fade till svart
+        print(screenSelector.GetCurrentLevel());
         fadeCanvas.DOFade(1, fadeDuration)
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => {
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
-                SceneManager.LoadScene(6,LoadSceneMode.Single);
+                SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
             } ); // När fade är klar, byt scen
     }
 }
