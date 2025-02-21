@@ -30,8 +30,10 @@ public class CameraZoom : MonoBehaviour
 
     public void StartGame()
     {
+        CameraFollower cameraFollower = GetComponentInChildren<CameraFollower>();
+        cameraFollower.StopCameraRotation();
 
-        cam.transform.rotation = Quaternion.Euler(0, 0, 0);
+        cam.transform.DORotate(new Vector3(0,0,0), 1, RotateMode.Fast); // rotate to look directly at pc
         Vector3 targetPosition = new Vector3(zoomTarget.position.x, zoomTarget.position.y, cam.transform.position.z - moveCloserAmount); // Flytta närmare i Z-led
 
         // Flytta kameran närmare + zooma in
