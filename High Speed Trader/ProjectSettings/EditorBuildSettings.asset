@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScenes/EndScreen.unity
     guid: 59694eab011c137449362cdec97307ba
   - enabled: 1
-    path: Assets/Scenes/MenuScenes/HighScore.unity
+    path: Assets/Scenes/MenuScenes/Highscore.unity
     guid: 760ba411830336f4d9cfb23ebca335d2
   - enabled: 1
     path: Assets/Scenes/MenuScenes/MenuLobby.unity

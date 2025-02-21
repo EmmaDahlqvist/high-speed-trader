@@ -19,6 +19,11 @@ public class HighScore : MonoBehaviour
             UpdateHighScoreText();
         }
     }
+
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt("HighScore");
+    }
     
     private void SaveHighScore()
     {

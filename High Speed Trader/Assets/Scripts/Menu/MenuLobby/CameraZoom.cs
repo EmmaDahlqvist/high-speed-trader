@@ -30,6 +30,7 @@ public class CameraZoom : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.SetInt("CurrentLevel", screenSelector.GetCurrentLevel());
         CameraFollower cameraFollower = GetComponentInChildren<CameraFollower>();
         cameraFollower.StopCameraRotation();
 
