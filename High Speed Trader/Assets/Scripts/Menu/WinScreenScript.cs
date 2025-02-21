@@ -10,6 +10,7 @@ public class WinScreenScript : MonoBehaviour
     private TextMeshProUGUI deathText;
     private LevelInitalizer LevelInitalizer;
     private CashManager cashManager;
+    private HighScore highScore;
     private int lastScore;
 
 
@@ -18,6 +19,7 @@ public class WinScreenScript : MonoBehaviour
     {
         cashManager = FindObjectOfType<CashManager>();
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
+        highScore = FindObjectOfType<HighScore>();
         deathText = GameObject.Find("BetMoneyWon").GetComponent<TextMeshProUGUI>();
         lastScore = PlayerPrefs.GetInt("Score", 0);
   
@@ -34,6 +36,7 @@ public class WinScreenScript : MonoBehaviour
     public async void OnRestartButton()
     {
         cashManager.AddCash(lastScore);
+        highScore.UpdateHighScore(lastScore);
         
         UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
@@ -46,6 +49,7 @@ public class WinScreenScript : MonoBehaviour
     public async void onBackToMenuButton()
     {
         cashManager.AddCash(lastScore);
+        highScore.UpdateHighScore(lastScore);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
         UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
