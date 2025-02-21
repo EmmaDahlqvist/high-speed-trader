@@ -38,9 +38,9 @@ public class WinScreenScript : MonoBehaviour
         cashManager.AddCash(lastScore);
         highScore.UpdateHighScore(lastScore);
         
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1));
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
         LevelInitalizer.StartLevel();
 
       
@@ -49,10 +49,11 @@ public class WinScreenScript : MonoBehaviour
     public async void onBackToMenuButton()
     {
         cashManager.AddCash(lastScore);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(8, UnityEngine.SceneManagement.LoadSceneMode.Single);
         highScore.UpdateHighScore(lastScore);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
         await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
+        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(8));
     }
 
 

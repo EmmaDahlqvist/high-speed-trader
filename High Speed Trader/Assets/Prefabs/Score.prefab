@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1507693215739649047}
   - component: {fileID: 3014789828174622923}
   - component: {fileID: 6585212778978001534}
-  - component: {fileID: 8172306103191073428}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -103,20 +102,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8172306103191073428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222351497693133659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df754916778773a4b8b7474a4b467545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 7770958361228453781}
-  multiplier: 3
 --- !u!1 &7230525161508145557
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,3 +264,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 7770958361228453781}
   multiplier: 3
+  scoreLoweringRatePercentage: 0.005

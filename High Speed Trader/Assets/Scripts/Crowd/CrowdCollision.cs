@@ -25,9 +25,9 @@ public class CrowdCollision : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(4, LoadSceneMode.Single);
+            SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
             await Task.Delay(1); // Delay for 1 millisecond
-            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(4));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("EndScreen"));
             SceneManager.UnloadSceneAsync(currentSceneIndex);
             
         }
