@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - PlayerComponent
-  - Goal
+  - NPCWanderGoal
   layers:
   - Default
   - TransparentFX

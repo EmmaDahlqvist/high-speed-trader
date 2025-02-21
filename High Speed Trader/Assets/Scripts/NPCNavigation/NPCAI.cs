@@ -3,27 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class NPCAI : MonoBehaviour
 {
     GameObject[] goalLocations;
     NavMeshAgent agent;
 
+    [SerializeField] private float minIdleTime = 0f;
+    [SerializeField] private float maxIdleTime = 5f;
+
+    private bool isIdle = false;
+
 
     void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
-        goalLocations = GameObject.FindGameObjectsWithTag("Goal");
+        goalLocations = GameObject.FindGameObjectsWithTag("NPCWanderGoal");
         GoToNewLocation();
     }
 
-    
     void Update()
     {
-
-        if (agent.remainingDistance < 1)
+        if (!isIdle && agent.remainingDistance <= 1f && !agent.pathPending)
         {
-            GoToNewLocation();
+            StartCoroutine(IdleAndMove());
         }
+    }
+
+    private IEnumerator IdleAndMove()
+    {
+        isIdle = true;
+        agent.isStopped = true;
+
+        float idleTime = Random.Range(minIdleTime, maxIdleTime);
+        yield return new WaitForSeconds(idleTime);
+
+        agent.isStopped = false;
+        GoToNewLocation();
+        isIdle = false;
     }
 
     private void GoToNewLocation()
@@ -31,5 +48,4 @@ public class NPCAI : MonoBehaviour
         int i = Random.Range(0, goalLocations.Length);
         agent.SetDestination(goalLocations[i].transform.position);
     }
-
 }
