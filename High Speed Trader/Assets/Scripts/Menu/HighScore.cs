@@ -13,8 +13,11 @@ public class HighScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HighScoreText = GameObject.Find("HighScoreText").GetComponent<TextMeshProUGUI>();
-        UpdateHighScoreText();
+        if (GameObject.Find("HighScoreText") != null)
+        {
+            HighScoreText = GameObject.Find("HighScoreText").GetComponent<TextMeshProUGUI>();
+            UpdateHighScoreText();
+        }
     }
     
     private void SaveHighScore()
