@@ -11,8 +11,10 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     private CanvasGroup runCanvasGroup;
     public GameObject runPromptCanvas;
 
+    public bool wait;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         DOTween.SetTweensCapacity(2000, 100);
         // Fetch the canvasGroup
@@ -39,6 +41,16 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
         runCanvasGroup.blocksRaycasts = false;
         runCanvasGroup.blocksRaycasts = false;
 
+        if (wait)
+        {
+            return;
+        }
+
+        StartPrompts();
+    }
+
+    public void StartPrompts()
+    {
         ShowPrompt(getReadyCanvasGroup, getReadyPromptCanvas);
     }
 
@@ -46,7 +58,9 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     {
         HideCanvasGroup(getReadyCanvasGroup);
         ShowPrompt(runCanvasGroup, runPromptCanvas);
-        StartCoroutine(FadeOutRoutine(runCanvasGroup));
+        runCanvasGroup.DOFade(1f, 0.5f).OnStart(() => Debug.Log("Fade started")).OnComplete(() => {
+            StartCoroutine(FadeOutRoutine(runCanvasGroup));
+        });
     }
 
     private void StartFadeOut(CanvasGroup canvasGroup)
@@ -56,9 +70,9 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
 
     private void ShowPrompt(CanvasGroup canvasGroup, GameObject canvas)
     {
-        //canvas.SetActive(true);
-        canvasGroup.alpha = 1f;
+        canvasGroup.DOFade(1f, 0.5f);
     }
+
 
     private IEnumerator FadeOutRoutine(CanvasGroup canvasGroup)
     {
