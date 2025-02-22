@@ -69,6 +69,11 @@ public class LookAtObject : MonoBehaviour
                     });
             });
 
+        ZoomInOnObject();
+    }
+
+    private void ZoomInOnObject ()
+    {
         // Zooma in genom att minska field of view
         cam.DOFieldOfView(zoomFOV, zoomTime)
            .SetEase(Ease.InOutQuad)
@@ -84,7 +89,6 @@ public class LookAtObject : MonoBehaviour
     // notify playercam script that zoom is done
     private void NotifyZoomDone()
     {
-        print("look done");
         playerCamScript.objectZoomWait = false;
         startPromptScript.wait = false;
         startPromptScript.StartPrompts();
