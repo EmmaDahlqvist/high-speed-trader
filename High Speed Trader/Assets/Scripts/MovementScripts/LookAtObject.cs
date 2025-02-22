@@ -12,8 +12,11 @@ public class LookAtObject : MonoBehaviour
     public Transform orientation;
     public Transform camHolder;
     private PlayerCam playerCamScript;
-    public float zoomFactor = 10f;
+    public float zoomFOV = 10f;
     public float zoomTime = 2f;
+
+    public float timeBeforeStartLooking = 1f;
+    public float timeAfterDone = 1f;
 
     public ScoreManager scoreManager;
 
@@ -34,6 +37,11 @@ public class LookAtObject : MonoBehaviour
         playerCamScript = cam.GetComponent<PlayerCam>();
         originalFov = cam.fieldOfView;
 
+        Invoke("StartLooking", 1f);
+    }
+
+    private void StartLooking()
+    {
         // Spara den ursprungliga rotationen för camHolder
         Quaternion originalRotation = camHolder.rotation;
 
@@ -45,30 +53,30 @@ public class LookAtObject : MonoBehaviour
             .SetEase(Ease.InOutQuad)
             .OnStart(() =>
             {
-        // Visa prompten direkt när animationen startar
-        promptCanvasGroup.alpha = 1f;
+                // Visa prompten direkt när animationen startar
+                promptCanvasGroup.alpha = 1f;
             })
             .OnComplete(() =>
             {
-        // När kameran har tittat på objektet, återgå till originalrotationen för camHolder
-        camHolder.DORotateQuaternion(originalRotation, moveTime)
+                // När kameran har tittat på objektet, återgå till originalrotationen för camHolder
+                camHolder.DORotateQuaternion(originalRotation, moveTime)
                     .SetEase(Ease.InOutQuad)
                     .OnComplete(() =>
                     {
-                // Fade ut prompten när den sista animationen är klar
-                promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten över 1 sekund
-                NotifyZoomDone();  // Anropa NotifyZoomDone
-            });
+                        // Fade ut prompten när den sista animationen är klar
+                        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten över 1 sekund
+                        Invoke("NotifyZoomDone", timeAfterDone);
+                    });
             });
 
         // Zooma in genom att minska field of view
-        cam.DOFieldOfView(zoomFactor, zoomTime)
+        cam.DOFieldOfView(zoomFOV, zoomTime)
            .SetEase(Ease.InOutQuad)
            .OnComplete(() =>
            {
-           // När zoomningen är klar, zooma tillbaka till original fov
-           cam.DOFieldOfView(originalFov, zoomTime)
-                  .SetEase(Ease.InOutQuad);
+               // När zoomningen är klar, zooma tillbaka till original fov
+               cam.DOFieldOfView(originalFov, zoomTime)
+                      .SetEase(Ease.InOutQuad);
            });
     }
 
