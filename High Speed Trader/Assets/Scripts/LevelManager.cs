@@ -56,7 +56,6 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Inlästa levlar: " + string.Join(", ", completedLevels));
         return completedLevels;
     }
 
@@ -66,6 +65,5 @@ public class LevelManager : MonoBehaviour
         string completedLevelsString = string.Join(",", completedLevels);
         PlayerPrefs.SetString(CompletedLevelsKey, completedLevelsString);
         PlayerPrefs.Save();
-        Debug.Log("Sparade levlar: " + completedLevelsString);
     }
 }

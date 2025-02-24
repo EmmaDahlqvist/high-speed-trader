@@ -126,13 +126,11 @@ public class ScreenSelector : MonoBehaviour
         if (levelManager.GetCompletedLevels().Contains(lvl - 1))
         {
             playButton.interactable = true;
-            Debug.Log("current level not completed. lvl: " + (lvl-1));
         } else
         {
             playButton.interactable = false;
             colors.normalColor = Color.gray;
             playButton.colors = colors;
-            Debug.Log("current level not completed. lvl: " + (lvl-1));
         }
     }
 
