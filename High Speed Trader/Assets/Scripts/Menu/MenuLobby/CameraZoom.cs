@@ -9,7 +9,6 @@ public class CameraZoom : MonoBehaviour
     public float zoomFactor = 3f;  // Hur mycket kameran zoomar in
     public CanvasGroup fadeCanvas; // Dra in din CanvasGroup här
     public float fadeDuration = 1.5f;  // Hur snabbt fade-effekten sker
-    public string nextScene = "NextScene";  // Scenen som ska laddas
     public float moveCloserAmount = 5f; // Hur nära kameran rör sig i Z-led
 
     public GameObject screenSelectorObject;
@@ -72,5 +71,10 @@ public class CameraZoom : MonoBehaviour
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
                 SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
             } ); // När fade är klar, byt scen
+    }
+
+    void OnDestroy()
+    {
+        DOTween.KillAll();
     }
 }

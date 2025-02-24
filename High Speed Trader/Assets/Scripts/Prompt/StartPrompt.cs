@@ -93,4 +93,9 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     {
         canvasGroup.alpha = 0f;
     }
+
+    void OnDestroy()
+    {
+        DOTween.KillAll();
+    }
 }
