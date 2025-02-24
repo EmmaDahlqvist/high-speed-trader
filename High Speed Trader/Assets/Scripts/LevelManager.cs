@@ -31,10 +31,6 @@ public class LevelManager : MonoBehaviour
             SaveCompletedLevels(completedLevels);
             Debug.Log("Level " + levelNumber + " tillagd och sparad.");
         }
-        else
-        {
-            Debug.Log("Level " + levelNumber + " är redan avklarad.");
-        }
     }
 
     // Hämta alla avklarade levlar från PlayerPrefs

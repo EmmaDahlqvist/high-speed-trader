@@ -24,4 +24,9 @@ public class TextEffect : MonoBehaviour
                    fullText,
                    fullText.Length * typingSpeed).SetEase(Ease.Linear);
     }
+
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
+    }
 }

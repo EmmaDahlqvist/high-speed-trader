@@ -50,7 +50,6 @@ public class ScreenSelector : MonoBehaviour
             SetUpPlayButtons(i);
         }
 
-        print(levelManager.GetLastLevel());
         SetScreen(levelManager.GetLastLevel());
 
         fadeCanvasGroup.alpha = 1f;

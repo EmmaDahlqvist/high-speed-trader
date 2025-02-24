@@ -58,7 +58,7 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     {
         HideCanvasGroup(getReadyCanvasGroup);
         ShowPrompt(runCanvasGroup, runPromptCanvas);
-        runCanvasGroup.DOFade(1f, 0.5f).OnStart(() => Debug.Log("Fade started")).OnComplete(() => {
+        runCanvasGroup.DOFade(1f, 0.5f).OnComplete(() => {
             StartCoroutine(FadeOutRoutine(runCanvasGroup));
         });
     }

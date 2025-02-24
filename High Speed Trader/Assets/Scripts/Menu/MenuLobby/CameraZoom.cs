@@ -15,12 +15,18 @@ public class CameraZoom : MonoBehaviour
     private ScreenSelector screenSelector;
 
     SliderBehaviour sliderBehaviour;
-    CashManager cashManager;
+    public CashManager cashManager;
 
     private Camera cam;
 
     void Start()
     {
+        //CASH. IF TOO LOW
+        if (cashManager.GetCash() < 100)
+        {
+            cashManager.SetCash(100);
+        }
+
         cam = Camera.main;
 
         // get the screen selector and the current lvl

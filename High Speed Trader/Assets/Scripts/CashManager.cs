@@ -71,12 +71,7 @@ public class CashManager : MonoBehaviour
 
     private void LoadCash()
     {
-        cash = PlayerPrefs.GetInt("PlayerCash", 150);
-        if(cash < 100)
-        {
-            cash = 150;
-            SaveCash();
-        }
+        cash = PlayerPrefs.GetInt("PlayerCash", 0);
         lastRemovedCash = PlayerPrefs.GetInt("LastRemovedCash", 0);
         lastAddedCash = PlayerPrefs.GetInt("LastAddedCash", 0);
     }
