@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7136074516745932115}
   - component: {fileID: 4285552324593336672}
   - component: {fileID: 2644161497391165290}
+  - component: {fileID: 7992545471466011018}
   m_Layer: 16
   m_Name: Player
   m_TagString: PlayerComponent
@@ -211,6 +212,19 @@ MonoBehaviour:
   promptTimer: 2
   getReadyPromptCanvas: {fileID: 0}
   runPromptCanvas: {fileID: 0}
+--- !u!114 &7992545471466011018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126733507240892217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4ace2468d22464681d9235b05128f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voidPosition: -100
 --- !u!1 &395190853317004117
 GameObject:
   m_ObjectHideFlags: 0
