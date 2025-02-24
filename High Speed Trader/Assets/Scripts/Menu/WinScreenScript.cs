@@ -31,7 +31,8 @@ public class WinScreenScript : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        highScore.SetHighScore(lastScore, levelManager.GetLastLevel());
+        highScore.SetHighScore(lastScore, levelManager.GetLastLevel()); // add highscore
+        levelManager.AddCompletedLevel(levelManager.GetLastLevel()); // add to completed level
 
         
 
