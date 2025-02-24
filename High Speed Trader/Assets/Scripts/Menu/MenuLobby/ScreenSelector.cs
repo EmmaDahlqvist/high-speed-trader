@@ -25,6 +25,7 @@ public class ScreenSelector : MonoBehaviour
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
         levelManager = transform.GetComponent<LevelManager>();
 
+        levelManager.AddCompletedLevel(0);
         levelObjects.Add(0, menuObject);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
@@ -39,6 +40,10 @@ public class ScreenSelector : MonoBehaviour
             Debug.LogError("screenholder did not have UIRaycastChecker script!");
         }
 
+        // set up playbuttons, if theyre interactable or not
+        for(int i = 1; i <= levelObjects.Count-1; i++) {
+            SetUpPlayButtons(i);
+        }
 
         SetScreen(levelManager.GetLastLevel());
     }
@@ -104,6 +109,31 @@ public class ScreenSelector : MonoBehaviour
         slider = sliderObj.GetComponent<SliderBehaviour>();
         slider.SetLevel(currentLvl);
         slider.Start();
+    }
+
+    private void SetUpPlayButtons(int lvl)
+    {
+        Transform playButtonObj = levelObjects[lvl].transform.Find ("PlayButton");
+        if(playButtonObj == null )
+        {
+            Debug.Log("Playbutton didnt exist");
+            return;
+        }
+
+        Button playButton = playButtonObj.GetComponent<Button>();
+        ColorBlock colors = playButton.colors;
+        // du har klarat banan innan
+        if (levelManager.GetCompletedLevels().Contains(lvl - 1))
+        {
+            playButton.interactable = true;
+            Debug.Log("current level not completed. lvl: " + (lvl-1));
+        } else
+        {
+            playButton.interactable = false;
+            colors.normalColor = Color.gray;
+            playButton.colors = colors;
+            Debug.Log("current level not completed. lvl: " + (lvl-1));
+        }
     }
 
 
