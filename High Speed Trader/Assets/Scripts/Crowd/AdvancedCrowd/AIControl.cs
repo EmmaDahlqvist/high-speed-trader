@@ -17,12 +17,10 @@ public class AIControl : MonoBehaviour
         agent.SetDestination(goal.transform.position);
         int r = Random.Range(40, 60);
         agent.avoidancePriority = r;
-
     }
 
     void Update()
     {
-        // agent.SetDestination(goal.transform.position);
         if (agent.remainingDistance > 10)
             agent.SetDestination(goal.transform.position + randomOffset * 5);
         else
