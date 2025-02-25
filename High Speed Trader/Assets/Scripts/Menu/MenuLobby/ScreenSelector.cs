@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,14 +18,10 @@ public class ScreenSelector : MonoBehaviour
     private HighScoreScreen highScoreScreen;
     private LevelManager levelManager;
 
-    public CanvasGroup fadeCanvasGroup;
-
     private int currentLvl = 0;
     public Dictionary<int, GameObject> levelObjects = new Dictionary<int, GameObject>();
-
     private void Start()
     {
-
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
         levelManager = transform.GetComponent<LevelManager>();
 
@@ -51,14 +46,6 @@ public class ScreenSelector : MonoBehaviour
         }
 
         SetScreen(levelManager.GetLastLevel());
-
-        fadeCanvasGroup.alpha = 1f;
-        FadeIn();
-    }
-    private void FadeIn()
-    {
-        fadeCanvasGroup.DOFade(0f, 2f)  // Fadea till 0 (osynlig)
-            .SetEase(Ease.InOutQuad);                // Sätt easing för smidig övergång
     }
 
     public int GetCurrentLevel()
@@ -74,10 +61,16 @@ public class ScreenSelector : MonoBehaviour
         menuObject.SetActive(false);
 
         SetScreen(currentLvl);
+
+        Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
+        slider = sliderObj.GetComponent<SliderBehaviour>();
+        slider.SetLevel(currentLvl);
+        slider.Start();
     }
 
     private void SwitchRaycaster(GameObject gameObject)
     {
+        print("gameobject " + gameObject);
         if(gameObject.GetComponent<GraphicRaycaster>() == null)
         {
             print(gameObject + " s raycast is null");
@@ -115,7 +108,6 @@ public class ScreenSelector : MonoBehaviour
         Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
         slider = sliderObj.GetComponent<SliderBehaviour>();
         slider.SetLevel(currentLvl);
-        slider.SetSlider(sliderObj.GetComponent<Slider>());
         slider.Start();
     }
 
