@@ -19,7 +19,7 @@ public class EndScreenScript : MonoBehaviour
         cashManager = FindObjectOfType<CashManager>();
         // TODO here I want to see what my bet was going into the level that I failed on, and change the death Text accordingly - for later
         deathText = GameObject.Find("BetMoneyLost").GetComponent<TextMeshProUGUI>();
-        deathText.text = "You died! You lost: " + cashManager.getLastRemovedCash() + "$";
+        deathText.text = GameState.KillReason + " You lost: " + cashManager.getLastRemovedCash() + "$";
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
