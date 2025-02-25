@@ -11,10 +11,8 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     private CanvasGroup runCanvasGroup;
     public GameObject runPromptCanvas;
 
-    public bool wait;
-
     // Start is called before the first frame update
-    public void Start()
+    void Start()
     {
         DOTween.SetTweensCapacity(2000, 100);
         // Fetch the canvasGroup
@@ -41,16 +39,6 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
         runCanvasGroup.blocksRaycasts = false;
         runCanvasGroup.blocksRaycasts = false;
 
-        if (wait)
-        {
-            return;
-        }
-
-        StartPrompts();
-    }
-
-    public void StartPrompts()
-    {
         ShowPrompt(getReadyCanvasGroup, getReadyPromptCanvas);
     }
 
@@ -58,9 +46,7 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     {
         HideCanvasGroup(getReadyCanvasGroup);
         ShowPrompt(runCanvasGroup, runPromptCanvas);
-        runCanvasGroup.DOFade(1f, 0.5f).OnComplete(() => {
-            StartCoroutine(FadeOutRoutine(runCanvasGroup));
-        });
+        StartCoroutine(FadeOutRoutine(runCanvasGroup));
     }
 
     private void StartFadeOut(CanvasGroup canvasGroup)
@@ -70,9 +56,9 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
 
     private void ShowPrompt(CanvasGroup canvasGroup, GameObject canvas)
     {
-        canvasGroup.DOFade(1f, 0.5f);
+        //canvas.SetActive(true);
+        canvasGroup.alpha = 1f;
     }
-
 
     private IEnumerator FadeOutRoutine(CanvasGroup canvasGroup)
     {
@@ -92,10 +78,5 @@ public class StartPrompt : MonoBehaviour, TurnAroundCompleteListener
     private void HideCanvasGroup(CanvasGroup canvasGroup)
     {
         canvasGroup.alpha = 0f;
-    }
-
-    void OnDestroy()
-    {
-        DOTween.KillAll();
     }
 }

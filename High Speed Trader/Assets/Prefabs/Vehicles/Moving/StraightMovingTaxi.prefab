@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0315b3ad6d45398478f4b6b333880a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killReason: You were killed by a taxi!
 --- !u!1 &1307797817383643820
 GameObject:
   m_ObjectHideFlags: 0
