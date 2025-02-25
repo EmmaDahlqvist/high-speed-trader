@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class HighScoreScreen : MonoBehaviour
+{
+
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI text;
+    public HighScore highScore;
+
+
+    public void UpdateHighScore(int level)
+    {
+        if(level == 0)
+        {
+            MenuText();
+            return;
+        }
+        text.text = "HIGHEST TURNAROUND:";
+        scoreText.text = highScore.GetHighscore(level).ToString() + "$";
+    }
+
+    public void MenuText()
+    {
+        text.text = "LOGIN";
+        scoreText.text = "...";
+    }
+}

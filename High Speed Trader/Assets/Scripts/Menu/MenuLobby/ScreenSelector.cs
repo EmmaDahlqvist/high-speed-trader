@@ -14,32 +14,38 @@ public class ScreenSelector : MonoBehaviour
     public GameObject levelThreeObject;
     public Transform screenHolderObject;
     private UIRaycastChecker UIRaycastChecker;
+    public GameObject highScoreObject;
+    private HighScoreScreen highScoreScreen;
+    private LevelManager levelManager;
 
-    private int currentLvl = 1;
+    private int currentLvl = 0;
     public Dictionary<int, GameObject> levelObjects = new Dictionary<int, GameObject>();
     private void Start()
     {
-        menuObject.SetActive(true);
+        highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
+        levelManager = transform.GetComponent<LevelManager>();
+
+        levelManager.AddCompletedLevel(0);
+        levelObjects.Add(0, menuObject);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
         levelObjects.Add(3, levelThreeObject);
 
 
-        foreach(GameObject gameObject in levelObjects.Values)
-        {
-            gameObject.SetActive(false);
-        }
+        DeactivateAllScreens();
 
         UIRaycastChecker = screenHolderObject.GetComponent<UIRaycastChecker>();
-        if(UIRaycastChecker == null)
+        if (UIRaycastChecker == null)
         {
             Debug.LogError("screenholder did not have UIRaycastChecker script!");
         }
-    }
 
-    private void Update()
-    {
+        // set up playbuttons, if theyre interactable or not
+        for(int i = 1; i <= levelObjects.Count-1; i++) {
+            SetUpPlayButtons(i);
+        }
 
+        SetScreen(levelManager.GetLastLevel());
     }
 
     public int GetCurrentLevel()
@@ -51,12 +57,10 @@ public class ScreenSelector : MonoBehaviour
 
     public void OnPlayButton()
     {
+        currentLvl = 1;
         menuObject.SetActive(false);
-        SwitchRaycaster(menuObject);
 
-
-        levelObjects[currentLvl].SetActive(true);
-        SwitchRaycaster(levelObjects[currentLvl]);
+        SetScreen(currentLvl);
 
         Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
         slider = sliderObj.GetComponent<SliderBehaviour>();
@@ -66,6 +70,11 @@ public class ScreenSelector : MonoBehaviour
 
     private void SwitchRaycaster(GameObject gameObject)
     {
+        print("gameobject " + gameObject);
+        if(gameObject.GetComponent<GraphicRaycaster>() == null)
+        {
+            print(gameObject + " s raycast is null");
+        }
         UIRaycastChecker.SetRaycasterObject(gameObject.GetComponent<GraphicRaycaster>());
     }
 
@@ -77,38 +86,83 @@ public class ScreenSelector : MonoBehaviour
     public void OnSwitchRightButton()
     {
         currentLvl += 1;
-        levelObjects[currentLvl-1].SetActive(false);
-        levelObjects[currentLvl].SetActive(true);
-        SwitchRaycaster(levelObjects[currentLvl]);;
-
-        Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
-        slider = sliderObj.GetComponent<SliderBehaviour>();
-        slider.SetLevel(currentLvl);
-        slider.Start();
+        SetScreen(currentLvl);
     }
 
     public void OnSwitchLeftButton()
     {
         currentLvl -= 1;
-        levelObjects[currentLvl+1].SetActive(false);
-        levelObjects[currentLvl].SetActive(true);
-        SwitchRaycaster(levelObjects[currentLvl]); ;
+        SetScreen(currentLvl);
+    }
 
+    private void DeactivateAllScreens()
+    {
+        foreach (GameObject gameObject in levelObjects.Values)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void SetUpSlider()
+    {
         Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
         slider = sliderObj.GetComponent<SliderBehaviour>();
         slider.SetLevel(currentLvl);
         slider.Start();
     }
 
-    public void OnBackToMenuButton()
+    private void SetUpPlayButtons(int lvl)
     {
-        currentLvl = 1;
+        Transform playButtonObj = levelObjects[lvl].transform.Find ("PlayButton");
+        if(playButtonObj == null )
+        {
+            Debug.Log("Playbutton didnt exist");
+            return;
+        }
+
+        Button playButton = playButtonObj.GetComponent<Button>();
+        ColorBlock colors = playButton.colors;
+        // du har klarat banan innan
+        if (levelManager.GetCompletedLevels().Contains(lvl - 1))
+        {
+            playButton.interactable = true;
+        } else
+        {
+            playButton.interactable = false;
+            colors.normalColor = Color.gray;
+            playButton.colors = colors;
+        }
+    }
+
+
+    // 0 means menu
+    private void SetScreen(int level)
+    {
+        currentLvl = level; // set current level index
+
+        DeactivateAllScreens();
+        levelObjects[level].SetActive(true);
+        SwitchRaycaster(levelObjects[level]);
+        highScoreScreen.UpdateHighScore(level);
+        if(level != 0)
+        {
+            SetUpSlider();
+        }
+    }
+
+    private void StartMenu()
+    {
+        currentLvl = 0;
         foreach (GameObject gameObject in levelObjects.Values)
         {
             gameObject.SetActive(false);
         }
-        menuObject.SetActive(true);
-        SwitchRaycaster(menuObject);
+        SetScreen(0);
+    }
+
+    public void OnBackToMenuButton()
+    {
+        StartMenu();
     }
 
     public GameObject GetCurrentLevelObject()

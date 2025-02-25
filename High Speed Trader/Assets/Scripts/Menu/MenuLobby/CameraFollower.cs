@@ -26,10 +26,24 @@ public class CameraFollower : MonoBehaviour, UIHitListener
     }
 
     public Rect mouseBounds = new Rect(100, 100, 800, 500); // (x, y, width, height)
+    private bool cameraRotation = true;
+
+    public void StopCameraRotation()
+    {
+        cameraRotation = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if(!cameraRotation)
+        {
+            return;
+        }
+
+
         if(lookingAtUI)
         {
             Cursor.visible = true;
