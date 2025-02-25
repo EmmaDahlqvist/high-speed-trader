@@ -638,8 +638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_StartPoint: {x: 0, y: 0, z: -5}
-  m_EndPoint: {x: 0, y: 0, z: 5}
+  m_StartPoint: {x: -0.00000047683716, y: 0, z: 5.0000005}
+  m_EndPoint: {x: 0.00000047683716, y: 0, z: -5.0000005}
   m_Width: 0
   m_CostModifier: -1
   m_Bidirectional: 1
@@ -792,7 +792,7 @@ Animator:
   m_GameObject: {fileID: 1480395932}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e6e687b2a1364c4598b281bec7f6b05, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1361368a1ef339d4d8a83cc225202377, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -816,6 +816,7 @@ GameObject:
   - component: {fileID: 1695030867}
   - component: {fileID: 1695030866}
   - component: {fileID: 1695030865}
+  - component: {fileID: 1695030870}
   - component: {fileID: 1695030864}
   m_Layer: 0
   m_Name: AnimatedGuy
@@ -938,6 +939,18 @@ Transform:
   - {fileID: 1480395931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1695030870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695030863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1815ce071e251cd41a7a907bc49496c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1799235012
 GameObject:
   m_ObjectHideFlags: 0

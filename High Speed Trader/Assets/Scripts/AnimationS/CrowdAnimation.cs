@@ -47,12 +47,14 @@ public class CrowdAnimation : MonoBehaviour
         while (normalizedTime < 1.0f)
         {
             m_Animator.SetBool("isJumping", true);
+
+            float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
+            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
         }
 
-        float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
-        agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
-        normalizedTime += Time.deltaTime / duration;
-        yield return null;
+        
     }
 
 }
