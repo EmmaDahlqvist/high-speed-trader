@@ -23,11 +23,12 @@ public class PlayerCam : MonoBehaviour
     bool lockedStart = true;
     public bool turnAroundAtStart = true;
 
+    public bool objectZoomWait = false; // change to true if it should zoom in at an object in the start
 
     private List<TurnAroundCompleteListener> turnAroundCompleteListeners = new List<TurnAroundCompleteListener>();
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         // set up rotation from start:
         Cursor.lockState = CursorLockMode.Locked;
@@ -42,13 +43,24 @@ public class PlayerCam : MonoBehaviour
             turnAroundCompleteListeners.Add(player.GetComponent<StartPrompt>()); // add startprompt script as turn around listener
         }
 
+        if (objectZoomWait)
+        {
+            return;
+        }
+
+        TurnAroundRoutine();
+    }
+
+    public void TurnAroundRoutine()
+    {
         if (turnAroundAtStart)
         {
-            camHolder.rotation = Quaternion.Euler(0, 180, 0);
+            camHolder.DORotate(new Vector3(0, 180, 0), turnAroundTime);
             //orientation.rotation = Quaternion.Euler(0, 180, 0);
 
             lockedStart = true;
-        } else
+        }
+        else
         {
             TurnAroundComplete();
         }
@@ -57,6 +69,11 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(objectZoomWait)
+        {
+            return;
+        }
+
         if(lockedStart && turnAroundAtStart)
         {
             if(lookingBackTime <= 0)
@@ -108,5 +125,10 @@ public class PlayerCam : MonoBehaviour
     public void DoTilt(float zTilt)
     {
         transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
+    }
+
+    void OnDestroy()
+    {
+        DOTween.KillAll();
     }
 }

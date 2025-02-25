@@ -15,11 +15,11 @@ public class SliderBehaviour : MonoBehaviour
     public int currentBet;
     private int currentCash;
     private CashManager cashManager;
-    private Array minBets = new int[] { 100, 500, 2000 };
+    private Array minBets = new int[] { 100, 250, 2000 };
     private Array maxBets = new int[] { 250, 1000, 10000 };
-    
+
     [Header("Slider")]
-    private int currentLevel;
+    private int currentLevel = 1;
     public Slider betSlider; // Reference to the Slider component
     public TextMeshProUGUI currentBetText;
     public bool active = true;
@@ -29,10 +29,14 @@ public class SliderBehaviour : MonoBehaviour
     {
         currentLevel = level;
     }
+
+    public void SetSlider(Slider slider)
+    {
+        betSlider = slider;
+    }
     
     public void Start()
     {
-        currentLevel = 1;
         cashManager = FindObjectOfType<CashManager>();
         currentCash = cashManager.GetCash();
         currentBetText = GameObject.Find("CurrentBet").GetComponent<TextMeshProUGUI>();
@@ -50,6 +54,18 @@ public class SliderBehaviour : MonoBehaviour
         // Add a listener to handle value changes
         betSlider.onValueChanged.AddListener(OnSliderValueChanged);
     }
+
+    public void InitializeSlider(int level, Slider slider)
+    {
+        minBet = (int)minBets.GetValue(level);
+        maxBet = (int)maxBets.GetValue(level);
+        betSlider = slider;
+
+        slider.minValue = minBet;
+        slider.maxValue = maxBet;
+
+        initializeSlider();
+    } 
 
     public void initializeSlider()
     {
