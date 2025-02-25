@@ -1,8 +1,6 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,21 +18,14 @@ public class ScreenSelector : MonoBehaviour
     private HighScoreScreen highScoreScreen;
     private LevelManager levelManager;
 
-    public CanvasGroup fadeCanvasGroup;
-
     private int currentLvl = 0;
     public Dictionary<int, GameObject> levelObjects = new Dictionary<int, GameObject>();
-
-    private void Awake()
+    private void Start()
     {
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
         levelManager = transform.GetComponent<LevelManager>();
 
         levelManager.AddCompletedLevel(0);
-    }
-
-    private void Start()
-    {
         levelObjects.Add(0, menuObject);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
@@ -55,14 +46,6 @@ public class ScreenSelector : MonoBehaviour
         }
 
         SetScreen(levelManager.GetLastLevel());
-
-        fadeCanvasGroup.alpha = 1f;
-        FadeIn();
-    }
-    private void FadeIn()
-    {
-        fadeCanvasGroup.DOFade(0f, 2f)  // Fadea till 0 (osynlig)
-            .SetEase(Ease.InOutQuad);                // Sätt easing för smidig övergång
     }
 
     public int GetCurrentLevel()
@@ -78,10 +61,16 @@ public class ScreenSelector : MonoBehaviour
         menuObject.SetActive(false);
 
         SetScreen(currentLvl);
+
+        Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
+        slider = sliderObj.GetComponent<SliderBehaviour>();
+        slider.SetLevel(currentLvl);
+        slider.Start();
     }
 
     private void SwitchRaycaster(GameObject gameObject)
     {
+        print("gameobject " + gameObject);
         if(gameObject.GetComponent<GraphicRaycaster>() == null)
         {
             print(gameObject + " s raycast is null");
@@ -119,7 +108,6 @@ public class ScreenSelector : MonoBehaviour
         Transform sliderObj = levelObjects[currentLvl].transform.Find("Slider Green");
         slider = sliderObj.GetComponent<SliderBehaviour>();
         slider.SetLevel(currentLvl);
-        slider.SetSlider(sliderObj.GetComponent<Slider>());
         slider.Start();
     }
 
@@ -132,17 +120,14 @@ public class ScreenSelector : MonoBehaviour
             return;
         }
 
-
         Button playButton = playButtonObj.GetComponent<Button>();
         ColorBlock colors = playButton.colors;
-        // du har klarat banan 
+        // du har klarat banan innan
         if (levelManager.GetCompletedLevels().Contains(lvl - 1))
         {
             playButton.interactable = true;
         } else
         {
-            TextMeshProUGUI playButtonText = playButton.GetComponentInChildren<TextMeshProUGUI>();
-            playButtonText.text = "FINISH PREVIOUS";
             playButton.interactable = false;
             colors.normalColor = Color.gray;
             playButton.colors = colors;
