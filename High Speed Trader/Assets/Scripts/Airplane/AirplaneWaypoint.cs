@@ -26,7 +26,7 @@ public class AirplaneWaypoint : MonoBehaviour
 
         if(distance <= 0.05)
         {
-            if(index <= wayPoints.Count-1)
+            if(index < wayPoints.Count-1)
                 index++;
         }
     }
