@@ -15,7 +15,7 @@ public class SliderBehaviour : MonoBehaviour
     public int currentBet;
     private int currentCash;
     private CashManager cashManager;
-    private Array minBets = new int[] { 100, 500, 2000 };
+    private Array minBets = new int[] { 100, 250, 2000 };
     private Array maxBets = new int[] { 250, 1000, 10000 };
 
     [Header("Slider")]

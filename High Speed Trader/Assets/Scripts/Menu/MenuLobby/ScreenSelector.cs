@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,13 +25,16 @@ public class ScreenSelector : MonoBehaviour
     private int currentLvl = 0;
     public Dictionary<int, GameObject> levelObjects = new Dictionary<int, GameObject>();
 
-    private void Start()
+    private void Awake()
     {
-
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
         levelManager = transform.GetComponent<LevelManager>();
 
         levelManager.AddCompletedLevel(0);
+    }
+
+    private void Start()
+    {
         levelObjects.Add(0, menuObject);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
@@ -128,14 +132,17 @@ public class ScreenSelector : MonoBehaviour
             return;
         }
 
+
         Button playButton = playButtonObj.GetComponent<Button>();
         ColorBlock colors = playButton.colors;
-        // du har klarat banan innan
+        // du har klarat banan 
         if (levelManager.GetCompletedLevels().Contains(lvl - 1))
         {
             playButton.interactable = true;
         } else
         {
+            TextMeshProUGUI playButtonText = playButton.GetComponentInChildren<TextMeshProUGUI>();
+            playButtonText.text = "FINISH PREVIOUS";
             playButton.interactable = false;
             colors.normalColor = Color.gray;
             playButton.colors = colors;
