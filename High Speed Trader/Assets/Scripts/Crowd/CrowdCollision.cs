@@ -11,7 +11,6 @@ public class CrowdCollision : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -24,6 +23,7 @@ public class CrowdCollision : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameState.KillReason = "You were killed by the crowd!";
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
             await Task.Delay(1); // Delay for 1 millisecond
