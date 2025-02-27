@@ -8,18 +8,22 @@ public class AIControl : MonoBehaviour
 {
     public GameObject goal;
     NavMeshAgent agent;
+    Vector3 randomOffset;
 
-
-    // Start is called before the first frame update
     void Start()
     {
+        randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         agent = this.GetComponent<NavMeshAgent>();
         agent.SetDestination(goal.transform.position);
+        int r = Random.Range(40, 60);
+        agent.avoidancePriority = r;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(goal.transform.position);
+        if (agent.remainingDistance > 10)
+            agent.SetDestination(goal.transform.position + randomOffset * 5);
+        else
+            agent.SetDestination(goal.transform.position + randomOffset);
     }
 }

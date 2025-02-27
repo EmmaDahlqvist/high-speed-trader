@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 1524884778490065639}
   - component: {fileID: 7136074516745932115}
   - component: {fileID: 4285552324593336672}
-  - component: {fileID: 730637939095778685}
-  m_Layer: 0
+  - component: {fileID: 2644161497391165290}
+  - component: {fileID: 7992545471466011018}
+  m_Layer: 16
   m_Name: Player
   m_TagString: PlayerComponent
   m_Icon: {fileID: 0}
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 126733507240892217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3291092, y: 3, z: -4.865923}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionPoint: {fileID: 8454019870351723886}
-  _interactionPointRadius: 6
+  _interactionPointRadius: 5
   _interactableMask:
     serializedVersion: 2
     m_Bits: 128
@@ -195,8 +196,8 @@ MonoBehaviour:
   sliding: {fileID: 3048004438047233945}
   crouching: {fileID: 2536998987903307426}
   vaulting: {fileID: 7301551471011031936}
-  landingSound: {fileID: 8300000, guid: 79e6e1370ee1ca747b469e68d0dcb0fe, type: 3}
---- !u!114 &730637939095778685
+  landingSound: {fileID: 8300000, guid: 45bc125cb8cb195408490bec63fde615, type: 3}
+--- !u!114 &2644161497391165290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,9 +209,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea50c8bd0b951341a3efa8d74ed3e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptTimer: 3
+  promptTimer: 2
   getReadyPromptCanvas: {fileID: 0}
   runPromptCanvas: {fileID: 0}
+--- !u!114 &7992545471466011018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126733507240892217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4ace2468d22464681d9235b05128f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voidPosition: -100
 --- !u!1 &395190853317004117
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +237,7 @@ GameObject:
   - component: {fileID: 5975835607563730169}
   - component: {fileID: 3397707476177079421}
   - component: {fileID: 72126134640941627}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,6 +445,7 @@ MonoBehaviour:
   camHolder: {fileID: 6162175768287036645}
   lookingBackTime: 2
   turnAroundTime: 1
+  turnAroundAtStart: 1
 --- !u!114 &9176705499174664357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2017586428073787650}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: CameraPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +548,7 @@ Transform:
   m_GameObject: {fileID: 639374087380316151}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.48, z: 0}
+  m_LocalPosition: {x: 0, y: 0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -548,7 +563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8454019870351723886}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: InteractionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2854748091565921993}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1034,7 +1049,7 @@ GameObject:
   - component: {fileID: 3256175832307826398}
   - component: {fileID: 1863272864524133248}
   - component: {fileID: 8547795855291925129}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: EventCollision
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1440,7 +1455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7606123295985790008}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

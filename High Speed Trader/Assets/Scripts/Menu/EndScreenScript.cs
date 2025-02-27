@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreenScript : MonoBehaviour
 {
     private TextMeshProUGUI deathText;
     private LevelInitalizer LevelInitalizer;
     private CashManager cashManager;
-    
+    private LevelManager levelManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = transform.GetComponent<LevelManager>();
         cashManager = FindObjectOfType<CashManager>();
         // TODO here I want to see what my bet was going into the level that I failed on, and change the death Text accordingly - for later
         deathText = GameObject.Find("BetMoneyLost").GetComponent<TextMeshProUGUI>();
-        deathText.text = "You died! You lost: " + cashManager.getLastRemovedCash() + "$";
+        deathText.text = GameState.KillReason + " You lost: " + cashManager.getLastRemovedCash() + "$";
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -32,17 +35,17 @@ public class EndScreenScript : MonoBehaviour
     public async void OnRestartButton()
     {
         LevelInitalizer = FindObjectOfType<LevelInitalizer>();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(1));
-        LevelInitalizer.StartLevel();
+        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
     
     public async void onBackToMenuButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
-        await Task.Delay(1); // Delay for 1 millisecond
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0));
+        levelManager.SetLastLevel(0);
+        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
+        await Task.Delay(5); // Delay for 1 millisecond
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
     
     

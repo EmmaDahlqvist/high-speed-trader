@@ -95,9 +95,10 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     // Update is called once per frame
     void Update()
     {
-        if (lockedStart) return;
         // ground check
         grounded = Physics.Raycast(playerObj.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+
+        if (lockedStart) return;
 
         MyInput();
         SpeedControl();
