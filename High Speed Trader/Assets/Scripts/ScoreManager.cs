@@ -19,6 +19,8 @@ public class ScoreManager : MonoBehaviour
     public float minScoreLoweringInterval = 0.5f;
     public float maxScoreLoweringInterval = 2f;
     public float oneSecondLoweringBet = 100f;
+
+    public bool wait = false;
          
     // Awake is called when the script instance is being loaded
     private void Awake()
@@ -34,6 +36,12 @@ public class ScoreManager : MonoBehaviour
         cashManager = FindObjectOfType<CashManager>();
         score = cashManager.getLastRemovedCash() * multiplier;
 
+        if (wait) return;
+        StartScore();
+    }
+
+    public void StartScore()
+    {
         UpdateScoreLoweringInterval();
         scoreText.text = score.ToString() + "$";
         StartCoroutine(LowerScoreRoutine());

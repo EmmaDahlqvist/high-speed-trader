@@ -11,6 +11,7 @@ public class CashManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // AddCash(10000);
         LoadCash();
     }
 
@@ -71,12 +72,7 @@ public class CashManager : MonoBehaviour
 
     private void LoadCash()
     {
-        cash = PlayerPrefs.GetInt("PlayerCash", 150);
-        if(cash < 100)
-        {
-            cash = 150;
-            SaveCash();
-        }
+        cash = PlayerPrefs.GetInt("PlayerCash", 0);
         lastRemovedCash = PlayerPrefs.GetInt("LastRemovedCash", 0);
         lastAddedCash = PlayerPrefs.GetInt("LastAddedCash", 0);
     }

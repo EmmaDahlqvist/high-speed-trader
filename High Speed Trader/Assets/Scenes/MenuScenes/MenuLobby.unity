@@ -174,6 +174,7 @@ MonoBehaviour:
   levelThreeObject: {fileID: 1242703315}
   screenHolderObject: {fileID: 2029423502}
   highScoreObject: {fileID: 1063293988}
+  fadeCanvasGroup: {fileID: 640731656}
 --- !u!114 &24086359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5094,7 +5095,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cebe4f935ff6ea1438c8bd37863adc41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bdcf5928d0231e64ca9a3771bcfcc8ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8146,6 +8147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1402178060}
   - component: {fileID: 1402178061}
+  - component: {fileID: 1402178062}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8186,9 +8188,21 @@ MonoBehaviour:
   zoomFactor: 3
   fadeCanvas: {fileID: 640731656}
   fadeDuration: 1
-  nextScene: NextScene
   moveCloserAmount: -0.55
   screenSelectorObject: {fileID: 24086356}
+  cashManager: {fileID: 1402178062}
+--- !u!114 &1402178062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402178059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241ba8e1365c4754a97bec6a23bce86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1417842924
 GameObject:
   m_ObjectHideFlags: 0
