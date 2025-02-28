@@ -20,7 +20,6 @@ public class AIControl : MonoBehaviour
 
     public void Initiate()
     {
-        print("starting ai");
         randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         agent = this.GetComponent<NavMeshAgent>();
         agent.SetDestination(goal.transform.position);
