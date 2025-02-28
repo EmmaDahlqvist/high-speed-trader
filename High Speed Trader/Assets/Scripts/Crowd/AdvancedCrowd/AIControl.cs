@@ -10,8 +10,17 @@ public class AIControl : MonoBehaviour
     NavMeshAgent agent;
     Vector3 randomOffset;
 
+    public bool wait;
+
     void Start()
     {
+        if (wait) return;
+        Initiate();
+    }
+
+    public void Initiate()
+    {
+        print("starting ai");
         randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         agent = this.GetComponent<NavMeshAgent>();
         agent.SetDestination(goal.transform.position);
@@ -21,6 +30,7 @@ public class AIControl : MonoBehaviour
 
     void Update()
     {
+        if (wait) return;
         if (agent.remainingDistance > 10)
             agent.SetDestination(goal.transform.position + randomOffset * 5);
         else

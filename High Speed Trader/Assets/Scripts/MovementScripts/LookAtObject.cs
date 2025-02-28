@@ -26,6 +26,8 @@ public class LookAtObject : MonoBehaviour
 
     private float originalFov;
 
+    public List<AIControl> aiControls = new List<AIControl>();
+    
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -72,6 +74,14 @@ public class LookAtObject : MonoBehaviour
         ZoomInOnObject();
     }
 
+    private void StartAIControls()
+    {
+        foreach (AIControl aiControl in aiControls)
+        {
+            aiControl.Initiate();
+        }
+    }
+
     private void ZoomInOnObject ()
     {
         // Zooma in genom att minska field of view
@@ -94,6 +104,7 @@ public class LookAtObject : MonoBehaviour
         startPromptScript.StartPrompts();
         playerCamScript.TurnAroundRoutine();
         scoreManager.StartScore();
+        StartAIControls();
     }
 
     // Update is called once per frame
