@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - PlayerComponent
+  - NPCWanderGoal
   - UI
   - UI_RaycastBackground
   layers:

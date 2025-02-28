@@ -9,24 +9,19 @@ public class CameraZoom : MonoBehaviour
     public float zoomFactor = 3f;  // Hur mycket kameran zoomar in
     public CanvasGroup fadeCanvas; // Dra in din CanvasGroup här
     public float fadeDuration = 1.5f;  // Hur snabbt fade-effekten sker
+    public string nextScene = "NextScene";  // Scenen som ska laddas
     public float moveCloserAmount = 5f; // Hur nära kameran rör sig i Z-led
 
     public GameObject screenSelectorObject;
     private ScreenSelector screenSelector;
 
     SliderBehaviour sliderBehaviour;
-    public CashManager cashManager;
+    CashManager cashManager;
 
     private Camera cam;
 
     void Start()
     {
-        //CASH. IF TOO LOW
-        if (cashManager.GetCash() < 100)
-        {
-            cashManager.SetCash(100);
-        }
-
         cam = Camera.main;
 
         // get the screen selector and the current lvl
@@ -35,8 +30,7 @@ public class CameraZoom : MonoBehaviour
 
     public void StartGame()
     {
-        PlayerPrefs.SetInt("LastLevel", screenSelector.GetCurrentLevel());
-        PlayerPrefs.Save();
+        PlayerPrefs.SetInt("CurrentLevel", screenSelector.GetCurrentLevel());
         CameraFollower cameraFollower = GetComponentInChildren<CameraFollower>();
         cameraFollower.StopCameraRotation();
 
@@ -77,10 +71,5 @@ public class CameraZoom : MonoBehaviour
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
                 SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
             } ); // När fade är klar, byt scen
-    }
-
-    void OnDestroy()
-    {
-        DOTween.KillAll();
     }
 }

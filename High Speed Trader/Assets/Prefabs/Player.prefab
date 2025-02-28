@@ -86,7 +86,7 @@ MonoBehaviour:
   walkSpeed: 8
   sprintSpeed: 13
   wallRunSpeed: 8.5
-  groundDrag: 6
+  groundDrag: 5
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -212,7 +212,6 @@ MonoBehaviour:
   promptTimer: 2
   getReadyPromptCanvas: {fileID: 0}
   runPromptCanvas: {fileID: 0}
-  wait: 0
 --- !u!114 &7992545471466011018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +446,6 @@ MonoBehaviour:
   lookingBackTime: 2
   turnAroundTime: 1
   turnAroundAtStart: 1
-  objectZoomWait: 0
 --- !u!114 &9176705499174664357
 MonoBehaviour:
   m_ObjectHideFlags: 0
