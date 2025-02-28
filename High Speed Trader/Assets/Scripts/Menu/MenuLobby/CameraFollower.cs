@@ -32,7 +32,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
     {
         cameraRotation = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 
     // Update is called once per frame
@@ -42,6 +42,8 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         {
             return;
         }
+        
+        Cursor.lockState = CursorLockMode.Confined;
 
 
         if(lookingAtUI)
@@ -49,7 +51,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
             Cursor.visible = true;
         } else
         {
-            Cursor.visible = false;
+            Cursor.visible = true;
         }
 
 
