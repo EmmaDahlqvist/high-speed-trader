@@ -12,6 +12,8 @@ public class LockCameraZoom : MonoBehaviour
     private Quaternion targetRotation; // Kamerans målrotation när den zoomar in
     public float targetXRotation = -5f;
 
+    public ScreenSelector screenSelector;
+
     public CameraFollower cameraFollower;
 
     private bool isZoomedIn = false; // För att hålla reda på om kameran är zoomad in eller inte
@@ -29,15 +31,10 @@ public class LockCameraZoom : MonoBehaviour
 
     void Update()
     {
-        // Om knappen trycks ner (t.ex. "Z"-tangenten)
-        if (Input.GetKeyDown(KeyCode.Z) && !isZoomedIn)
+        // Om du är i någon annan screen än meny screenen
+        if (screenSelector.GetCurrentLevel() != 0 && !isZoomedIn)
         {
             ZoomIn();
-        }
-        // Om knappen släpps
-        else if (Input.GetKeyUp(KeyCode.Z) && isZoomedIn)
-        {
-            ZoomOut();
         }
     }
 

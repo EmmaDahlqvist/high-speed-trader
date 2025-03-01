@@ -19,13 +19,17 @@ public class CameraZoom : MonoBehaviour
 
     private Camera cam;
 
-    void Start()
+    private void Awake()
     {
         //CASH. IF TOO LOW
         if (cashManager.GetCash() < 100)
         {
             cashManager.SetCash(100);
         }
+    }
+
+    void Start()
+    {
 
         cam = Camera.main;
 
@@ -81,6 +85,7 @@ public class CameraZoom : MonoBehaviour
 
     void OnDestroy()
     {
+        fadeCanvas.alpha = 0;
         DOTween.KillAll();
     }
 }

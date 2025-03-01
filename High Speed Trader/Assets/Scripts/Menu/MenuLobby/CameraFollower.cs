@@ -16,6 +16,13 @@ public class CameraFollower : MonoBehaviour, UIHitListener
 
     public Camera playerCamera;
 
+    public Rect mouseBounds = new Rect(100, 100, 800, 500); // (x, y, width, height)
+    private bool cameraRotation = true;
+
+    private bool lockCamera = false;
+
+    public ScreenSelector screenSelector;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +30,16 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         originalSensY = sensY; // Spara original känslighet
 
         lockCamera = true;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        StartCoroutine(DelayedUnlock(1.5f));
+
+        // Unlock if in menu
+        if(screenSelector.GetCurrentLevel() == 0)
+        {
+            StartCoroutine(DelayedUnlock(0.5f));
+        }
     }
-
-    public Rect mouseBounds = new Rect(100, 100, 800, 500); // (x, y, width, height)
-    private bool cameraRotation = true;
-
-    private bool lockCamera = false;
 
     private IEnumerator DelayedUnlock(float delay)
     {

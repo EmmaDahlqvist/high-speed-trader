@@ -26,10 +26,14 @@ public class CrowdCollision : MonoBehaviour
             GameState.KillReason = "You were killed by the crowd!";
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
-            await Task.Delay(1); // Delay for 1 millisecond
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync("EndScreen", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("EndScreen"));
             SceneManager.UnloadSceneAsync(currentSceneIndex);
-            
+
         }
 
         if (other.CompareTag("Obstacle"))
