@@ -12,9 +12,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
 
     private float xRotation;
     private float yRotation;
-
-    private bool lookingAtUI;
-    private bool justStarted;
+    private bool lookingAtUI = false;
 
     public Camera playerCamera;
 
@@ -28,7 +26,6 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        justStarted = true;
         StartCoroutine(DelayedUnlock(1.5f));
     }
 

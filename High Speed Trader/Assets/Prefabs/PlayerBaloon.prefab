@@ -332,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cccc66219eb444dae6cd8d571a3e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
+  sensX: 280
+  sensY: 280
   orientation: {fileID: 6586603201222202006}
   camHolder: {fileID: 6368216196119809914}
   lookingBackTime: 2
@@ -441,6 +441,7 @@ MonoBehaviour:
   timeAfterDone: 1
   scoreManager: {fileID: 0}
   promptCanvasGroup: {fileID: 0}
+  aiControls: []
 --- !u!1 &1404335701534487067
 GameObject:
   m_ObjectHideFlags: 0
