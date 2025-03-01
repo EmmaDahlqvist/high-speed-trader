@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScreenSelector : MonoBehaviour
 {
@@ -137,6 +138,8 @@ public class ScreenSelector : MonoBehaviour
         } else
         {
             playButton.interactable = false;
+            TextMeshProUGUI textInButton = playButton.GetComponentInChildren<TextMeshProUGUI>();
+            textInButton.text = "Finish previous!";
             colors.normalColor = Color.gray;
             playButton.colors = colors;
         }

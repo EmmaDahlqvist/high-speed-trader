@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
                 {
                     completedLevels.Add(levelNumber);
                 }
+
             }
         }
 
