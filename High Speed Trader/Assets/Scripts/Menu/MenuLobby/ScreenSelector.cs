@@ -14,6 +14,7 @@ public class ScreenSelector : MonoBehaviour
     public GameObject levelOneObject;
     public GameObject levelTwoObject;
     public GameObject levelThreeObject;
+    public GameObject guideObject;
     public Transform screenHolderObject;
     private UIRaycastChecker UIRaycastChecker;
     public GameObject highScoreObject;
@@ -22,14 +23,27 @@ public class ScreenSelector : MonoBehaviour
 
     public CanvasGroup fadeCanvasGroup;
 
+    private bool firstTimePlaying;
+
     private int currentLvl = 0;
     public Dictionary<int, GameObject> levelObjects = new Dictionary<int, GameObject>();
 
     private void Start()
     {
-
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
         levelManager = transform.GetComponent<LevelManager>();
+
+        if (levelManager.GetFirstTimePlaying() == true)
+        {
+            levelManager.SetFirstTimePlayingFalse();
+            firstTimePlaying = true;
+            print("first time");
+        }  else
+        {
+            firstTimePlaying = true;
+            print("not first time");
+
+        }
 
         levelManager.AddCompletedLevel(0);
         levelObjects.Add(0, menuObject);
@@ -72,8 +86,30 @@ public class ScreenSelector : MonoBehaviour
     public void OnPlayButton()
     {
         currentLvl = 1;
-        menuObject.SetActive(false);
+        if (firstTimePlaying)
+        {
+            guideObject.SetActive(true);
+            SwitchRaycaster(guideObject);
+            firstTimePlaying = false;
+        } else
+        {
+            menuObject.SetActive(false);
 
+            SetScreen(currentLvl);
+        }
+    }
+
+    public void OnOpenGuideButton()
+    {
+        currentLvl = 0;
+        DeactivateAllScreens();
+        guideObject.SetActive(true);
+        SwitchRaycaster(guideObject);
+    }
+
+    public void OnGuideOKButton()
+    {
+        guideObject.SetActive(false);
         SetScreen(currentLvl);
     }
 
@@ -105,6 +141,7 @@ public class ScreenSelector : MonoBehaviour
 
     private void DeactivateAllScreens()
     {
+        guideObject.SetActive(false);
         foreach (GameObject gameObject in levelObjects.Values)
         {
             gameObject.SetActive(false);
