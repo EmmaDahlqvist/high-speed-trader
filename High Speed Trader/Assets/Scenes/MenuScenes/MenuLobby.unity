@@ -4927,9 +4927,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Choose a stock to invest into, get to the nearest laptop ASAP to sell
-    the stock while its at an all time high. \n\nHint: Dont get caught by the stockbrokers
-    chasing you"
+  m_text: "Select a trade, place your bet, and get to the nearest laptop ASAP to
+    sell the stock while its at an all time high. \n\nHint: Dont get caught by the
+    stockbrokers chasing you!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12344,7 +12344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL TWO NAME
+  m_text: Master of the market
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
