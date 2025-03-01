@@ -1,14 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
-public class CrowdAudioController : MonoBehaviour
+public class CrowdSound : MonoBehaviour
 {
-    public Transform player;  // Drag the player GameObject here
-    public Transform[] npcs;  // Assign all NPCs to this array
+    public Transform player;
+    public Transform[] npcs;
     public float maxVolume = 1.0f;
-    public float minVolume = 0.0f;
+    public float minVolume = 0.3f;
     public float maxDistance = 20f;
+    public AudioClip[] footstepSounds; // Assign multiple footstep sounds
+    public int minFootstepsPerSecond = 2;
+    public int maxFootstepsPerSecond = 6;
 
     private AudioSource audioSource;
+    private bool isPlayingFootsteps = false;
 
     void Start()
     {
@@ -17,13 +22,14 @@ public class CrowdAudioController : MonoBehaviour
         {
             Debug.LogError("No AudioSource found on " + gameObject.name);
         }
+
+        StartCoroutine(PlayFootstepsWithRandomIntervals());
     }
 
     void Update()
     {
-        if (!audioSource || !player || npcs.Length == 0) return;
+        if (!audioSource || !player || npcs.Length == 0 || footstepSounds.Length == 0) return;
 
-        // Calculate the average position of all NPCs
         Vector3 averagePosition = Vector3.zero;
         foreach (Transform npc in npcs)
         {
@@ -31,12 +37,33 @@ public class CrowdAudioController : MonoBehaviour
         }
         averagePosition /= npcs.Length;
 
-        // Move the Crowd GameObject to the average position
         transform.position = averagePosition;
 
         // Adjust volume based on player distance
         float distance = Vector3.Distance(transform.position, player.position);
-        float volume = Mathf.Lerp(maxVolume, minVolume, distance / maxDistance);
-        audioSource.volume = Mathf.Clamp(volume, 0.3f, maxVolume); // Ensure a minimum volume
+        float t = Mathf.InverseLerp(maxDistance, 0, distance);
+        float volume = Mathf.Lerp(minVolume, maxVolume, t);
+        audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
+    }
+
+    IEnumerator PlayFootstepsWithRandomIntervals()
+    {
+        isPlayingFootsteps = true;
+        while (true) // Loop forever
+        {
+            float interval = 1f / Random.Range(minFootstepsPerSecond, maxFootstepsPerSecond);
+            yield return new WaitForSeconds(interval);
+
+            PlayRandomFootstep();
+        }
+    }
+
+    void PlayRandomFootstep()
+    {
+        if (footstepSounds.Length == 0) return;
+
+        AudioClip randomClip = footstepSounds[Random.Range(0, footstepSounds.Length)];
+        audioSource.pitch = Random.Range(0.8f, 1.2f); // Add pitch variation
+        audioSource.PlayOneShot(randomClip, Random.Range(0.6f, 1.0f)); // Play with random volume
     }
 }
