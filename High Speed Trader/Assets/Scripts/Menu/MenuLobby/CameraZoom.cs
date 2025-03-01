@@ -79,13 +79,13 @@ public class CameraZoom : MonoBehaviour
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => {
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
+                Camera.main.clearFlags = CameraClearFlags.Skybox;
                 SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
             } ); // När fade är klar, byt scen
     }
 
     void OnDestroy()
     {
-        fadeCanvas.alpha = 0;
         DOTween.KillAll();
     }
 }

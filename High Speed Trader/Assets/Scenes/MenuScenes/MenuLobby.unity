@@ -8212,7 +8212,7 @@ MonoBehaviour:
   zoomFactor: 3
   fadeCanvas: {fileID: 640731656}
   fadeDuration: 1
-  moveCloserAmount: -0.55
+  moveCloserAmount: -0.4
   screenSelectorObject: {fileID: 24086356}
   cashManager: {fileID: 1402178062}
 --- !u!114 &1402178062

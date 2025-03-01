@@ -34,7 +34,6 @@ public class EndScreenScript : MonoBehaviour
     
     public async void OnRestartButton()
     {
-        LevelInitalizer = FindObjectOfType<LevelInitalizer>();
         var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
         while (!loadOperation.isDone)
         {
