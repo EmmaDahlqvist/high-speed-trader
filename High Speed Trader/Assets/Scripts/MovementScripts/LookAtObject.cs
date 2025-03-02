@@ -66,10 +66,9 @@ public class LookAtObject : MonoBehaviour
                     .OnComplete(() =>
                     {
                         // Fade ut prompten n�r den sista animationen �r klar
-                        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten �ver 1 sekund
                         Invoke("NotifyZoomDone", timeAfterDone);
                     });
-            });
+            }).SetId("LookTween");
 
         ZoomInOnObject();
     }
@@ -93,13 +92,15 @@ public class LookAtObject : MonoBehaviour
                // N�r zoomningen �r klar, zooma tillbaka till original fov
                cam.DOFieldOfView(originalFov, zoomTime)
                       .SetEase(Ease.InOutQuad);
-           });
+           }).SetId("ZoomTween");
     }
 
 
     // notify playercam script that zoom is done
     private void NotifyZoomDone()
     {
+        print("notifying done");
+        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten �ver 1 sekund
         playerCamScript.objectZoomWait = false;
         startPromptScript.wait = false;
         startPromptScript.StartPrompts();
@@ -111,6 +112,13 @@ public class LookAtObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    public void SkipIntro()
+    {
+        DOTween.Kill("ZoomTween");
+        DOTween.Kill("LookTween");
+        promptCanvasGroup.alpha = 0;
+        NotifyZoomDone();
     }
 }
