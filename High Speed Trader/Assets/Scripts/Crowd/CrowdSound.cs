@@ -42,6 +42,7 @@ public class CrowdSound : MonoBehaviour
         // Adjust volume based on player distance
         float distance = Vector3.Distance(transform.position, player.position);
         float t = Mathf.InverseLerp(maxDistance, 0, distance);
+        t = t * t; // Quadratic interpolation
         float volume = Mathf.Lerp(minVolume, maxVolume, t);
         audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
     }
@@ -64,6 +65,6 @@ public class CrowdSound : MonoBehaviour
 
         AudioClip randomClip = footstepSounds[Random.Range(0, footstepSounds.Length)];
         audioSource.pitch = Random.Range(0.8f, 1.2f); // Add pitch variation
-        audioSource.PlayOneShot(randomClip, Random.Range(0.6f, 1.0f)); // Play with random volume
+        audioSource.PlayOneShot(randomClip, audioSource.volume * Random.Range(0.6f, 1.0f));
     }
 }
