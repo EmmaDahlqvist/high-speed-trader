@@ -63,6 +63,7 @@ public class CarAudioController : MonoBehaviour
             if (distance > fadeDistance)
             {
                 hasEnteredSweetSpot = false;
+                engineSound.Stop();
             }
         }
     }
