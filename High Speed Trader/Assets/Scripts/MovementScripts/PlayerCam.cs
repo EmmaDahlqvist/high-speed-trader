@@ -120,7 +120,10 @@ public class PlayerCam : MonoBehaviour
             turnAroundCompleteListener.ActAfterTurn();
         }
         print("skipintro avctive false");
-        skipIntroPrompt.SetActive(false);
+        if(skipIntroPrompt != null )
+        {
+            skipIntroPrompt.SetActive(false);
+        }
     }
 
     public void DoFov(float endValue)

@@ -19,6 +19,9 @@ public class HoldToSkip : MonoBehaviour
 
     private bool isSkipped;
 
+    public List<GameObject> crowd = new List<GameObject>();
+    public GameObject crowdTeleportLocation;
+
     void Update()
     {
         if (isSkipped) return;
@@ -58,5 +61,11 @@ public class HoldToSkip : MonoBehaviour
             lookAtObject.SkipIntro();
         }
         isSkipped = true;
+
+        foreach(GameObject crowdObject in crowd)
+        {
+            print("setting position");
+            crowdObject.transform.position = crowdTeleportLocation.transform.position;
+        }
     }
 }
