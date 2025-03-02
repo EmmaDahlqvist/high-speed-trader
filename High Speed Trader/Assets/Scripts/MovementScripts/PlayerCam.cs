@@ -20,6 +20,8 @@ public class PlayerCam : MonoBehaviour
     [Header("Start")]
     public float lookingBackTime = 2f;
     public float turnAroundTime = 1;
+    public float turnAroundAngleBack = 180;
+    public float turnAroundAngleForward = 0;
     bool lockedStart = true;
     public bool turnAroundAtStart = true;
 
@@ -34,7 +36,6 @@ public class PlayerCam : MonoBehaviour
         // set up rotation from start:
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
         // find player and their playermovement script to lock it
         GameObject player = GameObject.FindWithTag("PlayerComponent");
 
@@ -56,7 +57,7 @@ public class PlayerCam : MonoBehaviour
     {
         if (turnAroundAtStart)
         {
-            camHolder.DORotate(new Vector3(0, 180, 0), turnAroundTime);
+            camHolder.DORotate(new Vector3(0, turnAroundAngleBack, 0), turnAroundTime);
             //orientation.rotation = Quaternion.Euler(0, 180, 0);
 
             lockedStart = true;
@@ -80,8 +81,8 @@ public class PlayerCam : MonoBehaviour
             if(lookingBackTime <= 0)
             {
 
-                orientation.DORotate(Vector3.zero, turnAroundTime).OnComplete(() => TurnAroundComplete()); ; // turn the orientation back around in time
-                camHolder.DORotate(Vector3.zero, turnAroundTime); // turn the camera back around in time
+                orientation.DORotate(new Vector3(0, turnAroundAngleForward, 0), turnAroundTime).OnComplete(() => TurnAroundComplete()); ; // turn the orientation back around in time
+                camHolder.DORotate(new Vector3(0, turnAroundAngleForward, 0), turnAroundTime); // turn the camera back around in time
             }
 
             lookingBackTime -= Time.deltaTime;
@@ -112,7 +113,10 @@ public class PlayerCam : MonoBehaviour
     {
 
         lockedStart = false;
-        foreach(TurnAroundCompleteListener turnAroundCompleteListener in turnAroundCompleteListeners)
+        Vector3 currentCamRotation = camHolder.eulerAngles;
+        xRotation = currentCamRotation.x;
+        yRotation = currentCamRotation.y;
+        foreach (TurnAroundCompleteListener turnAroundCompleteListener in turnAroundCompleteListeners)
         {
             turnAroundCompleteListener.ActAfterTurn();
         }

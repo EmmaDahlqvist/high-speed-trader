@@ -1937,6 +1937,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 386600049207838868, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: objectZoomWait
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2644161497391165290, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
       propertyPath: runPromptCanvas
       value: 
@@ -1945,6 +1949,18 @@ PrefabInstance:
       propertyPath: getReadyPromptCanvas
       value: 
       objectReference: {fileID: 1442565610}
+    - target: {fileID: 6162175768287036645, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6162175768287036645, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6162175768287036645, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7136074516745932115, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
       propertyPath: _goalCanvas
       value: 
@@ -2110,6 +2126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &238208831
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3772,6 +3789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &449355819
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3907,6 +3925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &450079729
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5167,6 +5186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &609459343
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6197,6 +6217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &721207987
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7347,6 +7368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &824582703
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9831,6 +9853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1037618973
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10267,6 +10290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1051860717
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11176,6 +11200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1143285728
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11569,6 +11594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1189588266
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12129,6 +12155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1246018146
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12732,6 +12759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1283420612
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14816,6 +14844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1438596905
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17593,6 +17622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1814305509
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19097,6 +19127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1935282511
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19586,6 +19617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &1998286302
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19721,6 +19753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1111438234}
+  wait: 0
 --- !u!136 &2000705754
 CapsuleCollider:
   m_ObjectHideFlags: 0
