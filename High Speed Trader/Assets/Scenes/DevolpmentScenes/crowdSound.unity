@@ -2732,7 +2732,7 @@ MonoBehaviour:
   - {fileID: 970763861}
   - {fileID: 861974114}
   - {fileID: 934390554}
-  maxVolume: 50
+  maxVolume: 150
   minVolume: 0
   maxDistance: 40
   footstepSounds:
