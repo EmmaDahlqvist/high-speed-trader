@@ -2733,8 +2733,8 @@ MonoBehaviour:
   - {fileID: 861974114}
   - {fileID: 934390554}
   maxVolume: 50
-  minVolume: 30
-  maxDistance: 1
+  minVolume: 0
+  maxDistance: 40
   footstepSounds:
   - {fileID: 8300000, guid: 7131d701ae015a54aa3d856feccd513f, type: 3}
   - {fileID: 8300000, guid: 942019cf9ecd5854ebeb343b12b7f779, type: 3}
