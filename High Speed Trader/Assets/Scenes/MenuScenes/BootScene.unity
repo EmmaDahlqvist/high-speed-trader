@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 796550481}
   - component: {fileID: 796550482}
   - component: {fileID: 796550483}
+  - component: {fileID: 796550484}
   m_Layer: 0
   m_Name: BootLogic
   m_TagString: Untagged
@@ -274,6 +275,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingText: {fileID: 1736714815}
   typingSpeed: 0.2
+--- !u!114 &796550484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796550480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785c51dbabfd846428bccd78d23e4036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1165372571
 GameObject:
   m_ObjectHideFlags: 0
