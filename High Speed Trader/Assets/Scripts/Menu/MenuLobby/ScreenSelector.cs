@@ -40,7 +40,7 @@ public class ScreenSelector : MonoBehaviour
             print("first time");
         }  else
         {
-            firstTimePlaying = true;
+            firstTimePlaying = false;
             print("not first time");
 
         }

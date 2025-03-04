@@ -50,7 +50,7 @@ public class LockCameraZoom : MonoBehaviour
     }
 
     // Funktion för att zooma ut
-    void ZoomOut()
+    public void ZoomOut()
     {
         mainCamera.transform.DOMove(originalPosition, zoomDuration).SetEase(Ease.InOutQuad);
         mainCamera.transform.DORotateQuaternion(originalRotation, zoomDuration)

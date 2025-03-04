@@ -530,7 +530,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fcf7d281354eb6340bf006a9528281e4, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.541
   m_Pitch: 1
   Loop: 1
@@ -538,7 +538,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 0.5
+  DopplerLevel: 1.59
   MinDistance: 1
   MaxDistance: 50
   Pan2D: 0
@@ -1335,7 +1335,7 @@ MonoBehaviour:
   engineSound: {fileID: 7814095133762085441}
   player: {fileID: 0}
   sweetSpotDistance: 20
-  fadeDistance: 100
+  fadeDistance: 50
   maxVolume: 1
   minVolume: 0
   smoothFactor: 6

@@ -20,12 +20,15 @@ public class PlayerCam : MonoBehaviour
     [Header("Start")]
     public float lookingBackTime = 2f;
     public float turnAroundTime = 1;
+    public float skipTunrAroundTime = 0.5f;
     bool lockedStart = true;
     public bool turnAroundAtStart = true;
 
     public bool objectZoomWait = false; // change to true if it should zoom in at an object in the start
 
     private List<TurnAroundCompleteListener> turnAroundCompleteListeners = new List<TurnAroundCompleteListener>();
+
+    public GameObject skipIntroPrompt;
 
 
     // Start is called before the first frame update
@@ -56,7 +59,7 @@ public class PlayerCam : MonoBehaviour
     {
         if (turnAroundAtStart)
         {
-            camHolder.DORotate(new Vector3(0, 180, 0), turnAroundTime);
+            camHolder.DORotate(new Vector3(0, 180, 0), turnAroundTime).SetId("TurnAround");
             //orientation.rotation = Quaternion.Euler(0, 180, 0);
 
             lockedStart = true;
@@ -70,6 +73,7 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(objectZoomWait)
         {
             return;
@@ -80,8 +84,8 @@ public class PlayerCam : MonoBehaviour
             if(lookingBackTime <= 0)
             {
 
-                orientation.DORotate(Vector3.zero, turnAroundTime).OnComplete(() => TurnAroundComplete()); ; // turn the orientation back around in time
-                camHolder.DORotate(Vector3.zero, turnAroundTime); // turn the camera back around in time
+                orientation.DORotate(Vector3.zero, turnAroundTime).OnComplete(() => TurnAroundComplete()).SetId("Rotate"); ; // turn the orientation back around in time
+                camHolder.DORotate(Vector3.zero, turnAroundTime).SetId("TurnBack"); // turn the camera back around in time
             }
 
             lookingBackTime -= Time.deltaTime;
@@ -116,6 +120,11 @@ public class PlayerCam : MonoBehaviour
         {
             turnAroundCompleteListener.ActAfterTurn();
         }
+        print("skipintro avctive false");
+        if(skipIntroPrompt != null )
+        {
+            skipIntroPrompt.SetActive(false);
+        }
     }
 
     public void DoFov(float endValue)
@@ -131,5 +140,13 @@ public class PlayerCam : MonoBehaviour
     void OnDestroy()
     {
         DOTween.KillAll();
+    }
+
+    public void SkipIntro()
+    {
+        DOTween.Kill("TurnAround");
+        DOTween.Kill("TurnBack");
+        DOTween.Kill("Rotate");
+        camHolder.DORotate(Vector3.zero, skipTunrAroundTime).OnComplete( () => TurnAroundComplete()); // turn the camera back qucikly
     }
 }

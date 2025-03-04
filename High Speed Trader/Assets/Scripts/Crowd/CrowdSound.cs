@@ -30,19 +30,27 @@ public class CrowdSound : MonoBehaviour
     {
         if (!audioSource || !player || npcs.Length == 0 || footstepSounds.Length == 0) return;
 
-        Vector3 averagePosition = Vector3.zero;
+        Transform closestNpc = null;
+        float closestDistance = float.MaxValue;
+
         foreach (Transform npc in npcs)
         {
-            averagePosition += npc.position;
+            float distance = Vector3.Distance(npc.position, player.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestNpc = npc;
+            }
         }
-        averagePosition /= npcs.Length;
 
-        transform.position = averagePosition;
+        if (closestNpc != null)
+        {
+            transform.position = closestNpc.position;
+        }
 
         // Adjust volume based on player distance
-        float distance = Vector3.Distance(transform.position, player.position);
-        float volume = maxVolume * (1 - Mathf.Clamp01(distance / maxDistance));
-        audioSource.volume = Mathf.Clamp(volume * 3, minVolume, maxVolume);
+        float volume = Mathf.Lerp(minVolume, maxVolume, 1 - Mathf.Clamp01(closestDistance / maxDistance));
+        audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
     }
 
     IEnumerator PlayFootstepsWithRandomIntervals()
