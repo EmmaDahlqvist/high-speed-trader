@@ -3038,7 +3038,7 @@ MonoBehaviour:
   playerCam: {fileID: 1588436153}
   lookAtObject: {fileID: 0}
   fillImage: {fileID: 1011458318}
-  holdDuration: 2
+  holdDuration: 1
   crowd:
   - {fileID: 1995825672}
   - {fileID: 677433381}
