@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
                 {
                     completedLevels.Add(levelNumber);
                 }
+
             }
         }
 
@@ -61,5 +62,22 @@ public class LevelManager : MonoBehaviour
         string completedLevelsString = string.Join(",", completedLevels);
         PlayerPrefs.SetString(CompletedLevelsKey, completedLevelsString);
         PlayerPrefs.Save();
+    }
+
+    public void SetFirstTimePlayingTrue()
+    {
+        PlayerPrefs.SetInt("FirstTimePlaying", 1);
+        PlayerPrefs.Save();
+    }
+
+    public void SetFirstTimePlayingFalse()
+    {
+        PlayerPrefs.SetInt("FirstTimePlaying", 0);
+        PlayerPrefs.Save();
+    }
+
+    public bool GetFirstTimePlaying()
+    {
+        return PlayerPrefs.GetInt("FirstTimePlaying",1) == 1;
     }
 }

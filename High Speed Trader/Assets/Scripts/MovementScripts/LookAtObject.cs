@@ -44,29 +44,29 @@ public class LookAtObject : MonoBehaviour
 
     private void StartLooking()
     {
-        // Spara den ursprungliga rotationen för camHolder
+        // Spara den ursprungliga rotationen fï¿½r camHolder
         Quaternion originalRotation = camHolder.rotation;
 
-        // Beräkna riktningen till objektet (med full 3D-vinkel, inklusive höjd)
+        // Berï¿½kna riktningen till objektet (med full 3D-vinkel, inklusive hï¿½jd)
         Vector3 directionToLook = objectToLookAt.transform.position - cam.transform.position;
 
-        // Rotera camHolder för att titta på objektet
+        // Rotera camHolder fï¿½r att titta pï¿½ objektet
         camHolder.DOLookAt(objectToLookAt.transform.position, moveTime)
             .SetEase(Ease.InOutQuad)
             .OnStart(() =>
             {
-                // Visa prompten direkt när animationen startar
+                // Visa prompten direkt nï¿½r animationen startar
                 promptCanvasGroup.alpha = 1f;
             })
             .OnComplete(() =>
             {
-                // När kameran har tittat på objektet, återgå till originalrotationen för camHolder
+                // Nï¿½r kameran har tittat pï¿½ objektet, ï¿½tergï¿½ till originalrotationen fï¿½r camHolder
                 camHolder.DORotateQuaternion(originalRotation, moveTime)
                     .SetEase(Ease.InOutQuad)
                     .OnComplete(() =>
                     {
-                        // Fade ut prompten när den sista animationen är klar
-                        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten över 1 sekund
+                        // Fade ut prompten nï¿½r den sista animationen ï¿½r klar
+                        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten ï¿½ver 1 sekund
                         Invoke("NotifyZoomDone", timeAfterDone);
                     });
             });
@@ -78,6 +78,7 @@ public class LookAtObject : MonoBehaviour
     {
         foreach (AIControl aiControl in aiControls)
         {
+            aiControl.wait = false;
             aiControl.Initiate();
         }
     }
@@ -89,7 +90,7 @@ public class LookAtObject : MonoBehaviour
            .SetEase(Ease.InOutQuad)
            .OnComplete(() =>
            {
-               // När zoomningen är klar, zooma tillbaka till original fov
+               // Nï¿½r zoomningen ï¿½r klar, zooma tillbaka till original fov
                cam.DOFieldOfView(originalFov, zoomTime)
                       .SetEase(Ease.InOutQuad);
            });

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ public class KillPlayerCollision: MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            DOTween.KillAll();
             GameState.KillReason = killReason; // set kill reason
 
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

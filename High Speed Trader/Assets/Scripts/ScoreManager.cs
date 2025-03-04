@@ -61,15 +61,15 @@ public class ScoreManager : MonoBehaviour
         score -= scoreLoweringRate;
         scoreText.text = score.ToString() + "$";
 
-        float threshold = cashManager.getLastRemovedCash() * 1.2f; // when at 120% of bet, start get red text 
+        // float threshold = cashManager.getLastRemovedCash() * 1.2f; // when at 120% of bet, start get red text 
 
-        // Calculate the color based on the score
-        float t = Mathf.InverseLerp(0, threshold, score);
-
-        Color neonGreen = new Color(0.22f, 1f, 0.08f); // #39FF14
-
-        Color color = Color.Lerp(Color.red, Color.green, t);
-        scoreText.color = color;
+        // // Calculate the color based on the score
+        // float t = Mathf.InverseLerp(0, threshold, score);
+        //
+        // Color neonGreen = new Color(0.22f, 1f, 0.08f); // #39FF14
+        //
+        // Color color = Color.Lerp(Color.red, Color.green, t);
+        // scoreText.color = color;
     }
 
 

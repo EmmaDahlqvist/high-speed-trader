@@ -212,6 +212,7 @@ MonoBehaviour:
   promptTimer: 2
   getReadyPromptCanvas: {fileID: 0}
   runPromptCanvas: {fileID: 0}
+  wait: 0
 --- !u!114 &7992545471466011018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,13 +440,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cccc66219eb444dae6cd8d571a3e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
+  sensX: 280
+  sensY: 280
   orientation: {fileID: 2854748091565921993}
   camHolder: {fileID: 6162175768287036645}
   lookingBackTime: 2
   turnAroundTime: 1
   turnAroundAtStart: 1
+  objectZoomWait: 0
 --- !u!114 &9176705499174664357
 MonoBehaviour:
   m_ObjectHideFlags: 0

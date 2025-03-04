@@ -19,13 +19,17 @@ public class CameraZoom : MonoBehaviour
 
     private Camera cam;
 
-    void Start()
+    private void Awake()
     {
         //CASH. IF TOO LOW
         if (cashManager.GetCash() < 100)
         {
             cashManager.SetCash(100);
         }
+    }
+
+    void Start()
+    {
 
         cam = Camera.main;
 
@@ -75,6 +79,7 @@ public class CameraZoom : MonoBehaviour
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => {
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
+                Camera.main.clearFlags = CameraClearFlags.Skybox;
                 SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
             } ); // När fade är klar, byt scen
     }

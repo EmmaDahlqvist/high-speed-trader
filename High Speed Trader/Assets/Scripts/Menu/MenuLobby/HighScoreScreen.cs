@@ -18,7 +18,7 @@ public class HighScoreScreen : MonoBehaviour
             MenuText();
             return;
         }
-        text.text = "HIGHEST TURNAROUND:";
+        text.text = "HIGHSCORE:";
         scoreText.text = highScore.GetHighscore(level).ToString() + "$";
     }
 

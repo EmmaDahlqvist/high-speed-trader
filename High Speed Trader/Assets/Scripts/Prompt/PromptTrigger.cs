@@ -8,18 +8,20 @@ public class PromptTrigger : MonoBehaviour
     public TextMeshProUGUI promptText;
     public GameObject promptImage;
     public string message;
-    public float fadeDistance = 3f; // Maxavstånd från zonens mitt där prompten fortfarande syns lite
+    public float fadeDistance = 3f; // Maxavstï¿½nd frï¿½n zonens mitt dï¿½r prompten fortfarande syns lite
     public float fadeSpeed = 2f; // Hur snabbt den fadar
     private CanvasGroup canvasGroup;
     private Transform player;
     private bool playerInZone = false;
     private Vector3 zoneCenter; // Mitten av zonen
-    private float zoneRadius; // Storleken på trigger-zonen
+    private float zoneRadius; // Storleken pï¿½ trigger-zonen
+    private AudioSource audioSource;
 
     void Start()
     {
         promptText.SetText(message);
         canvasGroup = promptImage.GetComponent<CanvasGroup>();
+        audioSource = GetComponent<AudioSource>();
         if (canvasGroup == null)
         {
             canvasGroup = promptImage.AddComponent<CanvasGroup>();
@@ -29,11 +31,13 @@ public class PromptTrigger : MonoBehaviour
         promptImage.SetActive(true);
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Beräkna zonens mittpunkt och storlek
+        // Berï¿½kna zonens mittpunkt och storlek
         Collider col = GetComponent<Collider>();
         zoneCenter = col.bounds.center;
-        zoneRadius = col.bounds.extents.magnitude; // Använd storlek på zonen
+        zoneRadius = col.bounds.extents.magnitude; // Anvï¿½nd storlek pï¿½ zonen
     }
+
+    private bool hasPlayedSound = false;
 
     void Update()
     {
@@ -41,16 +45,24 @@ public class PromptTrigger : MonoBehaviour
 
         float distance = Vector3.Distance(player.position, zoneCenter);
 
-        if (distance <= zoneRadius) // Spelaren är inne i zonen
+        if (distance <= zoneRadius) // Player is inside the zone
         {
             playerInZone = true;
-            canvasGroup.alpha = 1f; // Full synlighet
+            canvasGroup.alpha = 1f; // Full visibility
+
+            if (!hasPlayedSound)
+            {
+                audioSource.Play();
+                hasPlayedSound = true;
+            }
         }
-        else // Spelaren är utanför zonen
+        else // Player is outside the zone
         {
             playerInZone = false;
             float fadeFactor = Mathf.Clamp01(1 - ((distance - zoneRadius) / fadeDistance));
             canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, fadeFactor, Time.deltaTime * fadeSpeed);
+            hasPlayedSound = false;
         }
     }
-}
+    }
+

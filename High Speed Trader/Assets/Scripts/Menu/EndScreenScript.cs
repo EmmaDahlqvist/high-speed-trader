@@ -34,17 +34,22 @@ public class EndScreenScript : MonoBehaviour
     
     public async void OnRestartButton()
     {
-        LevelInitalizer = FindObjectOfType<LevelInitalizer>();
-        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
-        await Task.Delay(5); // Delay for 1 millisecond
+        var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+        while (!loadOperation.isDone)
+        {
+            await Task.Yield();
+        }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
     
     public async void onBackToMenuButton()
     {
         levelManager.SetLastLevel(0);
-        SceneManager.LoadScene("MenuLobby", LoadSceneMode.Single);
-        await Task.Delay(5); // Delay for 1 millisecond
+        var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+        while (!loadOperation.isDone)
+        {
+            await Task.Yield();
+        }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
     
