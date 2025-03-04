@@ -479,7 +479,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730369175138824673, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Name
@@ -3994,7 +3994,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730369175138824673, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Name
@@ -6434,7 +6434,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730369175138824673, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Name
@@ -10323,7 +10323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730369175138824673, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Name
@@ -15544,7 +15544,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730369175138824673, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Name
@@ -18393,7 +18393,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730369175138824673, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
       propertyPath: m_Name
