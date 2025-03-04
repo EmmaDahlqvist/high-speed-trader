@@ -93,10 +93,12 @@ public class LookAtObject : MonoBehaviour
         }
     }
 
+    private Tween zoomTween;
+
     private void ZoomInOnObject ()
     {
         // Zooma in genom att minska field of view
-        cam.DOFieldOfView(zoomFOV, zoomTime)
+        zoomTween = cam.DOFieldOfView(zoomFOV, zoomTime)
            .SetEase(Ease.InOutQuad)
            .OnComplete(() =>
            {
@@ -134,7 +136,10 @@ public class LookAtObject : MonoBehaviour
     {
         skip = true;
         DOTween.Kill("LookTween");
-        DOTween.Kill("ZoomTween");
+        if(zoomTween.IsActive())
+        {
+            zoomTween.PlayBackwards();
+        }
         promptCanvasGroup.alpha = 0;
         NotifyZoomDone();
     }
