@@ -49,7 +49,7 @@ public class CrowdSound : MonoBehaviour
         }
 
         // Adjust volume based on player distance
-        float volume = maxVolume * (1 - Mathf.Clamp01(closestDistance / maxDistance));
+        float volume = Mathf.Lerp(minVolume, maxVolume, 1 - Mathf.Clamp01(closestDistance / maxDistance));
         audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
     }
 

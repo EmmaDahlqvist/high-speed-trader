@@ -5,7 +5,7 @@ public class CarAudioController : MonoBehaviour
     public AudioSource engineSound;
     public Transform player;
 
-    public float sweetSpotDistance = 10f; // Stable sound in is area (no fade)
+    public float sweetSpotDistance = 10f; // Stable sound in this area (no fade)
     public float fadeDistance = 20f;      // Fade in/out start distance
     public float maxVolume = 1.0f;
     public float minVolume = 0.0f;
@@ -45,19 +45,27 @@ public class CarAudioController : MonoBehaviour
         if (distance < sweetSpotDistance)
         {
             engineSound.volume = maxVolume;
-            hasEnteredSweetSpot = true; 
+            hasEnteredSweetSpot = true;
+            if (!engineSound.isPlaying)
+            {
+                engineSound.Play();
+            }
         }
         else if (!hasEnteredSweetSpot && distance < fadeDistance && movingTowardsPlayer)
         {
-            // Fade in  when car is coming towards player
-            float fadeFactor = 1 - ((distance - sweetSpotDistance) / (fadeDistance + 40 - sweetSpotDistance));
+            // Fade in when car is coming towards player
+            float fadeFactor = 1 - ((distance - sweetSpotDistance) / (fadeDistance - sweetSpotDistance));
             engineSound.volume = Mathf.Lerp(engineSound.volume, maxVolume * fadeFactor, Time.deltaTime * smoothFactor);
+            if (!engineSound.isPlaying)
+            {
+                engineSound.Play();
+            }
         }
         else if (hasEnteredSweetSpot && distance > sweetSpotDistance)
         {
             // Fade out when car has been next to player
             float fadeFactor = (distance - sweetSpotDistance) / (fadeDistance - sweetSpotDistance);
-            engineSound.volume = Mathf.Lerp(engineSound.volume, maxVolume * (1 - fadeFactor), Time.deltaTime * smoothFactor*3);
+            engineSound.volume = Mathf.Lerp(engineSound.volume, maxVolume * (1 - fadeFactor), Time.deltaTime * smoothFactor * 3);
 
             // if car has left fade distance, reset hasEnteredSweetSpot
             if (distance > fadeDistance)
