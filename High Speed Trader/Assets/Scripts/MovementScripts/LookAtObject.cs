@@ -27,6 +27,8 @@ public class LookAtObject : MonoBehaviour
     private float originalFov;
 
     public List<AIControl> aiControls = new List<AIControl>();
+
+    private bool skip = false;
     
     // Start is called before the first frame update
     IEnumerator Start()
@@ -70,7 +72,10 @@ public class LookAtObject : MonoBehaviour
                     });
             }).SetId("LookTween");
 
-        ZoomInOnObject();
+        if(!skip)
+        {
+            ZoomInOnObject();
+        }
     }
 
     private void StartAIControls()
@@ -103,11 +108,16 @@ public class LookAtObject : MonoBehaviour
         promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten �ver 1 sekund
         playerCamScript.objectZoomWait = false;
         startPromptScript.wait = false;
-        startPromptScript.StartPrompts();
-        playerCamScript.TurnAroundRoutine();
         scoreManager.StartScore();
         StartAIControls();
+        if (!skip) // only start turn around etc if not skip
+        {
+            startPromptScript.StartPrompts();
+            playerCamScript.TurnAroundRoutine();
+        }
     }
+
+  
 
     // Update is called once per frame
     void Update()
@@ -116,9 +126,10 @@ public class LookAtObject : MonoBehaviour
 
     public void SkipIntro()
     {
-        DOTween.Kill("ZoomTween");
         DOTween.Kill("LookTween");
+        DOTween.Kill("ZoomTween");
         promptCanvasGroup.alpha = 0;
+        skip = true;
         NotifyZoomDone();
     }
 }

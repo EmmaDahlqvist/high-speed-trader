@@ -52,13 +52,22 @@ public class HoldToSkip : MonoBehaviour
     void OnHoldComplete()
     {
         fillImage.gameObject.SetActive(false);
-        if(playerCam != null)
-        {
-            playerCam.SkipIntro();
-        }
-        if(lookAtObject != null)
+
+        if (lookAtObject != null)
         {
             lookAtObject.SkipIntro();
+        }
+        else
+        {
+            Debug.Log("Look at object script not assigned");
+
+        }
+        if (playerCam != null)
+        {
+            playerCam.SkipIntro();
+        } else
+        {
+            Debug.Log("Player cam not assigned");
         }
         isSkipped = true;
 
