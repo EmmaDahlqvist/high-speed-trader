@@ -826,7 +826,7 @@ PrefabInstance:
     - target: {fileID: 3725775416128114872, guid: b403553d72fa9714187d5da865e765ef, type: 3}
       propertyPath: vehiclePrefab
       value: 
-      objectReference: {fileID: 1734065493287246510, guid: bbd29c243ad8a764db89d9c5882fd712, type: 3}
+      objectReference: {fileID: 1423798594413160114, guid: 740d67c491004b849a256c83a95baddd, type: 3}
     - target: {fileID: 3725775416128114872, guid: b403553d72fa9714187d5da865e765ef, type: 3}
       propertyPath: rotationOnSpawn
       value: 180
@@ -837,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4945708664918466654, guid: b403553d72fa9714187d5da865e765ef, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5723132745639094947, guid: b403553d72fa9714187d5da865e765ef, type: 3}
       propertyPath: m_LocalPosition.x
