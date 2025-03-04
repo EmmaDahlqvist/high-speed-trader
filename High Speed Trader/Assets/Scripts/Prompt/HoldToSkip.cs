@@ -64,7 +64,6 @@ public class HoldToSkip : MonoBehaviour
 
         foreach(GameObject crowdObject in crowd)
         {
-            print("setting position");
             crowdObject.transform.position = crowdTeleportLocation.transform.position;
         }
     }

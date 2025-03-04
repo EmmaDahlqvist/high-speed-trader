@@ -20,6 +20,7 @@ public class PlayerCam : MonoBehaviour
     [Header("Start")]
     public float lookingBackTime = 2f;
     public float turnAroundTime = 1;
+    public float skipTunrAroundTime = 0.5f;
     bool lockedStart = true;
     public bool turnAroundAtStart = true;
 
@@ -146,7 +147,6 @@ public class PlayerCam : MonoBehaviour
         DOTween.Kill("TurnAround");
         DOTween.Kill("TurnBack");
         DOTween.Kill("Rotate");
-        camHolder.DORotate(Vector3.zero, turnAroundTime); // turn the camera back qucikly
-        TurnAroundComplete();
+        camHolder.DORotate(Vector3.zero, skipTunrAroundTime).OnComplete( () => TurnAroundComplete()); // turn the camera back qucikly
     }
 }
