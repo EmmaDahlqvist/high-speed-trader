@@ -340,6 +340,7 @@ MonoBehaviour:
   turnAroundTime: 1
   turnAroundAtStart: 1
   objectZoomWait: 1
+  skipIntroPrompt: {fileID: 0}
 --- !u!114 &8188576245899595413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +823,7 @@ GameObject:
   - component: {fileID: 4628047379187106178}
   - component: {fileID: 8097133612172743423}
   - component: {fileID: 4449848146386039675}
+  - component: {fileID: 6517013956988434655}
   m_Layer: 16
   m_Name: Player
   m_TagString: PlayerComponent
@@ -1031,6 +1033,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voidPosition: -100
+--- !u!114 &6517013956988434655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866196747346325609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36bd650354151404dbb7870aa91235b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 798186409255884180}
+  lookAtObject: {fileID: 671620380988525620}
+  fillImage: {fileID: 0}
+  holdDuration: 1
+  crowd: []
+  crowdTeleportLocation: {fileID: 0}
 --- !u!1 &5852957383525881908
 GameObject:
   m_ObjectHideFlags: 0
