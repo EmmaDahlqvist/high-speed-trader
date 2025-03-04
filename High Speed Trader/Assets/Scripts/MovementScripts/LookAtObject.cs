@@ -41,7 +41,10 @@ public class LookAtObject : MonoBehaviour
         playerCamScript = cam.GetComponent<PlayerCam>();
         originalFov = cam.fieldOfView;
 
-        Invoke("StartLooking", 1f);
+        if (!skip)
+        {
+            Invoke("StartLooking", 1f);
+        }
     }
 
     private void StartLooking()
@@ -53,24 +56,27 @@ public class LookAtObject : MonoBehaviour
         Vector3 directionToLook = objectToLookAt.transform.position - cam.transform.position;
 
         // Rotera camHolder f�r att titta p� objektet
-        camHolder.DOLookAt(objectToLookAt.transform.position, moveTime)
-            .SetEase(Ease.InOutQuad)
-            .OnStart(() =>
-            {
+        if(!skip)
+        {
+            camHolder.DOLookAt(objectToLookAt.transform.position, moveTime)
+    .SetEase(Ease.InOutQuad)
+    .OnStart(() =>
+    {
                 // Visa prompten direkt n�r animationen startar
                 promptCanvasGroup.alpha = 1f;
-            })
-            .OnComplete(() =>
-            {
+    })
+    .OnComplete(() =>
+    {
                 // N�r kameran har tittat p� objektet, �terg� till originalrotationen f�r camHolder
                 camHolder.DORotateQuaternion(originalRotation, moveTime)
-                    .SetEase(Ease.InOutQuad)
-                    .OnComplete(() =>
-                    {
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() =>
+            {
                         // Fade ut prompten n�r den sista animationen �r klar
                         Invoke("NotifyZoomDone", timeAfterDone);
-                    });
-            }).SetId("LookTween");
+            });
+    }).SetId("LookTween");
+        }
 
         if(!skip)
         {
@@ -126,10 +132,10 @@ public class LookAtObject : MonoBehaviour
 
     public void SkipIntro()
     {
+        skip = true;
         DOTween.Kill("LookTween");
         DOTween.Kill("ZoomTween");
         promptCanvasGroup.alpha = 0;
-        skip = true;
         NotifyZoomDone();
     }
 }
