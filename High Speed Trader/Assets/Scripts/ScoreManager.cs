@@ -16,10 +16,15 @@ public class ScoreManager : MonoBehaviour
     public int multiplier;
     int scoreLoweringRate = 1;
     float scoreLoweringInterval = 1f;
-    public float minScoreLoweringInterval = 0.5f;
-    public float maxScoreLoweringInterval = 2f;
-    public float oneSecondLoweringBet = 100f;
 
+    [Header("Score lowering")]
+    public float minBetInterval = 1f;
+    public float maxBetInterval = 0.5f;
+   
+    public float minBet = 100;
+    public float maxBet = 250;
+
+    [Header("Wait for looking at baloon")]
     public bool wait = false;
          
     // Awake is called when the script instance is being loaded
@@ -36,14 +41,14 @@ public class ScoreManager : MonoBehaviour
         cashManager = FindObjectOfType<CashManager>();
         score = cashManager.getLastRemovedCash() * multiplier;
 
+        UpdateScoreLoweringInterval();
+        scoreText.text = score.ToString() + "$";
         if (wait) return;
         StartScore();
     }
 
     public void StartScore()
     {
-        UpdateScoreLoweringInterval();
-        scoreText.text = score.ToString() + "$";
         StartCoroutine(LowerScoreRoutine());
     }
          
@@ -75,8 +80,14 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoreLoweringInterval()
     {
-        float betAmount = cashManager.getLastRemovedCash();
-        scoreLoweringInterval = Mathf.Clamp(oneSecondLoweringBet / Mathf.Max(betAmount, 1), minScoreLoweringInterval, maxScoreLoweringInterval);
+        float betAmount = Mathf.Clamp(cashManager.getLastRemovedCash(), minBet, maxBet); // Se till att betAmount alltid är inom intervallet
+
+        // Normalisera betAmount mellan 0 (minBet) och 1 (maxBet)
+        float t = Mathf.InverseLerp(minBet, maxBet, betAmount);
+
+        // Interpolera scoreLoweringInterval mellan minBetInterval och maxBetInterval
+        scoreLoweringInterval = Mathf.Lerp(minBetInterval, maxBetInterval, t);
+        print("scorelowering " + scoreLoweringInterval);
     }
 
     private void OnDestroy()
