@@ -41,7 +41,6 @@ public class HoldToSkip : MonoBehaviour
         {
             fillImage.gameObject.SetActive(true);
             active = true;
-            print("showing");
         }
 
         if (!active) return;
