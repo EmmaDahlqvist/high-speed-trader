@@ -2364,6 +2364,10 @@ PrefabInstance:
       propertyPath: getReadyPromptCanvas
       value: 
       objectReference: {fileID: 1442565610}
+    - target: {fileID: 2948728709291875313, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: groundDrag
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7136074516745932115, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
       propertyPath: _goalCanvas
       value: 
@@ -8865,7 +8869,7 @@ Transform:
   m_GameObject: {fileID: 884833361}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -874.5, y: -30.33, z: -361.19}
+  m_LocalPosition: {x: -874.5, y: -30.16, z: -361.19}
   m_LocalScale: {x: 20.712545, y: 4.064, z: 2.500859}
   m_ConstrainProportionsScale: 0
   m_Children: []
