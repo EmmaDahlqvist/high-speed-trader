@@ -66,13 +66,13 @@ public class CarAudioController : MonoBehaviour
             // Fade out when car has been next to player
             float fadeFactor = (distance - sweetSpotDistance) / (fadeDistance - sweetSpotDistance);
             engineSound.volume = Mathf.Lerp(engineSound.volume, maxVolume * (1 - fadeFactor), Time.deltaTime * smoothFactor * 3);
+        }
 
-            // if car has left fade distance, reset hasEnteredSweetSpot
-            if (distance > fadeDistance)
-            {
-                hasEnteredSweetSpot = false;
-                engineSound.Stop();
-            }
+        // Stop the engine sound if the car is outside the fade distance
+        if (distance > fadeDistance)
+        {
+            hasEnteredSweetSpot = false;
+            engineSound.Stop();
         }
     }
 }
