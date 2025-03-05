@@ -1343,10 +1343,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1181860864418175671, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181860864418175671, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: MaxDistance
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181860864418175671, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: MinDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181860864418175671, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181860864418175671, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181860864418175671, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.502
+      objectReference: {fileID: 0}
     - target: {fileID: 2717071253686905384, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 665023982}
+    - target: {fileID: 2717071253686905384, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: maxVolume
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717071253686905384, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: minVolume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717071253686905384, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: maxDistance
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717071253686905384, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
+      propertyPath: peakDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2717071253686905384, guid: d3e216e82fe602f459bee5ad1adc9176, type: 3}
       propertyPath: npcs.Array.data[0]
       value: 

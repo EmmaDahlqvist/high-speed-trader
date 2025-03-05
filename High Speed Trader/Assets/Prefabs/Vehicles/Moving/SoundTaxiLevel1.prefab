@@ -275,7 +275,7 @@ MonoBehaviour:
   player: {fileID: 0}
   sweetSpotDistance: 20
   fadeDistance: 40
-  maxVolume: 1
+  maxVolume: 0.5
   minVolume: 0
   smoothFactor: 10
 --- !u!1 &1080362124583542523

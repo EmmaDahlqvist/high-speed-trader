@@ -7,13 +7,13 @@ public class CrowdSound : MonoBehaviour
     public Transform[] npcs;
     public float maxVolume = 1.0f;
     public float minVolume = 0.3f;
-    public float maxDistance = 20f;
-    public AudioClip[] footstepSounds; // Assign multiple footstep sounds
+    public float peakDistance = 15f; // Distance where volume is highest
+    public float maxDistance = 30f; // Beyond this, volume is minimal
+    public AudioClip[] footstepSounds;
     public int minFootstepsPerSecond = 2;
     public int maxFootstepsPerSecond = 6;
 
     private AudioSource audioSource;
-    private bool isPlayingFootsteps = false;
 
     void Start()
     {
@@ -48,19 +48,34 @@ public class CrowdSound : MonoBehaviour
             transform.position = closestNpc.position;
         }
 
-        // Adjust volume based on player distance
-        float volume = Mathf.Lerp(minVolume, maxVolume, 1 - Mathf.Clamp01(closestDistance / maxDistance));
+        // Adjust volume so it's loudest at peakDistance
+        float volume = 0f;
+
+        if (closestDistance <= peakDistance)
+        {
+            // Increase volume as NPC gets closer to peak distance
+            volume = Mathf.Lerp(minVolume, maxVolume, closestDistance / peakDistance);
+        }
+        else if (closestDistance > peakDistance && closestDistance <= maxDistance)
+        {
+            // Decrease volume past the peak distance
+            volume = Mathf.Lerp(maxVolume, minVolume, (closestDistance - peakDistance) / (maxDistance - peakDistance));
+        }
+        else
+        {
+            // Beyond maxDistance, keep at min volume
+            volume = minVolume;
+        }
+
         audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
     }
 
     IEnumerator PlayFootstepsWithRandomIntervals()
     {
-        isPlayingFootsteps = true;
-        while (true) // Loop forever
+        while (true)
         {
             float interval = 1f / Random.Range(minFootstepsPerSecond, maxFootstepsPerSecond);
             yield return new WaitForSeconds(interval);
-
             PlayRandomFootstep();
         }
     }
@@ -70,7 +85,7 @@ public class CrowdSound : MonoBehaviour
         if (footstepSounds.Length == 0) return;
 
         AudioClip randomClip = footstepSounds[Random.Range(0, footstepSounds.Length)];
-        audioSource.pitch = Random.Range(0.8f, 1.2f); // Add pitch variation
-        audioSource.PlayOneShot(randomClip, audioSource.volume * Random.Range(0.6f, 1.0f));
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(randomClip, audioSource.volume * Random.Range(0.8f, 1.2f));
     }
 }
