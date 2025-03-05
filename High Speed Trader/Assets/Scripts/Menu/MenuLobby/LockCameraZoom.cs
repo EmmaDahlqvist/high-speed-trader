@@ -41,27 +41,35 @@ public class LockCameraZoom : MonoBehaviour
     // Funktion för att zooma in
     public void ZoomIn()
     {
-        cameraFollower.LockCamera();
-        // Flytta kameran till zoom-location och rotera mot den
-        mainCamera.transform.DOMove(zoomLocation.position, zoomDuration).SetEase(Ease.InOutQuad);
-        mainCamera.transform.DORotateQuaternion(targetRotation, zoomDuration).SetEase(Ease.InOutQuad);
+        if(!isZoomedIn)
+        {
+            print("zooming in");
+            cameraFollower.LockCamera();
+            // Flytta kameran till zoom-location och rotera mot den
+            mainCamera.transform.DOMove(zoomLocation.position, zoomDuration).SetEase(Ease.InOutQuad);
+            mainCamera.transform.DORotateQuaternion(targetRotation, zoomDuration).SetEase(Ease.InOutQuad);
 
-        isZoomedIn = true;
+            isZoomedIn = true;
+        }
     }
 
     // Funktion för att zooma ut
-    void ZoomOut()
+    public void ZoomOut()
     {
-        mainCamera.transform.DOMove(originalPosition, zoomDuration).SetEase(Ease.InOutQuad);
-        mainCamera.transform.DORotateQuaternion(originalRotation, zoomDuration)
-            .SetEase(Ease.InOutQuad)
-            .OnComplete(() => {
-                cameraFollower.SyncRotationToCamera();
-                StartCoroutine(cameraFollower.UnlockCamera());
-            });
+        if(isZoomedIn)
+        {
+            print("zooming out");
+            mainCamera.transform.DOMove(originalPosition, zoomDuration).SetEase(Ease.InOutQuad);
+            mainCamera.transform.DORotateQuaternion(originalRotation, zoomDuration)
+                .SetEase(Ease.InOutQuad)
+                .OnComplete(() => {
+                    cameraFollower.SyncRotationToCamera();
+                    StartCoroutine(cameraFollower.UnlockCamera());
+                });
 
-        StartCoroutine(RestoreSensitivityWithDelay());
-        isZoomedIn = false;
+            StartCoroutine(RestoreSensitivityWithDelay());
+            isZoomedIn = false;
+        }
     }
 
     // Coroutine för att gradvis återställa musens känslighet

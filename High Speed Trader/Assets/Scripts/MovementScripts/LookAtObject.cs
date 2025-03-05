@@ -27,6 +27,8 @@ public class LookAtObject : MonoBehaviour
     private float originalFov;
 
     public List<AIControl> aiControls = new List<AIControl>();
+
+    private bool skip = false;
     
     // Start is called before the first frame update
     IEnumerator Start()
@@ -39,7 +41,10 @@ public class LookAtObject : MonoBehaviour
         playerCamScript = cam.GetComponent<PlayerCam>();
         originalFov = cam.fieldOfView;
 
-        Invoke("StartLooking", 1f);
+        if (!skip)
+        {
+            Invoke("StartLooking", 1f);
+        }
     }
 
     private void StartLooking()
@@ -51,27 +56,32 @@ public class LookAtObject : MonoBehaviour
         Vector3 directionToLook = objectToLookAt.transform.position - cam.transform.position;
 
         // Rotera camHolder f�r att titta p� objektet
-        camHolder.DOLookAt(objectToLookAt.transform.position, moveTime)
-            .SetEase(Ease.InOutQuad)
-            .OnStart(() =>
-            {
+        if(!skip)
+        {
+            camHolder.DOLookAt(objectToLookAt.transform.position, moveTime)
+    .SetEase(Ease.InOutQuad)
+    .OnStart(() =>
+    {
                 // Visa prompten direkt n�r animationen startar
                 promptCanvasGroup.alpha = 1f;
-            })
-            .OnComplete(() =>
-            {
+    })
+    .OnComplete(() =>
+    {
                 // N�r kameran har tittat p� objektet, �terg� till originalrotationen f�r camHolder
                 camHolder.DORotateQuaternion(originalRotation, moveTime)
-                    .SetEase(Ease.InOutQuad)
-                    .OnComplete(() =>
-                    {
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() =>
+            {
                         // Fade ut prompten n�r den sista animationen �r klar
-                        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten �ver 1 sekund
                         Invoke("NotifyZoomDone", timeAfterDone);
-                    });
             });
+    }).SetId("LookTween");
+        }
 
-        ZoomInOnObject();
+        if(!skip)
+        {
+            ZoomInOnObject();
+        }
     }
 
     private void StartAIControls()
@@ -83,34 +93,54 @@ public class LookAtObject : MonoBehaviour
         }
     }
 
+    private Tween zoomTween;
+
     private void ZoomInOnObject ()
     {
         // Zooma in genom att minska field of view
-        cam.DOFieldOfView(zoomFOV, zoomTime)
+        zoomTween = cam.DOFieldOfView(zoomFOV, zoomTime)
            .SetEase(Ease.InOutQuad)
            .OnComplete(() =>
            {
                // N�r zoomningen �r klar, zooma tillbaka till original fov
                cam.DOFieldOfView(originalFov, zoomTime)
                       .SetEase(Ease.InOutQuad);
-           });
+           }).SetId("ZoomTween");
     }
 
 
     // notify playercam script that zoom is done
     private void NotifyZoomDone()
     {
+        print("notifying done");
+        promptCanvasGroup.DOFade(0f, 0.5f);  // Fade out prompten �ver 1 sekund
         playerCamScript.objectZoomWait = false;
         startPromptScript.wait = false;
-        startPromptScript.StartPrompts();
-        playerCamScript.TurnAroundRoutine();
         scoreManager.StartScore();
         StartAIControls();
+        if (!skip) // only start turn around etc if not skip
+        {
+            startPromptScript.StartPrompts();
+            playerCamScript.TurnAroundRoutine();
+        }
     }
+
+  
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    public void SkipIntro()
+    {
+        skip = true;
+        DOTween.Kill("LookTween");
+        if(zoomTween.IsActive())
+        {
+            zoomTween.PlayBackwards();
+        }
+        promptCanvasGroup.alpha = 0;
+        NotifyZoomDone();
     }
 }

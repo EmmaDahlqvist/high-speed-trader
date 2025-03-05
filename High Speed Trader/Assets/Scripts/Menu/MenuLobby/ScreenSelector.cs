@@ -20,6 +20,7 @@ public class ScreenSelector : MonoBehaviour
     public GameObject highScoreObject;
     private HighScoreScreen highScoreScreen;
     private LevelManager levelManager;
+    public LockCameraZoom lockCameraZoom;
 
     public CanvasGroup fadeCanvasGroup;
 
@@ -40,7 +41,7 @@ public class ScreenSelector : MonoBehaviour
             print("first time");
         }  else
         {
-            firstTimePlaying = true;
+            firstTimePlaying = false;
             print("not first time");
 
         }
@@ -111,6 +112,10 @@ public class ScreenSelector : MonoBehaviour
     {
         guideObject.SetActive(false);
         SetScreen(currentLvl);
+        if(currentLvl == 0)
+        {
+            lockCameraZoom.ZoomOut();
+        }
     }
 
     private void SwitchRaycaster(GameObject gameObject)

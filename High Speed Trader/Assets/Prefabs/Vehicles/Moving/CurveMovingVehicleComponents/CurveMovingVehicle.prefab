@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0315b3ad6d45398478f4b6b333880a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killReason: You died!
 --- !u!114 &3633201267087547602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,11 +290,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineSound: {fileID: 0}
   player: {fileID: 0}
-  sweetSpotDistance: 10
-  fadeDistance: 30
+  sweetSpotDistance: 20
+  fadeDistance: 40
   maxVolume: 1
   minVolume: 0
-  smoothFactor: 5
+  smoothFactor: 10
 --- !u!64 &2658053634263662142
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -443,16 +444,16 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33d5f05eb46a3e345928831e0d00b15e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.541
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 2.45
+  MinDistance: 2
+  MaxDistance: 40
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -487,7 +488,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
