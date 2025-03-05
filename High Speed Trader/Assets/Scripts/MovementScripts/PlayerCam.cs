@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class PlayerCam : MonoBehaviour
     private List<TurnAroundCompleteListener> turnAroundCompleteListeners = new List<TurnAroundCompleteListener>();
 
     public GameObject skipIntroPrompt;
+    public HoldToSkip holdToSkipScript;
 
 
     // Start is called before the first frame update
@@ -118,12 +120,19 @@ public class PlayerCam : MonoBehaviour
         lockedStart = false;
         foreach(TurnAroundCompleteListener turnAroundCompleteListener in turnAroundCompleteListeners)
         {
-            turnAroundCompleteListener.ActAfterTurn();
+            try
+            {
+                turnAroundCompleteListener.ActAfterTurn();
+            } catch(Exception ex)
+            {
+                Debug.LogError(ex);
+            }
         }
         print("skipintro avctive false");
         if(skipIntroPrompt != null )
         {
             skipIntroPrompt.SetActive(false);
+            holdToSkipScript.SetSkipped();
         }
     }
 

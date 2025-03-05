@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     public float playerHeight;
     public LayerMask whatIsGround;
     bool grounded;
+    public Transform groundCheck;
+
+    [Header("Slope check")]
+    public float maxStableAngle = 15f;
 
     public Transform orientation;
     public Transform playerObj;
@@ -97,6 +101,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     {
         // ground check
         grounded = Physics.Raycast(playerObj.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        //grounded = Physics.CheckSphere(groundCheck.position, 0.2f, whatIsGround);
 
         if (lockedStart) return;
 
@@ -115,6 +120,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     {
         if (lockedStart) return;
         MovePlayer();
+        //SlopeCheck();
     }
 
     private void MyInput()
@@ -311,4 +317,29 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         // unlock player movement after they have turned around
         lockedStart = false;
     }
+
+
+    private void SlopeCheck()
+    {
+        if (!grounded) return;
+        Debug.DrawRay(groundCheck.position, Vector3.down * (playerHeight * 0.5f + 0.3f), Color.red);
+
+        RaycastHit hit;
+        if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, playerHeight * 0.5f + 0.3f, whatIsGround))
+        {
+            float angle = Vector3.Angle(hit.normal, Vector3.up);
+            if (angle < maxStableAngle)
+            {
+                Vector3 velocity = rb.velocity;
+                // Hämta den horisontella (laterala) komponenten
+                Vector3 lateralVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
+                // Minska lateral velocity med frictionFactor (exempelvis 50 % per FixedUpdate)
+                float frictionFactor = 0.5f;
+                Vector3 newLateralVelocity = lateralVelocity * (1 - frictionFactor);
+                // Sätt ihop med den ursprungliga y-komponenten
+                rb.velocity = new Vector3(newLateralVelocity.x, velocity.y, newLateralVelocity.z);
+            }
+        }
+    }
+
 }

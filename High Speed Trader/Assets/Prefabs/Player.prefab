@@ -43,6 +43,7 @@ Transform:
   - {fileID: 2017586428073787650}
   - {fileID: 6189588326976846501}
   - {fileID: 8454019870351723886}
+  - {fileID: 6659469223316214065}
   m_Father: {fileID: 7606123295985790008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1537715621231972345
@@ -100,6 +101,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
+  groundCheck: {fileID: 6659469223316214065}
+  maxStableAngle: 15
   orientation: {fileID: 2854748091565921993}
   playerObj: {fileID: 5710595107526337591}
   state: 0
@@ -465,9 +468,11 @@ MonoBehaviour:
   camHolder: {fileID: 6162175768287036645}
   lookingBackTime: 2
   turnAroundTime: 1
+  skipTunrAroundTime: 0.5
   turnAroundAtStart: 1
   objectZoomWait: 0
   skipIntroPrompt: {fileID: 0}
+  holdToSkipScript: {fileID: 7401976565983198335}
 --- !u!114 &9176705499174664357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,6 +1064,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6671435044575159905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6120863153308218622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6659469223316214065}
+  - component: {fileID: 8684540483570836499}
+  m_Layer: 16
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6659469223316214065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120863153308218622}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6671435044575159905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8684540483570836499
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120863153308218622}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6362832587005609327
 GameObject:
   m_ObjectHideFlags: 0
