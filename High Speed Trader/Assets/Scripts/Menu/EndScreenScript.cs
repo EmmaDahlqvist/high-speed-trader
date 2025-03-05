@@ -30,7 +30,7 @@ public class EndScreenScript : MonoBehaviour
         
     }
 
-    private int deathLevel; //for later TODO
+
     
     public async void OnRestartButton()
     {
@@ -56,7 +56,7 @@ public class EndScreenScript : MonoBehaviour
         }
         else
         {
-            levelManager.SetLastLevel(0);
+            levelManager.SetLastLevel(levelManager.GetLastLevel());
             var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
             while (!loadOperation.isDone)
             {
