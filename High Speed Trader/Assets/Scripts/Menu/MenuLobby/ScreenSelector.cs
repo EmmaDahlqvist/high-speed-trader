@@ -67,7 +67,7 @@ public class ScreenSelector : MonoBehaviour
         }
 
         // set up playbuttons, if theyre interactable or not
-        for(int i = 1; i <= levelObjects.Count-1; i++) {
+        for(int i = 1; i <= levelObjects.Count-2; i++) {
             SetUpPlayButtons(i);
         }
 
