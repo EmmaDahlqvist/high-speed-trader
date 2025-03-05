@@ -173,9 +173,11 @@ MonoBehaviour:
   levelTwoObject: {fileID: 120656220}
   levelThreeObject: {fileID: 1242703315}
   guideObject: {fileID: 1138766800}
+  gameOverObject: {fileID: 1884412759}
   screenHolderObject: {fileID: 2029423502}
   highScoreObject: {fileID: 1063293988}
   lockCameraZoom: {fileID: 2029423506}
+  toggle: {fileID: 708522060}
   fadeCanvasGroup: {fileID: 640731656}
 --- !u!114 &24086359
 MonoBehaviour:
@@ -2089,7 +2091,7 @@ RectTransform:
   m_Father: {fileID: 1427244648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.617, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3160,7 +3162,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 24086358}
         m_TargetAssemblyTypeName: ScreenSelector, Assembly-CSharp
-        m_MethodName: OnGuideOKButton
+        m_MethodName: onRestartGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4989,6 +4991,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 24086358}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onTogglePressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenSelector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8337654723760106660, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
       propertyPath: m_Text
       value: Do not show again
@@ -5009,6 +5043,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8471820919921989618, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6415649246072548017, guid: 27834320931067c4b9127246cba948d2, type: 3}
     - target: {fileID: 8480689217235716967, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
       propertyPath: m_Name
       value: Toggle Green
@@ -5517,6 +5555,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693833393}
   m_CullTransparentMesh: 1
+--- !u!114 &708522060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4285872143204403002, guid: 6ad1db13ca5f1d5449a653c0ada8f380, type: 3}
+  m_PrefabInstance: {fileID: 618710588}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &720031031
 GameObject:
   m_ObjectHideFlags: 0
@@ -7735,8 +7784,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1903404967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.617, y: 0}
-  m_AnchorMax: {x: 0.617, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8704,7 +8753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1242703316
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10248,10 +10297,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: bankruptcy
+  m_text: 'Bankruptcy
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3876cd509e9c5e34c891f7f5dbc022e4, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: 3876cd509e9c5e34c891f7f5dbc022e4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8eb7e45c26c84ac43889ca5c5ac73020, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: 8eb7e45c26c84ac43889ca5c5ac73020, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

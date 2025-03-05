@@ -34,24 +34,57 @@ public class EndScreenScript : MonoBehaviour
     
     public async void OnRestartButton()
     {
-        var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
-        while (!loadOperation.isDone)
+        if (CheckGameOver())
         {
-            await Task.Yield();
+            levelManager.SetLastLevel(-1);
+            cashManager.SetCash(100);
+            var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        else
+        {
+            levelManager.SetLastLevel(0);
+            var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        }
     }
     
     public async void onBackToMenuButton()
     {
-        levelManager.SetLastLevel(0);
-        var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
-        while (!loadOperation.isDone)
+        if (CheckGameOver())
         {
-            await Task.Yield();
+            levelManager.SetLastLevel(-1);
+            cashManager.SetCash(100);
+            var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        else
+        {
+            levelManager.SetLastLevel(0);
+            var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        }
+        
+       
     }
+
+    private bool CheckGameOver() => cashManager.GetCash() < 100;
     
     
 }

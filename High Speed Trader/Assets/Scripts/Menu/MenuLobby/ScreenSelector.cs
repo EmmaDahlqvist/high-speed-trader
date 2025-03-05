@@ -15,12 +15,14 @@ public class ScreenSelector : MonoBehaviour
     public GameObject levelTwoObject;
     public GameObject levelThreeObject;
     public GameObject guideObject;
+    public GameObject gameOverObject;
     public Transform screenHolderObject;
     private UIRaycastChecker UIRaycastChecker;
     public GameObject highScoreObject;
     private HighScoreScreen highScoreScreen;
     private LevelManager levelManager;
     public LockCameraZoom lockCameraZoom;
+    public Toggle toggle;
 
     public CanvasGroup fadeCanvasGroup;
 
@@ -33,6 +35,7 @@ public class ScreenSelector : MonoBehaviour
     {
         highScoreScreen = highScoreObject.GetComponent<HighScoreScreen>();
         levelManager = transform.GetComponent<LevelManager>();
+
 
         if (levelManager.GetFirstTimePlaying() == true)
         {
@@ -47,10 +50,12 @@ public class ScreenSelector : MonoBehaviour
         }
 
         levelManager.AddCompletedLevel(0);
+        levelObjects.Add(-1, gameOverObject);
         levelObjects.Add(0, menuObject);
         levelObjects.Add(1, levelOneObject);
         levelObjects.Add(2, levelTwoObject);
         levelObjects.Add(3, levelThreeObject);
+   
 
 
         DeactivateAllScreens();
@@ -74,7 +79,7 @@ public class ScreenSelector : MonoBehaviour
     private void FadeIn()
     {
         fadeCanvasGroup.DOFade(0f, 2f)  // Fadea till 0 (osynlig)
-            .SetEase(Ease.InOutQuad);                // Sätt easing för smidig övergång
+            .SetEase(Ease.InOutQuad);                // Sï¿½tt easing fï¿½r smidig ï¿½vergï¿½ng
     }
 
     public int GetCurrentLevel()
@@ -197,7 +202,7 @@ public class ScreenSelector : MonoBehaviour
         levelObjects[level].SetActive(true);
         SwitchRaycaster(levelObjects[level]);
         highScoreScreen.UpdateHighScore(level);
-        if(level != 0)
+        if(level > 0)
         {
             SetUpSlider();
         }
@@ -223,4 +228,23 @@ public class ScreenSelector : MonoBehaviour
         return levelObjects[currentLvl];
     }
     
+
+    public void onRestartGameButton()
+    {
+        StartMenu();
+    }
+
+    public void onTogglePressed()
+    {
+
+        if (toggle.isOn)
+        {
+            PlayerPrefs.SetInt("Toggle", 1);
+        } else
+        {
+            PlayerPrefs.SetInt("Toggle", 0);
+        }
+        PlayerPrefs.Save();
+    }
+ 
 }
