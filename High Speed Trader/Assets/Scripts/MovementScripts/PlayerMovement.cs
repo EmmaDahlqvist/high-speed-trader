@@ -56,11 +56,13 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
 
     private bool lockedStart;
 
+    // Flagga för att hantera hoppet i FixedUpdate
+    private bool jumpRequested;
+
     public void addLandingListener(PlayerMovementListener playerMovementListener)
     {
         landingListener = playerMovementListener;
     }
-
 
     public bool IsGrounded()
     {
@@ -99,9 +101,15 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     // Update is called once per frame
     void Update()
     {
-        // ground check
+        // Ground check
         grounded = Physics.Raycast(playerObj.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
-        //grounded = Physics.CheckSphere(groundCheck.position, 0.2f, whatIsGround);
+        // alternativt: grounded = Physics.CheckSphere(groundCheck.position, 0.2f, whatIsGround);
+
+        if (!grounded && measuringJump)
+        {
+            // Uppdatera maxJumpHeight med den högsta y-positionen som nås
+            maxJumpHeight = Mathf.Max(maxJumpHeight, playerObj.position.y);
+        }
 
         if (lockedStart) return;
 
@@ -109,7 +117,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         SpeedControl();
         StateHandler();
 
-        // handle drag
+        // Hantera drag
         if (grounded)
             rb.drag = groundDrag;
         else
@@ -119,8 +127,16 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     private void FixedUpdate()
     {
         if (lockedStart) return;
+
+        // Utför hoppet i FixedUpdate om flaggan är satt
+        if (jumpRequested)
+        {
+            Jump();
+            jumpRequested = false;
+        }
+
         MovePlayer();
-        //SlopeCheck();
+        // SlopeCheck();
     }
 
     private void MyInput()
@@ -128,24 +144,20 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        // Sätt hoppsflaggan vid knapptryck (använder GetKeyDown för att få en engångshändelse)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
+            jumpRequested = true;
         }
 
-        // start crouch
-        if(Input.GetKey(crouchKey))
+        // Starta crouch
+        if (Input.GetKey(crouchKey))
         {
             StartCrouching();
         }
 
-        // stop crouching
-        if(Input.GetKeyUp(crouchKey))
+        // Stoppa crouch
+        if (Input.GetKeyUp(crouchKey))
         {
             StopCrouching();
         }
@@ -153,7 +165,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
 
     public bool crouching;
 
-    // initiate crouch
+    // Initiera crouch
     public void StartCrouching()
     {
         crouching = true;
@@ -161,14 +173,14 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         rb.AddForce(Vector3.down * 5f, ForceMode.Force);
     }
 
-    // crouch movement
+    // Crouch-rörelse
     private void Crouch()
     {
         state = MovementState.crouching;
         moveSpeed = crouchSpeed;
     }
 
-    // stop the crouch
+    // Avsluta crouch
     public void StopCrouching()
     {
         crouching = false;
@@ -178,21 +190,28 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     private void StateHandler()
     {
         // Mode - vaulting
-        if(vaulting )
+        if (vaulting)
         {
             state = MovementState.vaulting;
             return;
         }
-        
-        // player was in air
+
+        // Spelaren var i luften
         if (!wasInAir && !grounded)
         {
-            wasInAir = true; // player is in the air
+            wasInAir = true; // Spelaren är i luften
         }
-        else if (wasInAir && grounded) // was in air but just landed
+        else if (wasInAir && grounded) // Var i luften men har landat
         {
             wasInAir = false;
-            if(landingListener != null)
+
+            if (measuringJump)
+            {
+                float jumpHeight = maxJumpHeight - jumpStartHeight;
+                Debug.Log("Jump height: " + jumpHeight);
+                measuringJump = false;
+            }
+            if (landingListener != null)
             {
                 landingListener.PlaySound();
             }
@@ -202,28 +221,24 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         if (wallRunning)
         {
             state = MovementState.wallRunning;
-            moveSpeed = wallRunSpeed; // if adding sliding, use desiredMoveSpeed here instead
+            moveSpeed = wallRunSpeed;
         }
-
-        // Mode - standing still
-        if(grounded && horizontalInput == 0 && verticalInput == 0)
+        // Mode - Står stilla
+        if (grounded && horizontalInput == 0 && verticalInput == 0)
         {
             state = MovementState.standingStill;
         }
-
-        // Mode - sliding
+        // Mode - Sliding
         else if (sliding && grounded)
         {
             state = MovementState.sliding;
         }
-
         // Mode - Crouching
-        else if(crouching)
+        else if (crouching)
         {
             Crouch();
         }
-
-        // Sprinting
+        // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey) && state != MovementState.crouching)
         {
             state = MovementState.sprinting;
@@ -233,7 +248,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
             }
             speedCoroutine = StartCoroutine(GraduallyIncreaseSpeed(sprintSpeed));
         }
-        // Walking
+        // Mode - Walking
         else if (grounded)
         {
             state = MovementState.walking;
@@ -243,8 +258,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
             }
             moveSpeed = walkSpeed;
         }
-
-        // Mode - air
+        // Mode - Air
         else
         {
             state = MovementState.air;
@@ -253,41 +267,51 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
 
     private void MovePlayer()
     {
-        //calculate movement direction
+        // Beräkna rörelseriktningen
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //on ground
+        // På marken
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
-
-        //in air
-        else if(!grounded)
+        // I luften
+        else if (!grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
-
     }
 
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        // limit velocity if needed
-        if(flatVel.magnitude > moveSpeed)
+        // Begränsa hastigheten om det behövs
+        if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
 
+    private float jumpStartHeight;
+    private float maxJumpHeight;
+    private bool measuringJump;
+
     private void Jump()
     {
-        // reset y velocity
+        // Återställ y-komponenten av hastigheten
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
         rb.AddForce(playerObj.up * jumpForce, ForceMode.Impulse);
+
+        // Spara start-höjden och initiera mätningen
+        jumpStartHeight = playerObj.position.y;
+        maxJumpHeight = jumpStartHeight;
+        measuringJump = true;
+
+        // Sätt hopp-köld och inaktivera hopp tills cooldown har passerat
+        readyToJump = false;
+        Invoke(nameof(ResetJump), jumpCooldown);
     }
 
     private void ResetJump()
@@ -299,7 +323,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     {
         while (moveSpeed < targetSpeed)
         {
-            moveSpeed += Time.deltaTime * 7f; // Adjust the increment value as needed
+            moveSpeed += Time.deltaTime * 7f; // Justera ökningen efter behov
             yield return null;
         }
         moveSpeed = targetSpeed;
@@ -308,16 +332,15 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     private bool IsTouchingWall()
     {
         RaycastHit hit;
-        float checkDistance = 1f; // justera detta värde beroende på hur nära väggen spelaren ska vara för att fastna
+        float checkDistance = 1f; // Justera detta värde beroende på hur nära väggen spelaren ska vara
         return Physics.Raycast(playerObj.position, transform.forward, out hit, checkDistance, whatIsGround);
     }
 
     public void ActAfterTurn()
     {
-        // unlock player movement after they have turned around
+        // Lås upp spelarens rörelse efter att de har vänt sig
         lockedStart = false;
     }
-
 
     private void SlopeCheck()
     {
@@ -333,13 +356,12 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
                 Vector3 velocity = rb.velocity;
                 // Hämta den horisontella (laterala) komponenten
                 Vector3 lateralVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
-                // Minska lateral velocity med frictionFactor (exempelvis 50 % per FixedUpdate)
+                // Minska lateral velocity med frictionFactor (t.ex. 50 % per FixedUpdate)
                 float frictionFactor = 0.5f;
                 Vector3 newLateralVelocity = lateralVelocity * (1 - frictionFactor);
-                // Sätt ihop med den ursprungliga y-komponenten
+                // Återställ med den ursprungliga y-komponenten
                 rb.velocity = new Vector3(newLateralVelocity.x, velocity.y, newLateralVelocity.z);
             }
         }
     }
-
 }
