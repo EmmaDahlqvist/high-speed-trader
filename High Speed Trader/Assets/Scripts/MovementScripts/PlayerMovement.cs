@@ -105,6 +105,14 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         grounded = Physics.Raycast(playerObj.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
         // alternativt: grounded = Physics.CheckSphere(groundCheck.position, 0.2f, whatIsGround);
 
+        if(grounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        } else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
         if (!grounded && measuringJump)
         {
             // Uppdatera maxJumpHeight med den högsta y-positionen som nås
@@ -133,10 +141,14 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         {
             Jump();
             jumpRequested = false;
+            coyoteTimeCounter = 0;
         }
 
         MovePlayer();
     }
+
+    private float coyoteTime = 0.08f;
+    private float coyoteTimeCounter;
 
     private void MyInput()
     {
@@ -144,7 +156,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // Sätt hoppsflaggan vid knapptryck (använder GetKeyDown för att få en engångshändelse)
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && coyoteTimeCounter > 0f)
         {
             jumpRequested = true;
         }
