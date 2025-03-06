@@ -22,9 +22,29 @@ public class HoldToSkip : MonoBehaviour
     public List<GameObject> crowd = new List<GameObject>();
     public GameObject crowdTeleportLocation;
 
+    private void Start()
+    {
+        fillImage.gameObject.SetActive(false);
+        print("not active");
+    }
+
+    bool active;
+
     void Update()
     {
-        if (isSkipped) return;
+        if (isSkipped)
+        {
+            return;
+        }
+
+        if(IsKeyboardKeyPressed())
+        {
+            fillImage.gameObject.SetActive(true);
+            active = true;
+        }
+
+        if (!active) return;
+
         // Kolla om F hålls ned
         if (Input.GetKey(KeyCode.F))
         {
@@ -49,9 +69,16 @@ public class HoldToSkip : MonoBehaviour
         }
     }
 
+    public void SetSkipped()
+    {
+        print("skipped");
+        isSkipped = true;
+        fillImage.gameObject.SetActive(false);
+    }
+
     void OnHoldComplete()
     {
-        fillImage.gameObject.SetActive(false);
+        SetSkipped();
 
         if (lookAtObject != null)
         {
@@ -69,11 +96,27 @@ public class HoldToSkip : MonoBehaviour
         {
             Debug.Log("Player cam not assigned");
         }
-        isSkipped = true;
 
         foreach(GameObject crowdObject in crowd)
         {
             crowdObject.transform.position = crowdTeleportLocation.transform.position;
         }
     }
+
+    private bool IsKeyboardKeyPressed()
+    {
+        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            // Hoppa över musknappar och joystick-knappar
+            if (key >= KeyCode.Mouse0 && key <= KeyCode.Mouse6) continue;
+            if (key >= KeyCode.JoystickButton0 && key <= KeyCode.Joystick8Button19) continue;
+
+            if (Input.GetKey(key))
+            {
+                return true; // Returnera true om en tangentbordsinput registreras
+            }
+        }
+        return false; // Returnera false om inget tangentbordsinput sker
+    }
+
 }

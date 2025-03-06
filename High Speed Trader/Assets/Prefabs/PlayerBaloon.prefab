@@ -338,9 +338,11 @@ MonoBehaviour:
   camHolder: {fileID: 6368216196119809914}
   lookingBackTime: 2
   turnAroundTime: 1
+  skipTunrAroundTime: 0.5
   turnAroundAtStart: 1
   objectZoomWait: 1
   skipIntroPrompt: {fileID: 0}
+  holdToSkipScript: {fileID: 6517013956988434655}
 --- !u!114 &8188576245899595413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +551,59 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1442776867391205359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6661347336253595333}
+  - component: {fileID: 8781899653644781975}
+  m_Layer: 16
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6661347336253595333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442776867391205359}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2064777839411668301}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8781899653644781975
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442776867391205359}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2253851713004700943
 GameObject:
@@ -849,6 +904,7 @@ Transform:
   - {fileID: 8191389706400177480}
   - {fileID: 6860362420996181429}
   - {fileID: 5933337615215633643}
+  - {fileID: 6661347336253595333}
   m_Father: {fileID: 7862699480097257029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5465698713164846959
@@ -906,6 +962,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
+  groundCheck: {fileID: 6661347336253595333}
+  maxStableAngle: 15
   orientation: {fileID: 6586603201222202006}
   playerObj: {fileID: 9143074330131825637}
   state: 0
