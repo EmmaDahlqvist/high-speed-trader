@@ -30,10 +30,45 @@ public class EndScreenScript : MonoBehaviour
         
     }
 
-    private int deathLevel; //for later TODO
+
     
     public async void OnRestartButton()
     {
+        if (CheckGameOver())
+        {
+            cashManager.SetCash(100);
+            // PlayerPrefs.SetInt("Toggle", 0);
+            Debug.Log("ToggleVal: " + PlayerPrefs.GetInt("Toggle"));
+            if (CheckToggle())
+            {
+                levelManager.SetLastLevel(0);
+                var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+                while (!loadOperation.isDone)
+                {
+                    await Task.Yield();
+                }
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+            }
+            else
+            {
+                await LoadGameOverScreen();
+            }
+        }
+        else
+        {
+            levelManager.SetLastLevel(levelManager.GetLastLevel());
+            var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        }
+    }
+
+    private async Task LoadGameOverScreen()
+    {
+        levelManager.SetLastLevel(-1);
         var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
         while (!loadOperation.isDone)
         {
@@ -41,17 +76,43 @@ public class EndScreenScript : MonoBehaviour
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
     }
-    
+
     public async void onBackToMenuButton()
     {
-        levelManager.SetLastLevel(0);
-        var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
-        while (!loadOperation.isDone)
+        if (CheckGameOver())
         {
-            await Task.Yield();
+            cashManager.SetCash(100);
+            if (CheckToggle())
+            {
+                levelManager.SetLastLevel(0);
+                var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+                while (!loadOperation.isDone)
+                {
+                    await Task.Yield();
+                }
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+            }
+            else
+            {
+                await LoadGameOverScreen();
+            }
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        else
+        {
+            levelManager.SetLastLevel(0);
+            var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
+            while (!loadOperation.isDone)
+            {
+                await Task.Yield();
+            }
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuLobby"));
+        }
+       
     }
+
+    private bool CheckGameOver() => cashManager.GetCash() < 100;
+    
+    private bool CheckToggle() => PlayerPrefs.GetInt("Toggle") == 1;
     
     
 }
