@@ -136,7 +136,6 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
         }
 
         MovePlayer();
-        // SlopeCheck();
     }
 
     private void MyInput()
@@ -208,7 +207,7 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
             if (measuringJump)
             {
                 float jumpHeight = maxJumpHeight - jumpStartHeight;
-                Debug.Log("Jump height: " + jumpHeight);
+                //Debug.Log("Jump height: " + jumpHeight);
                 measuringJump = false;
             }
             if (landingListener != null)
@@ -340,28 +339,5 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     {
         // Lås upp spelarens rörelse efter att de har vänt sig
         lockedStart = false;
-    }
-
-    private void SlopeCheck()
-    {
-        if (!grounded) return;
-        Debug.DrawRay(groundCheck.position, Vector3.down * (playerHeight * 0.5f + 0.3f), Color.red);
-
-        RaycastHit hit;
-        if (Physics.Raycast(groundCheck.position, Vector3.down, out hit, playerHeight * 0.5f + 0.3f, whatIsGround))
-        {
-            float angle = Vector3.Angle(hit.normal, Vector3.up);
-            if (angle < maxStableAngle)
-            {
-                Vector3 velocity = rb.velocity;
-                // Hämta den horisontella (laterala) komponenten
-                Vector3 lateralVelocity = Vector3.ProjectOnPlane(velocity, Vector3.up);
-                // Minska lateral velocity med frictionFactor (t.ex. 50 % per FixedUpdate)
-                float frictionFactor = 0.5f;
-                Vector3 newLateralVelocity = lateralVelocity * (1 - frictionFactor);
-                // Återställ med den ursprungliga y-komponenten
-                rb.velocity = new Vector3(newLateralVelocity.x, velocity.y, newLateralVelocity.z);
-            }
-        }
     }
 }
