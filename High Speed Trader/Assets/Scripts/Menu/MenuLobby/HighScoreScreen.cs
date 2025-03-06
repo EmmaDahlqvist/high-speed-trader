@@ -18,6 +18,11 @@ public class HighScoreScreen : MonoBehaviour
             MenuText();
             return;
         }
+        if(level == -1)
+        {
+            GameOverText();
+            return;
+        }
         text.text = "HIGHSCORE:";
         scoreText.text = highScore.GetHighscore(level).ToString() + "$";
     }
@@ -27,4 +32,12 @@ public class HighScoreScreen : MonoBehaviour
         text.text = "LOGIN";
         scoreText.text = "...";
     }
+
+    public void GameOverText()
+    {
+        text.text = "DONATION";
+        scoreText.text = "+100$";
+        
+    }
+    
 }
