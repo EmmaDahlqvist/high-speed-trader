@@ -20,7 +20,7 @@ public class CrowdAnimation : MonoBehaviour
         {
             if (agent.isOnOffMeshLink == true)
             {
-                yield return StartCoroutine(Parabola(agent, 2.0f, 0.5f));
+                yield return StartCoroutine(Parabola(agent, 2.0f, 1f));
                 agent.CompleteOffMeshLink();
             }
             yield return null;
