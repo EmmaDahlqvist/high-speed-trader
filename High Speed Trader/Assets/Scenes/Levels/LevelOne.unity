@@ -20068,6 +20068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_5 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1317658239629944, guid: 922b04fc03609ef4b9129cb49ae13cf0, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4195960195809178, guid: 922b04fc03609ef4b9129cb49ae13cf0, type: 3}
       propertyPath: m_LocalScale.x
       value: 13.1407795
