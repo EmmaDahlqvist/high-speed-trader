@@ -16,8 +16,6 @@ public class BootLogic : MonoBehaviour
 
         levelManager = GetComponent<LevelManager>();
 
-        levelManager.SetFirstTimePlayingTrue(); // for testing purposes
-
         Invoke("LoadMainScene", loadTime);
     }
 
