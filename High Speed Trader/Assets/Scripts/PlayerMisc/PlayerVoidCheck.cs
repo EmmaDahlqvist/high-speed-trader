@@ -24,7 +24,7 @@ public class PlayerVoidCheck : MonoBehaviour
     {
         if (playerTransform.position.y < voidPosition)
         {
-            GameState.KillReason = "You died in void!";
+            GameState.KillReason = "You fell in void!";
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
             await Task.Delay(5); // Delay for 1 millisecond
