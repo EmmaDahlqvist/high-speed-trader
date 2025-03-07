@@ -1,21 +1,23 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class CameraZoom : MonoBehaviour
 {
-    public Transform zoomTarget;  // Dra in den bild/objekt du vill zooma in pï¿½
+    public Transform zoomTarget;  // Dra in den bild/objekt du vill zooma in på
     public float zoomDuration = 1.5f;  // Hur snabbt kameran zoomar in
     public float zoomFactor = 3f;  // Hur mycket kameran zoomar in
-    public CanvasGroup fadeCanvas; // Dra in din CanvasGroup hï¿½r
+    public CanvasGroup fadeCanvas; // Dra in din CanvasGroup här
     public float fadeDuration = 1.5f;  // Hur snabbt fade-effekten sker
-    public float moveCloserAmount = 5f; // Hur nï¿½ra kameran rï¿½r sig i Z-led
+    public float moveCloserAmount = 5f; // Hur nära kameran rör sig i Z-led
 
     public GameObject screenSelectorObject;
     private ScreenSelector screenSelector;
 
     SliderBehaviour sliderBehaviour;
     public CashManager cashManager;
+    public AudioSource audioSource;
 
     private Camera cam;
 
@@ -45,17 +47,34 @@ public class CameraZoom : MonoBehaviour
         cameraFollower.StopCameraRotation();
 
         cam.transform.DORotate(new Vector3(0,0,0), 1, RotateMode.Fast); // rotate to look directly at pc
-        Vector3 targetPosition = new Vector3(zoomTarget.position.x, zoomTarget.position.y, cam.transform.position.z - moveCloserAmount); // Flytta nï¿½rmare i Z-led
+        Vector3 targetPosition = new Vector3(zoomTarget.position.x, zoomTarget.position.y, cam.transform.position.z - moveCloserAmount); // Flytta närmare i Z-led
 
-        // Flytta kameran nï¿½rmare + zooma in
+        // Flytta kameran närmare + zooma in
         cam.transform.DOMove(targetPosition, zoomDuration)
             .SetEase(Ease.InOutQuad);
 
         cam.DOOrthoSize(cam.orthographicSize / zoomFactor, zoomDuration)
             .SetEase(Ease.InOutQuad)
-            .OnComplete(() => StartFade()); // Nï¿½r zoom ï¿½r klar, starta fade
+            .OnComplete(() => { StartFade(); FadeOutAndLoadScene(); }); // När zoom är klar, starta fade
+    }
+    public void FadeOutAndLoadScene()
+    {
+        StartCoroutine(FadeOut());
     }
 
+    private IEnumerator FadeOut()
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume; // Återställ volymen ifall scenen laddas igen
+    }
     void StartFade()
     {
         GameObject currentLvlObject = screenSelector.GetCurrentLevelObject();
@@ -80,20 +99,8 @@ public class CameraZoom : MonoBehaviour
             .OnComplete(() => {
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
                 Camera.main.clearFlags = CameraClearFlags.Skybox;
-                // PlayerPrefs.SetInt("FirstTimePlayingGame", 1);
-                // PlayerPrefs.Save();
-                if(PlayerPrefs.GetInt("FirstTimePlayingGame", 1) == 1)
-                {
-                    PlayerPrefs.SetInt("FirstTimePlayingGame", 0);
-                    PlayerPrefs.Save();
-                    SceneManager.LoadScene("ScoreExplainerScene", LoadSceneMode.Single);
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByName("ScoreExplainerScene"));
-                }
-                else
-                {
-                    SceneManager.LoadScene(screenSelector.GetCurrentLevel(), LoadSceneMode.Single);
-                }
-            } ); // Nï¿½r fade ï¿½r klar, byt scen
+                SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
+            } ); // När fade är klar, byt scen
     }
 
     void OnDestroy()
