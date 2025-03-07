@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0315b3ad6d45398478f4b6b333880a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killReason: You died!
+  killReason: You fell on a building and died!
 --- !u!1 &6384028338499635285
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,4 +453,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0315b3ad6d45398478f4b6b333880a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killReason: You died!
+  killReason: You fell on a building and died!

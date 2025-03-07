@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class CameraZoom : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class CameraZoom : MonoBehaviour
 
     SliderBehaviour sliderBehaviour;
     public CashManager cashManager;
+    public AudioSource audioSource;
 
     private Camera cam;
 
@@ -53,9 +55,26 @@ public class CameraZoom : MonoBehaviour
 
         cam.DOOrthoSize(cam.orthographicSize / zoomFactor, zoomDuration)
             .SetEase(Ease.InOutQuad)
-            .OnComplete(() => StartFade()); // När zoom är klar, starta fade
+            .OnComplete(() => { StartFade(); FadeOutAndLoadScene(); }); // När zoom är klar, starta fade
+    }
+    public void FadeOutAndLoadScene()
+    {
+        StartCoroutine(FadeOut());
     }
 
+    private IEnumerator FadeOut()
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume; // Återställ volymen ifall scenen laddas igen
+    }
     void StartFade()
     {
         GameObject currentLvlObject = screenSelector.GetCurrentLevelObject();
