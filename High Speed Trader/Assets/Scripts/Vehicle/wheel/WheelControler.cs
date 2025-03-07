@@ -10,6 +10,7 @@ public class WheelControl : MonoBehaviour
 
     public bool steerable;
     public bool motorized;
+    public bool easteregg = false;
 
     Vector3 position;
     Quaternion rotation;
@@ -21,8 +22,9 @@ public class WheelControl : MonoBehaviour
 
     void Update()
     {
-
+        
         WheelCollider.GetWorldPose(out position, out rotation);
+        if (easteregg) return;
         wheelModel.transform.position = position;
         wheelModel.transform.rotation = rotation;
     }
