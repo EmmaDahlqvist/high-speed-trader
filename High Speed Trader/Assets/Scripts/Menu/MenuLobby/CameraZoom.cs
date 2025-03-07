@@ -80,8 +80,8 @@ public class CameraZoom : MonoBehaviour
             .OnComplete(() => {
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
                 Camera.main.clearFlags = CameraClearFlags.Skybox;
-                PlayerPrefs.SetInt("FirstTimePlayingGame", 1);
-                PlayerPrefs.Save();
+                // PlayerPrefs.SetInt("FirstTimePlayingGame", 1);
+                // PlayerPrefs.Save();
                 if(PlayerPrefs.GetInt("FirstTimePlayingGame", 1) == 1)
                 {
                     PlayerPrefs.SetInt("FirstTimePlayingGame", 0);
