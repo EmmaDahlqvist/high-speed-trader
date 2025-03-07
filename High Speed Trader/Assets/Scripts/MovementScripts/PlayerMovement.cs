@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour, TurnAroundCompleteListener
     public float playerHeight;
     public LayerMask whatIsGround;
     bool grounded;
-    public Transform groundCheck;
 
     [Header("Slope check")]
     public float maxStableAngle = 15f;
