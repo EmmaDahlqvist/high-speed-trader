@@ -32540,6 +32540,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1219159619}
     - target: {fileID: 7401976565983198335, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: holdDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401976565983198335, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
       propertyPath: crowd.Array.size
       value: 11
       objectReference: {fileID: 0}
