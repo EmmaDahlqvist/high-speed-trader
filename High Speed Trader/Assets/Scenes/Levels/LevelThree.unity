@@ -32519,6 +32519,22 @@ PrefabInstance:
       propertyPath: groundDrag
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6671435044575159905, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671435044575159905, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671435044575159905, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136074516745932115, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
+      propertyPath: _goalCanvas
+      value: 
+      objectReference: {fileID: 2143028415}
     - target: {fileID: 7401976565983198335, guid: 7a15a7766e30ccc4e9331e70c6c40a37, type: 3}
       propertyPath: fillImage
       value: 
@@ -45941,6 +45957,17 @@ Transform:
   - {fileID: 1903972247}
   m_Father: {fileID: 486087259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2143028415 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5439679790133592931, guid: 18561426921a30f4d913a44677304316, type: 3}
+  m_PrefabInstance: {fileID: 298962363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d24a58e9b65c0240aa2a8bbff373c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2145700759
 PrefabInstance:
   m_ObjectHideFlags: 0
