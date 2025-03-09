@@ -31,7 +31,7 @@ public class RightClickTutorial : MonoBehaviour
         rightClickIndicator.transform.localScale = originalScale * scaleFactor;
 
         // Check if player holds right-click
-        if (Input.GetMouseButton(1) || screenSelector.GetCurrentLevel() != 0)
+        if (Input.GetMouseButton(1) )
         {
             HideTutorial();
         } else

@@ -44,10 +44,12 @@ public class LockCameraZoom : MonoBehaviour
         if(!isZoomedIn)
         {
             print("zooming in");
-            cameraFollower.LockCamera();
+            //cameraFollower.LockCamera();
             // Flytta kameran till zoom-location och rotera mot den
             mainCamera.transform.DOMove(zoomLocation.position, zoomDuration).SetEase(Ease.InOutQuad);
-            mainCamera.transform.DORotateQuaternion(targetRotation, zoomDuration).SetEase(Ease.InOutQuad);
+            mainCamera.transform.DORotateQuaternion(targetRotation, zoomDuration).SetEase(Ease.InOutQuad)
+                .OnComplete(() =>
+                cameraFollower.SyncRotationToCamera()); ;
 
             isZoomedIn = true;
         }
@@ -64,7 +66,7 @@ public class LockCameraZoom : MonoBehaviour
                 .SetEase(Ease.InOutQuad)
                 .OnComplete(() => {
                     cameraFollower.SyncRotationToCamera();
-                    StartCoroutine(cameraFollower.UnlockCamera());
+                   // StartCoroutine(cameraFollower.UnlockCamera());
                 });
 
             StartCoroutine(RestoreSensitivityWithDelay());

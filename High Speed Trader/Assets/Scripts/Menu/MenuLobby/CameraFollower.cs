@@ -29,7 +29,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         originalSensX = sensX; // Spara original känslighet
         originalSensY = sensY; // Spara original känslighet
 
-        lockCamera = true;
+        //lockCamera = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -71,11 +71,18 @@ public class CameraFollower : MonoBehaviour, UIHitListener
 
     public void SyncRotationToCamera()
     {
-        // Använd transformens eulerAngles för att synkronisera rotationsvariablerna
-        Vector3 currentEuler = transform.eulerAngles;
-        xRotation = currentEuler.x;
-        yRotation = currentEuler.y;
+        Vector3 currentEuler = Camera.main.transform.eulerAngles; // Ta rotationen från kameran
+        xRotation = NormalizeAngle(currentEuler.x); // Fixar 360°-problem
+        yRotation = NormalizeAngle(currentEuler.y);
     }
+
+    // Ser till att värdena är inom ett korrekt intervall
+    private float NormalizeAngle(float angle)
+    {
+        if (angle > 180f) angle -= 360f;
+        return angle;
+    }
+
 
 
     public IEnumerator RestoreSensitivity()
@@ -102,6 +109,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
         sensY = originalSensY;
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -114,7 +122,7 @@ public class CameraFollower : MonoBehaviour, UIHitListener
 
 
 
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -123,10 +131,10 @@ public class CameraFollower : MonoBehaviour, UIHitListener
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
             yRotation += mouseX;
-            yRotation = Mathf.Clamp(yRotation, -20, 20); // left and right
+            yRotation = Mathf.Clamp(yRotation, -25, 35); // left and right
 
             xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -15, 5); // up and down
+            xRotation = Mathf.Clamp(xRotation, -15, 15); // up and down
 
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         } else

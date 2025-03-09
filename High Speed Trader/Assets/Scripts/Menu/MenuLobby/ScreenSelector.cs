@@ -92,17 +92,9 @@ public class ScreenSelector : MonoBehaviour
     public void OnPlayButton()
     {
         currentLvl = 1;
-        if (firstTimePlaying)
-        {
-            guideObject.SetActive(true);
-            SwitchRaycaster(guideObject);
-            firstTimePlaying = false;
-        } else
-        {
-            menuObject.SetActive(false);
+        menuObject.SetActive(false);
 
-            SetScreen(currentLvl);
-        }
+        SetScreen(currentLvl);
     }
 
     public void OnOpenGuideButton()
@@ -151,7 +143,6 @@ public class ScreenSelector : MonoBehaviour
 
     private void DeactivateAllScreens()
     {
-        guideObject.SetActive(false);
         foreach (GameObject gameObject in levelObjects.Values)
         {
             gameObject.SetActive(false);
