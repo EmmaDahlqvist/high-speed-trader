@@ -46,6 +46,7 @@ public class CrowdSound : MonoBehaviour
         if (closestNpc != null)
         {
             transform.position = closestNpc.position;
+            Debug.Log("Closest NPC: " + closestNpc.name + " at distance: " + closestDistance);
         }
 
         // Adjust volume so it's loudest at peakDistance
@@ -68,6 +69,7 @@ public class CrowdSound : MonoBehaviour
         }
 
         audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
+        Debug.Log("Audio Source Volume: " + audioSource.volume);
     }
 
     IEnumerator PlayFootstepsWithRandomIntervals()
