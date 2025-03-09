@@ -112,20 +112,28 @@ public class CameraFollower : MonoBehaviour, UIHitListener
             return;
         }
 
-        Cursor.lockState = CursorLockMode.Confined;
 
 
-        // mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        if(Input.GetMouseButton(1))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            // mouse input
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
-        yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -20, 20); // left and right
+            yRotation += mouseX;
+            yRotation = Mathf.Clamp(yRotation, -20, 20); // left and right
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -15, 5); // up and down
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -15, 5); // up and down
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        } else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
     }
 
 
