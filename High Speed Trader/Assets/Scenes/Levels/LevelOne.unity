@@ -6437,6 +6437,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GetReadyPrompt
       objectReference: {fileID: 0}
+    - target: {fileID: 4897743111469715710, guid: b90e4f1bcebbd0c4bb258902f820fa7a, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4897743111469715710, guid: b90e4f1bcebbd0c4bb258902f820fa7a, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 4897743111469715710, guid: b90e4f1bcebbd0c4bb258902f820fa7a, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 7294850027521046672, guid: b90e4f1bcebbd0c4bb258902f820fa7a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -19229,6 +19241,22 @@ PrefabInstance:
     - target: {fileID: 1057006584447279059, guid: e90a972a72f6f2448874ae6f9578175e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025995029187266537, guid: e90a972a72f6f2448874ae6f9578175e, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025995029187266537, guid: e90a972a72f6f2448874ae6f9578175e, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025995029187266537, guid: e90a972a72f6f2448874ae6f9578175e, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025995029187266537, guid: e90a972a72f6f2448874ae6f9578175e, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3264985220132471245, guid: e90a972a72f6f2448874ae6f9578175e, type: 3}
       propertyPath: m_Alpha

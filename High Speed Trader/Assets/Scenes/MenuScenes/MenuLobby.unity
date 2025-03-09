@@ -14346,8 +14346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cc86a5c2409c84bb1d131e9c74a58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 300
-  sensY: 300
+  sensX: 250
+  sensY: 250
   playerCamera: {fileID: 2029423501}
   mouseBounds:
     serializedVersion: 2

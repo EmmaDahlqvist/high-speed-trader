@@ -99,7 +99,15 @@ public class CameraZoom : MonoBehaviour
             .OnComplete(() => {
                 cashManager.RemoveCash(sliderBehaviour.currentBet);
                 Camera.main.clearFlags = CameraClearFlags.Skybox;
-                SceneManager.LoadScene(screenSelector.GetCurrentLevel(),LoadSceneMode.Single);
+                if(PlayerPrefs.GetInt("ScoreExplain" , 1) == 1)
+                {
+                    SceneManager.LoadScene("ScoreExplainerScene", LoadSceneMode.Single);
+                    PlayerPrefs.SetInt("ScoreExplain", 0);
+                    PlayerPrefs.Save();
+                } else
+                {
+                    SceneManager.LoadScene(screenSelector.GetCurrentLevel(), LoadSceneMode.Single);
+                }
             } ); // När fade är klar, byt scen
     }
 
