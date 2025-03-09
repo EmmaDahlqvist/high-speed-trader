@@ -9373,7 +9373,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6ced14d881666384ba937a2daddfb849, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.64
+  m_Volume: 0.206
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10740,7 +10740,7 @@ RectTransform:
   m_GameObject: {fileID: 1445289507}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.34762758, y: 0.3650437, z: 0.34762758}
+  m_LocalScale: {x: 0.37220487, y: 0.3908523, z: 0.37220487}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1250255529}
@@ -15047,8 +15047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cc86a5c2409c84bb1d131e9c74a58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 150
-  sensY: 150
+  sensX: 250
+  sensY: 250
   playerCamera: {fileID: 2029423501}
   mouseBounds:
     serializedVersion: 2
