@@ -9,6 +9,7 @@ public class HighScoreScreen : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI text;
     public HighScore highScore;
+    private CashManager cashManager;
 
 
     public void UpdateHighScore(int level)
@@ -35,8 +36,9 @@ public class HighScoreScreen : MonoBehaviour
 
     public void GameOverText()
     {
-        text.text = "DONATION";
-        scoreText.text = "+100$";
+        cashManager = FindObjectOfType<CashManager>();
+        text.text = "New Balance:";
+        scoreText.text = "100$";
         
     }
     

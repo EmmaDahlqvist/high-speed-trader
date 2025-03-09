@@ -36,12 +36,12 @@ public class EndScreenScript : MonoBehaviour
     {
         if (CheckGameOver())
         {
-            cashManager.SetCash(100);
+            // cashManager.SetCash(100);
             // PlayerPrefs.SetInt("Toggle", 0);
-            Debug.Log("ToggleVal: " + PlayerPrefs.GetInt("Toggle"));
+            // Debug.Log("ToggleVal: " + PlayerPrefs.GetInt("Toggle"));
             if (CheckToggle())
             {
-                levelManager.SetLastLevel(0);
+                levelManager.SetLastLevel(levelManager.GetLastLevel());
                 var loadOperation = SceneManager.LoadSceneAsync("MenuLobby", LoadSceneMode.Single);
                 while (!loadOperation.isDone)
                 {
