@@ -219,7 +219,7 @@ MonoBehaviour:
   mouseIcon: {fileID: 1743272794}
   rightClickIndicator: {fileID: 1445289509}
   tutorialText: {fileID: 1686545399}
-  pulseSpeed: 1.5
+  pulseSpeed: 2
 --- !u!1 &27475403
 GameObject:
   m_ObjectHideFlags: 0
