@@ -12,6 +12,7 @@ public class CashManager : MonoBehaviour
     void Start()
     {
         LoadCash();
+        // SetCash(1000000);
     }
 
     public void AddCash(int amount)
