@@ -18,10 +18,7 @@ public class CrowdSound : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (!audioSource)
-        {
-            Debug.LogError("No AudioSource found on " + gameObject.name);
-        }
+
 
         StartCoroutine(PlayFootstepsWithRandomIntervals());
     }
@@ -46,6 +43,7 @@ public class CrowdSound : MonoBehaviour
         if (closestNpc != null)
         {
             transform.position = closestNpc.position;
+           
         }
 
         // Adjust volume so it's loudest at peakDistance
@@ -68,6 +66,7 @@ public class CrowdSound : MonoBehaviour
         }
 
         audioSource.volume = Mathf.Clamp(volume, minVolume, maxVolume);
+
     }
 
     IEnumerator PlayFootstepsWithRandomIntervals()

@@ -4563,6 +4563,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6773945719365704462, guid: fdb286dfc9a77b04ea72e9bec0c0be10, type: 3}
+      propertyPath: pps
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773945719365704462, guid: fdb286dfc9a77b04ea72e9bec0c0be10, type: 3}
       propertyPath: maxBetInterval
       value: 0.4
       objectReference: {fileID: 0}
@@ -21359,6 +21363,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 460031755}
   - {fileID: 787521831}
   - {fileID: 1843223634}
   - {fileID: 236448473}
@@ -21473,7 +21478,6 @@ SceneRoots:
   - {fileID: 611250377}
   - {fileID: 1851992466}
   - {fileID: 276779615}
-  - {fileID: 460031755}
   - {fileID: 1286855028}
   - {fileID: 1822161617}
   - {fileID: 884833365}
