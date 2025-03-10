@@ -10,7 +10,7 @@ public class RightClickTutorial : MonoBehaviour
     public float pulseSpeed = 1.5f;
     private ScreenSelector screenSelector;
 
-    private bool hasInteracted = false;
+    private bool hidePermanently = false;
     private Vector3 originalScale;
 
     void Start()
@@ -31,7 +31,7 @@ public class RightClickTutorial : MonoBehaviour
         rightClickIndicator.transform.localScale = originalScale * scaleFactor;
 
         // Check if player holds right-click
-        if (Input.GetMouseButton(1) )
+        if (Input.GetMouseButton(1) || hidePermanently)
         {
             HideTutorial();
         } else
@@ -42,7 +42,6 @@ public class RightClickTutorial : MonoBehaviour
 
     void HideTutorial()
     {
-        hasInteracted = true;
         mouseIcon.gameObject.SetActive(false);
         rightClickIndicator.gameObject.SetActive(false);
         tutorialText.gameObject.SetActive(false);
@@ -53,5 +52,13 @@ public class RightClickTutorial : MonoBehaviour
         mouseIcon.gameObject.SetActive(true);
         rightClickIndicator.gameObject.SetActive(true);
         tutorialText.gameObject.SetActive(true);
+    }
+
+    public void HidePermanently()
+    {
+        hidePermanently = true;
+        mouseIcon.gameObject.SetActive(false);
+        rightClickIndicator.gameObject.SetActive(false);
+        tutorialText.gameObject.SetActive(false);
     }
 }

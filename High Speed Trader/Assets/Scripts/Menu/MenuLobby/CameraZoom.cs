@@ -39,8 +39,11 @@ public class CameraZoom : MonoBehaviour
         screenSelector = screenSelectorObject.GetComponent<ScreenSelector>();
     }
 
+    private int startLevel;
+
     public void StartGame()
     {
+        startLevel = screenSelector.GetCurrentLevel();
         PlayerPrefs.SetInt("LastLevel", screenSelector.GetCurrentLevel());
         PlayerPrefs.Save();
         CameraFollower cameraFollower = GetComponentInChildren<CameraFollower>();
@@ -93,7 +96,6 @@ public class CameraZoom : MonoBehaviour
         }
 
         // Fade till svart
-        print(screenSelector.GetCurrentLevel());
         fadeCanvas.DOFade(1, fadeDuration)
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => {
@@ -106,7 +108,7 @@ public class CameraZoom : MonoBehaviour
                     PlayerPrefs.Save();
                 } else
                 {
-                    SceneManager.LoadScene(screenSelector.GetCurrentLevel(), LoadSceneMode.Single);
+                    SceneManager.LoadScene(startLevel, LoadSceneMode.Single);
                 }
             } ); // När fade är klar, byt scen
     }
